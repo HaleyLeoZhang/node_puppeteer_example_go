@@ -45,8 +45,8 @@ import (
  *                 "sequence": "1", // 图片展示序号
  *                 "src": "https://res.nbhbzl.com/images/comic/103/205259/1526284455iSc0TXw2NXnFcpd8.jpg", // 图片地址
  *                 "progress": "0", // 下载状态:枚举值:0=>待下载,1=>下载中,2下载成功
- *                 "updated_at": "2019-08-27T14:22:29+08:00",
- *                 "created_at": "2019-08-27T14:22:29+08:00"
+ *                 "updated_at": "2019-08-27 14:22:29",
+ *                 "created_at": "2019-08-27 14:22:29"
  *             }
  *         ]
  *     }
