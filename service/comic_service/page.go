@@ -8,8 +8,13 @@ package comic_service
 // ----------------------------------------------------------------------
 
 import (
+	// "encoding/json"
+
+	"github.com/HaleyLeoZhang/node_puppeteer_example_go/caches"
 	"github.com/HaleyLeoZhang/node_puppeteer_example_go/models"
 	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/e"
+	// "github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/gredis"
+	// "github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/logging"
 )
 
 type PageParam struct {
@@ -20,12 +25,25 @@ type PageParam struct {
 func (p *PageParam) GetList() ([]*models.Pages, error) {
 	var (
 		PageList []*models.Pages
+		err      error
 	)
 
-	PageList, err := models.GetPageList(p.Channel, p.ComicID, p.getMaps())
+	cache := caches.ComicPage{
+		Channel: p.Channel,
+		ComicID: p.ComicID,
+	}
+	PageList, err = cache.Get()
+	if nil != PageList {
+		return PageList, nil
+	}
+
+	PageList, err = models.GetPageList(p.Channel, p.ComicID, p.getMaps())
 	if err != nil {
 		return nil, err
 	}
+
+	cache.Save(PageList)
+
 	return PageList, nil
 }
 
