@@ -8,20 +8,17 @@ package models
 // ----------------------------------------------------------------------
 
 import (
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/logging"
 	"github.com/jinzhu/gorm"
-
-	"encoding/json"
 )
 
 type Comics struct {
-	ID        string `json:"id"`
-	Channel   string `json:"channel"`
-	ComicID   string `json:"comic_id"`
-	Name      string `json:"name"`
-	Pic       string `json:"pic"`
-	Intro     string `json:"intro"`
-	IsDeleted string `json:"is_deleted"`
+	ID      string `json:"id"`
+	Channel string `json:"channel"`
+	ComicID string `json:"comic_id"`
+	Name    string `json:"name"`
+	Pic     string `json:"pic"`
+	Intro   string `json:"intro"`
+	// IsDeleted string `json:"is_deleted"`
 	UpdatedAt string `json:"updated_at"`
 	CreatedAt string `json:"created_at"`
 }
@@ -29,13 +26,6 @@ type Comics struct {
 func GetComicList(pageNum int, pageSize int, maps interface{}) ([]*Comics, error) {
 	var ComicList []*Comics
 	err := db.Where(maps).Offset(pageNum).Limit(pageSize).Find(&ComicList).Error
-
-	page_data, err := json.Marshal(ComicList)
-
-	logging.Info("maps ", maps)
-	logging.Info("pageNum ", pageNum)
-	logging.Info("pageSize ", pageSize)
-	logging.Info("page_data ", string(page_data))
 
 	if err != nil && err != gorm.ErrRecordNotFound {
 		return nil, err

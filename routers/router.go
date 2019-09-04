@@ -23,7 +23,11 @@ func InitRouter() *gin.Engine {
 	r.Use(gin.Recovery())
 
 	api_comic := r.Group("/api/comic")
-	api_comic.GET("comic/list", comic.GetComicList)
+	api_comic.GET("comic_list", comic.GetComicList)
+	api_comic.GET("page_list", comic.GetPageList)
+	api_comic.GET("image_list", comic.GetImageList)
+	
+
 
 	// api_comic.Use(jwt.JWT())
 	// {
