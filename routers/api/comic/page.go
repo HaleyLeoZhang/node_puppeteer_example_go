@@ -24,7 +24,7 @@ import (
 
 /**
  * @api {get} /api/comic/page_list 漫画章节列表
- * @apiName image_list
+ * @apiName page_list
  * @apiGroup Comic
  *
  * @apiParam {int} page_id 漫画列表接口中list对应的id
