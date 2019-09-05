@@ -29,7 +29,7 @@ import (
  *
  * @apiParam {int} page 页码
  *
- * @apiDescription  获取漫画列表
+ * @apiDescription  获取漫画列表[目前只是用下拉模式做的,后续可能会引入普通分页]
  *
  * @apiVersion 1.0.0
  * @apiSuccessExample Success-Response:

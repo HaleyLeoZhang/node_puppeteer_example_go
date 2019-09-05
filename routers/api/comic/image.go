@@ -65,10 +65,10 @@ func GetImageList(c *gin.Context) {
 		return
 	}
 
-	comicService := comic_service.ImageParam{
+	imageService := comic_service.ImageParam{
 		PageID: page_id,
 	}
-	imageList, err := comicService.GetList()
+	imageList, err := imageService.GetList()
 
 	if err != nil {
 		appG.Response(http.StatusInternalServerError, e.SOURCE_NOT_FOUND, nil)

@@ -8,6 +8,7 @@ package comic_service
 // ----------------------------------------------------------------------
 
 import (
+	"github.com/HaleyLeoZhang/node_puppeteer_example_go/caches"
 	"github.com/HaleyLeoZhang/node_puppeteer_example_go/models"
 	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/e"
 )
@@ -15,6 +16,8 @@ import (
 type ComicParam struct {
 	PageNum  int
 	PageSize int
+	Channel  int
+	ComicID  int
 }
 
 func (c *ComicParam) GetList() ([]*models.Comics, error) {
@@ -31,6 +34,31 @@ func (c *ComicParam) GetList() ([]*models.Comics, error) {
 
 func (c *ComicParam) Count() (int, error) {
 	return models.GetComicTotal(c.getMaps())
+}
+
+func (c *ComicParam) GetInfo() (*models.Comics, error) {
+	var (
+		OneComic *models.Comics
+		err      error
+	)
+	// 缓存
+	cache := caches.ComicInfo{
+		Channel: c.Channel,
+		ComicID: c.ComicID,
+	}
+	OneComic, err = cache.Get()
+	if nil != OneComic {
+		return OneComic, nil
+	}
+	// 模型
+	OneComic, err = models.GetComicInfo(c.Channel, c.ComicID, c.getMaps())
+	if err != nil {
+		return nil, err
+	}
+
+	cache.Save(OneComic)
+
+	return OneComic, nil
 }
 
 func (c *ComicParam) getMaps() map[string]interface{} {

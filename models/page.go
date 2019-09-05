@@ -38,3 +38,18 @@ func GetPageList(Channel int, ComicID int, maps interface{}) ([]*Pages, error) {
 
 	return PageList, nil
 }
+
+func GetPageInfo(ID int, maps interface{}) (*Pages, error) {
+	var PageInfo Pages
+
+	query_maps := make(map[string]interface{})
+	query_maps["id"] = ID
+
+	err := db.Where(query_maps).Where(maps).First(&PageInfo).Error
+
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return nil, err
+	}
+
+	return &PageInfo, nil
+}

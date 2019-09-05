@@ -11,22 +11,22 @@ import (
 	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/logging"
 )
 
-type ComicPage struct {
+type ComicInfo struct {
 	Channel int
 	ComicID int
 }
 
-func (c *ComicPage) getKeyName() string {
+func (c *ComicInfo) getKeyName() string {
 	keys := []string{}
 
-	keys = append(keys, e.CACHE_COMIC_PAGE_LIST)
+	keys = append(keys, e.CACHE_COMIC_INFO)
 	keys = append(keys, strconv.Itoa(c.Channel))
 	keys = append(keys, strconv.Itoa(c.ComicID))
 
 	return strings.Join(keys, e.DELEMITER_CACHE)
 }
 
-func (c *ComicPage) Get() ([]*models.Pages, error) {
+func (c *ComicInfo) Get() (*models.Comics, error) {
 	key := c.getKeyName()
 	if gredis.Exists(key) {
 		data, err := gredis.Get(key)
@@ -34,16 +34,16 @@ func (c *ComicPage) Get() ([]*models.Pages, error) {
 			logging.Info(err)
 		} else {
 			// logging.Info("在走缓存了")
-			var PageList []*models.Pages
-			json.Unmarshal(data, &PageList)
-			return PageList, nil
+			var OneComic *models.Comics
+			json.Unmarshal(data, &OneComic)
+			return OneComic, nil
 		}
 	}
 	return nil, nil
 }
 
-func (c *ComicPage) Save(PageList []*models.Pages) {
+func (c *ComicInfo) Save(OneComic *models.Comics) {
 	key := c.getKeyName()
-	ttl := 60
-	gredis.Set(key, PageList, ttl)
+	ttl := 300
+	gredis.Set(key, OneComic, ttl)
 }

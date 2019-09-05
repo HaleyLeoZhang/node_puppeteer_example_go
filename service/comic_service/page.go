@@ -20,6 +20,7 @@ import (
 type PageParam struct {
 	Channel int
 	ComicID int
+	ID      int
 }
 
 func (p *PageParam) GetList() ([]*models.Pages, error) {
@@ -45,6 +46,20 @@ func (p *PageParam) GetList() ([]*models.Pages, error) {
 	cache.Save(PageList)
 
 	return PageList, nil
+}
+
+func (p *PageParam) GetInfo() (*models.Pages, error) {
+	var (
+		PageInfo *models.Pages
+		err      error
+	)
+
+	PageInfo, err = models.GetPageInfo(p.ID, p.getMaps())
+	if err != nil {
+		return nil, err
+	}
+
+	return PageInfo, nil
 }
 
 func (p *PageParam) getMaps() map[string]interface{} {

@@ -27,7 +27,8 @@ import (
  * @apiName page_list
  * @apiGroup Comic
  *
- * @apiParam {int} page_id 漫画列表接口中list对应的id
+ * @apiParam {int} channel 漫画渠道ID
+ * @apiParam {int} comic_id 对应渠道中的资源ID
  *
  * @apiDescription  获取漫画章节列表
  *
@@ -70,11 +71,11 @@ func GetPageList(c *gin.Context) {
 		return
 	}
 
-	comicService := comic_service.PageParam{
+	pageService := comic_service.PageParam{
 		Channel: channel,
 		ComicID: comic_id,
 	}
-	pageList, err := comicService.GetList()
+	pageList, err := pageService.GetList()
 
 	if err != nil {
 		appG.Response(http.StatusInternalServerError, e.SOURCE_NOT_FOUND, nil)
@@ -83,6 +84,63 @@ func GetPageList(c *gin.Context) {
 
 	data := make(map[string]interface{})
 	data["list"] = pageList
+	// 分页逻辑放在前端,减少后端运算
+
+	appG.Response(http.StatusOK, e.SUCCESS, data)
+}
+
+/**
+ * @api {get} /api/comic/page_detail 漫画章节详情
+ * @apiName page_detail
+ * @apiGroup Comic
+ *
+ * @apiParam {int} id 漫画章节列表接口中list对应的id
+ *
+ * @apiDescription 获取漫画章节详情
+ *
+ * @apiVersion 1.0.0
+ * @apiSuccessExample Success-Response:
+ * HTTP/1.1 200 OK
+ */
+func GetPageDetail(c *gin.Context) {
+	appG := app.Gin{C: c}
+
+	id := com.StrTo(c.Query("id")).MustInt()
+	valid := validation.Validation{}
+	valid.Min(id, 1, "id")
+
+	if valid.HasErrors() {
+		app.MarkErrors(valid.Errors)
+		appG.Response(http.StatusBadRequest, e.INVALID_PARAMS, nil)
+		return
+	}
+
+	// 章节
+	pageService := comic_service.PageParam{
+		ID: id,
+	}
+	pageInfo, err := pageService.GetInfo()
+
+	if err != nil {
+		appG.Response(http.StatusInternalServerError, e.SOURCE_NOT_FOUND, nil)
+		return
+	}
+
+	// 漫画
+	comicService := comic_service.ComicParam{
+		Channel: pageInfo.Channel,
+		ComicID: pageInfo.ComicID,
+	}
+	comicInfo, err := comicService.GetInfo()
+
+	if err != nil {
+		appG.Response(http.StatusInternalServerError, e.SOURCE_NOT_FOUND, nil)
+		return
+	}
+
+	data := make(map[string]interface{})
+	data["page"] = pageInfo
+	data["comic"] = comicInfo
 	// 分页逻辑放在前端,减少后端运算
 
 	appG.Response(http.StatusOK, e.SUCCESS, data)
