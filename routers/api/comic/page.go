@@ -94,7 +94,7 @@ func GetPageList(c *gin.Context) {
  * @apiName page_detail
  * @apiGroup Comic
  *
- * @apiParam {int} id 漫画章节列表接口中list对应的id
+ * @apiParam {int} page_id 漫画章节列表接口中list对应的id
  *
  * @apiDescription 获取漫画章节详情
  *
@@ -143,7 +143,7 @@ func GetPageList(c *gin.Context) {
 func GetPageDetail(c *gin.Context) {
 	appG := app.Gin{C: c}
 
-	id := com.StrTo(c.Query("id")).MustInt()
+	id := com.StrTo(c.Query("page_id")).MustInt()
 	valid := validation.Validation{}
 	valid.Min(id, 1, "id")
 
