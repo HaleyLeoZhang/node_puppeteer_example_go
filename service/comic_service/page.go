@@ -62,6 +62,20 @@ func (p *PageParam) GetInfo() (*models.Pages, error) {
 	return PageInfo, nil
 }
 
+func (p *PageParam) GetNextInfo() (*models.Pages, error) {
+	var (
+		NextPageInfo *models.Pages
+		err          error
+	)
+
+	NextPageInfo, err = models.GetNextPageInfo(p.Channel, p.ComicID, p.ID, p.getMaps())
+	if err != nil {
+		return nil, err
+	}
+
+	return NextPageInfo, nil
+}
+
 func (p *PageParam) getMaps() map[string]interface{} {
 	maps := make(map[string]interface{})
 	maps["is_deleted"] = e.DATA_IS_DELETED_NO

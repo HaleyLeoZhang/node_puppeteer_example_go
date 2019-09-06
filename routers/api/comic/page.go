@@ -101,6 +101,44 @@ func GetPageList(c *gin.Context) {
  * @apiVersion 1.0.0
  * @apiSuccessExample Success-Response:
  * HTTP/1.1 200 OK
+ * {
+ *     "code": 200,
+ *     "message": "success",
+ *     "data": {
+ *         "comic": { // 当前漫画信息
+ *             "id": "1",
+ *             "channel": "2",
+ *             "comic_id": "5830",
+ *             "name": "戒魔人",
+ *             "pic": "",
+ *             "intro": "大一新生周小安偶然戴上一枚来历不明的商代戒指，从他口中吐出了一个恐怖的血魔人。一个人类历史上的惊天秘...",
+ *             "updated_at": "2019-09-04 15:18:24",
+ *             "created_at": "2019-09-03 20:37:31"
+ *         },
+ *         "next_page": { // 下一页信息
+ *             "id": 13,
+ *             "channel": 2,
+ *             "comic_id": 5830,
+ *             "sequence": 12,
+ *             "name": "第12话",
+ *             "link": "https://m.manhuaniu.com/manhua/5830/200270.html",
+ *             "progress": 2,
+ *             "updated_at": "2019-08-27 14:21:54",
+ *             "created_at": "2019-08-27 14:24:24"
+ *         },
+ *         "page": { // 当前页信息
+ *             "id": 12,
+ *             "channel": 2,
+ *             "comic_id": 5830,
+ *             "sequence": 11,
+ *             "name": "第11话",
+ *             "link": "https://m.manhuaniu.com/manhua/5830/200269.html",
+ *             "progress": 2,
+ *             "updated_at": "2019-08-27 14:21:54",
+ *             "created_at": "2019-08-27 14:24:17"
+ *         }
+ *     }
+ * }
  */
 func GetPageDetail(c *gin.Context) {
 	appG := app.Gin{C: c}
@@ -137,9 +175,19 @@ func GetPageDetail(c *gin.Context) {
 		appG.Response(http.StatusInternalServerError, e.SOURCE_NOT_FOUND, nil)
 		return
 	}
+	// 下一章节ID
+	pageService.Channel = pageInfo.Channel
+	pageService.ComicID = pageInfo.ComicID
+	nextPageInfo, err := pageService.GetNextInfo()
+
+	if err != nil {
+		appG.Response(http.StatusInternalServerError, e.SOURCE_NOT_FOUND, nil)
+		return
+	}
 
 	data := make(map[string]interface{})
 	data["page"] = pageInfo
+	data["next_page"] = nextPageInfo
 	data["comic"] = comicInfo
 	// 分页逻辑放在前端,减少后端运算
 
