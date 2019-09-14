@@ -25,6 +25,7 @@ type Comics struct {
 
 func GetComicList(pageNum int, pageSize int, maps interface{}) ([]*Comics, error) {
 	var ComicList []*Comics
+
 	err := db.Where(maps).Offset(pageNum).Limit(pageSize).Find(&ComicList).Error
 
 	if err != nil && err != gorm.ErrRecordNotFound {
