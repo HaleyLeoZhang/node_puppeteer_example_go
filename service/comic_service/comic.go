@@ -20,6 +20,12 @@ type ComicParam struct {
 	SourceID int
 }
 
+const (
+	isOnlineYes = 1 
+	isOnlineNo = 0 
+)
+
+
 func (c *ComicParam) GetList() ([]*models.Comics, error) {
 	var (
 		ComicList []*models.Comics
@@ -64,6 +70,7 @@ func (c *ComicParam) GetInfo() (*models.Comics, error) {
 func (c *ComicParam) getMaps() map[string]interface{} {
 	maps := make(map[string]interface{})
 	maps["is_deleted"] = e.DATA_IS_DELETED_NO
+	maps["is_online"] = isOnlineYes
 
 	return maps
 }
