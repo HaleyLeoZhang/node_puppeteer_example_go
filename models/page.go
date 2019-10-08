@@ -10,10 +10,10 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-type Pages struct {
+type ComicPages struct {
 	ID       int    `json:"id"`
 	Channel  int    `json:"channel"`
-	ComicID  int    `json:"comic_id"`
+	SourceID int    `json:"source_id"`
 	Sequence int    `json:"sequence"`
 	Name     string `json:"name"`
 	Link     string `json:"link"`
@@ -23,12 +23,12 @@ type Pages struct {
 	CreatedAt string `json:"created_at"`
 }
 
-func GetPageList(Channel int, ComicID int, maps interface{}) ([]*Pages, error) {
-	var PageList []*Pages
+func GetPageList(Channel int, SourceID int, maps interface{}) ([]*ComicPages, error) {
+	var PageList []*ComicPages
 
 	query_maps := make(map[string]interface{})
 	query_maps["channel"] = Channel
-	query_maps["comic_id"] = ComicID
+	query_maps["source_id"] = SourceID
 
 	err := db.Where(query_maps).Where(maps).Not("sequence", 0).Order("sequence asc").Find(&PageList).Error
 
@@ -39,8 +39,8 @@ func GetPageList(Channel int, ComicID int, maps interface{}) ([]*Pages, error) {
 	return PageList, nil
 }
 
-func GetPageInfo(ID int, maps interface{}) (*Pages, error) {
-	var PageInfo Pages
+func GetPageInfo(ID int, maps interface{}) (*ComicPages, error) {
+	var PageInfo ComicPages
 
 	query_maps := make(map[string]interface{})
 	query_maps["id"] = ID
@@ -54,10 +54,10 @@ func GetPageInfo(ID int, maps interface{}) (*Pages, error) {
 	return &PageInfo, nil
 }
 
-func GetNextPageInfo(Channel int, ComicID int, ID int, maps interface{}) (*Pages, error) {
-	var PageInfo Pages
+func GetNextPageInfo(Channel int, SourceID int, ID int, maps interface{}) (*ComicPages, error) {
+	var PageInfo ComicPages
 
-	err := db.Where("channel = ? And comic_id = ? And id > ?", Channel, ComicID, ID).First(&PageInfo).Error
+	err := db.Where("channel = ? And source_id = ? And id > ?", Channel, SourceID, ID).First(&PageInfo).Error
 
 	if err != nil && err != gorm.ErrRecordNotFound {
 		return nil, err

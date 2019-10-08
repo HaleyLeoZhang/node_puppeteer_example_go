@@ -17,7 +17,7 @@ type ComicParam struct {
 	PageNum  int
 	PageSize int
 	Channel  int
-	ComicID  int
+	SourceID int
 }
 
 func (c *ComicParam) GetList() ([]*models.Comics, error) {
@@ -43,15 +43,15 @@ func (c *ComicParam) GetInfo() (*models.Comics, error) {
 	)
 	// 缓存
 	cache := caches.ComicInfo{
-		Channel: c.Channel,
-		ComicID: c.ComicID,
+		Channel:  c.Channel,
+		SourceID: c.SourceID,
 	}
 	OneComic, err = cache.Get()
 	if nil != OneComic {
 		return OneComic, nil
 	}
 	// 模型
-	OneComic, err = models.GetComicInfo(c.Channel, c.ComicID, c.getMaps())
+	OneComic, err = models.GetComicInfo(c.Channel, c.SourceID, c.getMaps())
 	if err != nil {
 		return nil, err
 	}

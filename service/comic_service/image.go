@@ -16,9 +16,9 @@ type ImageParam struct {
 	PageID int
 }
 
-func (i *ImageParam) GetList() ([]*models.Images, error) {
+func (i *ImageParam) GetList() ([]*models.ComicImages, error) {
 	var (
-		ImageList []*models.Images
+		ImageList []*models.ComicImages
 	)
 
 	ImageList, err := models.GetImageList(i.PageID, i.getMaps())

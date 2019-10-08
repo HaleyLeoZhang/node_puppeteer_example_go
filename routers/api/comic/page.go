@@ -28,7 +28,7 @@ import (
  * @apiGroup Comic
  *
  * @apiParam {int} channel 漫画渠道ID
- * @apiParam {int} comic_id 对应渠道中的资源ID
+ * @apiParam {int} source_id 对应渠道中的资源ID
  *
  * @apiDescription  获取漫画章节列表
  *
@@ -44,7 +44,7 @@ import (
  *         {
  *             "id": 1,
  *             "channel": 2, // 获取漫画列表接口,对应渠道
- *             "comic_id": 5830, // 对应渠道中的资源ID
+ *             "source_id": 5830, // 对应渠道中的资源ID
  *             "sequence": 1, // 章节序号
  *             "name": "第1话", // 章节名称
  *             "link": "https://m.manhuaniu.com/manhua/5830/200258.html", // 章节地址
@@ -62,8 +62,8 @@ func GetPageList(c *gin.Context) {
 	valid := validation.Validation{}
 	valid.Min(channel, 0, "channel")
 
-	comic_id := com.StrTo(c.Query("comic_id")).MustInt()
-	valid.Min(comic_id, 1, "comic_id")
+	source_id := com.StrTo(c.Query("source_id")).MustInt()
+	valid.Min(source_id, 1, "source_id")
 
 	if valid.HasErrors() {
 		app.MarkErrors(valid.Errors)
@@ -72,8 +72,8 @@ func GetPageList(c *gin.Context) {
 	}
 
 	pageService := comic_service.PageParam{
-		Channel: channel,
-		ComicID: comic_id,
+		Channel:  channel,
+		SourceID: source_id,
 	}
 	pageList, err := pageService.GetList()
 
@@ -108,7 +108,7 @@ func GetPageList(c *gin.Context) {
  *         "comic": { // 当前漫画信息
  *             "id": "1",
  *             "channel": "2",
- *             "comic_id": "5830",
+ *             "source_id": "5830",
  *             "name": "戒魔人",
  *             "pic": "",
  *             "intro": "大一新生周小安偶然戴上一枚来历不明的商代戒指，从他口中吐出了一个恐怖的血魔人。一个人类历史上的惊天秘...",
@@ -118,7 +118,7 @@ func GetPageList(c *gin.Context) {
  *         "next_page": { // 下一页信息
  *             "id": 13,
  *             "channel": 2,
- *             "comic_id": 5830,
+ *             "source_id": 5830,
  *             "sequence": 12,
  *             "name": "第12话",
  *             "link": "https://m.manhuaniu.com/manhua/5830/200270.html",
@@ -129,7 +129,7 @@ func GetPageList(c *gin.Context) {
  *         "page": { // 当前页信息
  *             "id": 12,
  *             "channel": 2,
- *             "comic_id": 5830,
+ *             "source_id": 5830,
  *             "sequence": 11,
  *             "name": "第11话",
  *             "link": "https://m.manhuaniu.com/manhua/5830/200269.html",
@@ -166,8 +166,8 @@ func GetPageDetail(c *gin.Context) {
 
 	// 漫画
 	comicService := comic_service.ComicParam{
-		Channel: pageInfo.Channel,
-		ComicID: pageInfo.ComicID,
+		Channel:  pageInfo.Channel,
+		SourceID: pageInfo.SourceID,
 	}
 	comicInfo, err := comicService.GetInfo()
 
@@ -177,7 +177,7 @@ func GetPageDetail(c *gin.Context) {
 	}
 	// 下一章节ID
 	pageService.Channel = pageInfo.Channel
-	pageService.ComicID = pageInfo.ComicID
+	pageService.SourceID = pageInfo.SourceID
 	nextPageInfo, err := pageService.GetNextInfo()
 
 	if err != nil {

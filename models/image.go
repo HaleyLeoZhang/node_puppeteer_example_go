@@ -11,7 +11,7 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-type Images struct {
+type ComicImages struct {
 	ID       string `json:"id"`
 	PageID   string `json:"page_id"`
 	Sequence string `json:"sequence"`
@@ -22,8 +22,8 @@ type Images struct {
 	CreatedAt string `json:"created_at"`
 }
 
-func GetImageList(PageID int, maps interface{}) ([]*Images, error) {
-	var ImageList []*Images
+func GetImageList(PageID int, maps interface{}) ([]*ComicImages, error) {
+	var ImageList []*ComicImages
 
 	query_maps := make(map[string]interface{})
 	query_maps["page_id"] = PageID

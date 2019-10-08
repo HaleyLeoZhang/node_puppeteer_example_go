@@ -12,12 +12,12 @@ import (
 )
 
 type Comics struct {
-	ID      string `json:"id"`
-	Channel string `json:"channel"`
-	ComicID string `json:"comic_id"`
-	Name    string `json:"name"`
-	Pic     string `json:"pic"`
-	Intro   string `json:"intro"`
+	ID       string `json:"id"`
+	Channel  string `json:"channel"`
+	SourceID string `json:"source_id"`
+	Name     string `json:"name"`
+	Pic      string `json:"pic"`
+	Intro    string `json:"intro"`
 	// IsDeleted string `json:"is_deleted"`
 	UpdatedAt string `json:"updated_at"`
 	CreatedAt string `json:"created_at"`
@@ -34,12 +34,12 @@ func GetComicList(pageNum int, pageSize int, maps interface{}) ([]*Comics, error
 	return ComicList, nil
 }
 
-func GetComicInfo(Channel int, ComicID int, maps interface{}) (*Comics, error) {
+func GetComicInfo(Channel int, SourceID int, maps interface{}) (*Comics, error) {
 	var ComicInfo Comics
 
 	query_maps := make(map[string]interface{})
 	query_maps["channel"] = Channel
-	query_maps["comic_id"] = ComicID
+	query_maps["source_id"] = SourceID
 
 	err := db.Where(query_maps).Where(maps).First(&ComicInfo).Error
 

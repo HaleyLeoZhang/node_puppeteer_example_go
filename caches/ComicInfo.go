@@ -12,8 +12,8 @@ import (
 )
 
 type ComicInfo struct {
-	Channel int
-	ComicID int
+	Channel  int
+	SourceID int
 }
 
 func (c *ComicInfo) getKeyName() string {
@@ -21,7 +21,7 @@ func (c *ComicInfo) getKeyName() string {
 
 	keys = append(keys, e.CACHE_COMIC_INFO)
 	keys = append(keys, strconv.Itoa(c.Channel))
-	keys = append(keys, strconv.Itoa(c.ComicID))
+	keys = append(keys, strconv.Itoa(c.SourceID))
 
 	return strings.Join(keys, e.DELEMITER_CACHE)
 }

@@ -12,8 +12,8 @@ import (
 )
 
 type ComicPage struct {
-	Channel int
-	ComicID int
+	Channel  int
+	SourceID int
 }
 
 func (c *ComicPage) getKeyName() string {
@@ -21,12 +21,12 @@ func (c *ComicPage) getKeyName() string {
 
 	keys = append(keys, e.CACHE_COMIC_PAGE_LIST)
 	keys = append(keys, strconv.Itoa(c.Channel))
-	keys = append(keys, strconv.Itoa(c.ComicID))
+	keys = append(keys, strconv.Itoa(c.SourceID))
 
 	return strings.Join(keys, e.DELEMITER_CACHE)
 }
 
-func (c *ComicPage) Get() ([]*models.Pages, error) {
+func (c *ComicPage) Get() ([]*models.ComicPages, error) {
 	key := c.getKeyName()
 	if gredis.Exists(key) {
 		data, err := gredis.Get(key)
@@ -34,7 +34,7 @@ func (c *ComicPage) Get() ([]*models.Pages, error) {
 			logging.Info(err)
 		} else {
 			// logging.Info("在走缓存了")
-			var PageList []*models.Pages
+			var PageList []*models.ComicPages
 			json.Unmarshal(data, &PageList)
 			return PageList, nil
 		}
@@ -42,7 +42,7 @@ func (c *ComicPage) Get() ([]*models.Pages, error) {
 	return nil, nil
 }
 
-func (c *ComicPage) Save(PageList []*models.Pages) {
+func (c *ComicPage) Save(PageList []*models.ComicPages) {
 	key := c.getKeyName()
 	ttl := 60
 	gredis.Set(key, PageList, ttl)

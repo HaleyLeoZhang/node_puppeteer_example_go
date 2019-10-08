@@ -18,27 +18,27 @@ import (
 )
 
 type PageParam struct {
-	Channel int
-	ComicID int
-	ID      int
+	Channel  int
+	SourceID int
+	ID       int
 }
 
-func (p *PageParam) GetList() ([]*models.Pages, error) {
+func (p *PageParam) GetList() ([]*models.ComicPages, error) {
 	var (
-		PageList []*models.Pages
+		PageList []*models.ComicPages
 		err      error
 	)
 
 	cache := caches.ComicPage{
-		Channel: p.Channel,
-		ComicID: p.ComicID,
+		Channel:  p.Channel,
+		SourceID: p.SourceID,
 	}
 	PageList, err = cache.Get()
 	if nil != PageList {
 		return PageList, nil
 	}
 
-	PageList, err = models.GetPageList(p.Channel, p.ComicID, p.getMaps())
+	PageList, err = models.GetPageList(p.Channel, p.SourceID, p.getMaps())
 	if err != nil {
 		return nil, err
 	}
@@ -48,9 +48,9 @@ func (p *PageParam) GetList() ([]*models.Pages, error) {
 	return PageList, nil
 }
 
-func (p *PageParam) GetInfo() (*models.Pages, error) {
+func (p *PageParam) GetInfo() (*models.ComicPages, error) {
 	var (
-		PageInfo *models.Pages
+		PageInfo *models.ComicPages
 		err      error
 	)
 
@@ -62,13 +62,13 @@ func (p *PageParam) GetInfo() (*models.Pages, error) {
 	return PageInfo, nil
 }
 
-func (p *PageParam) GetNextInfo() (*models.Pages, error) {
+func (p *PageParam) GetNextInfo() (*models.ComicPages, error) {
 	var (
-		NextPageInfo *models.Pages
+		NextPageInfo *models.ComicPages
 		err          error
 	)
 
-	NextPageInfo, err = models.GetNextPageInfo(p.Channel, p.ComicID, p.ID, p.getMaps())
+	NextPageInfo, err = models.GetNextPageInfo(p.Channel, p.SourceID, p.ID, p.getMaps())
 	if err != nil {
 		return nil, err
 	}
