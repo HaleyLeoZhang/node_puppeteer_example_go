@@ -31,6 +31,21 @@ import (
  *
  * @apiDescription  获取漫画列表[目前只是用下拉模式做的,后续可能会引入普通分页]
  *
+ * @apiSuccess {int}    code    错误码---200表示正常
+ * @apiSuccess {string} message 释义---对应错误码
+ * @apiSuccess {object} data    数据
+ * @apiSuccess {array}  data.list  漫画列表
+ * @apiSuccess {int}    data.list.id  漫画ID
+ * @apiSuccess {int}    data.list.channel  漫画渠道ID---枚举值:0.未知 1.腾讯漫画 2.漫画牛
+ * @apiSuccess {int}    data.list.source_id  对应渠道中的资源ID
+ * @apiSuccess {string} data.list.name  章节名称
+ * @apiSuccess {string} data.list.pic  封面图片地址
+ * @apiSuccess {string} data.list.intro  漫画简介
+ * @apiSuccess {string} data.list.updated_at  更新时间
+ * @apiSuccess {string} data.list.created_at  创建时间
+ * @apiSuccess {int}    data.page  当前页码
+ * @apiSuccess {int}    data.total  数据条数
+ *
  * @apiVersion 1.0.0
  * @apiSuccessExample Success-Response:
  * HTTP/1.1 200 OK
@@ -38,20 +53,20 @@ import (
  *     "code": 200,
  *     "message": "success",
  *     "data": {
- *         "list": [ // 当前数据
+ *         "list": [
  *             {
  *                 "id": "1",
- *                 "channel": "2", // 枚举值：0.未知 1.腾讯漫画 2.漫画牛
- *                 "source_id": "5830", // 对应渠道中的资源ID
- *                 "name": "戒魔人", // 漫画名称
- *                 "pic": "", // 漫画封面
- *                 "intro": "大一新生周小安偶然戴上一枚来历不明的商代戒指，从他口中吐出了一个恐怖的血魔人。一个人类历史上的惊天秘...", // 漫画简介
+ *                 "channel": "2",
+ *                 "source_id": "5830",
+ *                 "name": "戒魔人", 
+ *                 "pic": "",
+ *                 "intro": "大一新生周小安偶然戴上一枚来历不明的商代戒指,从他口中吐出了一个恐怖的血魔人。一个人类历史上的惊天秘...",
  *                 "updated_at": "2019-08-27 14:20:02",
  *                 "created_at": "2019-09-03 20:37:31"
  *             }
  *         ],
- *         "page": 1, // 当前页码
- *         "total": 3 // 数据条数
+ *         "page": 1,
+ *         "total": 3
  *     }
  * }
  */

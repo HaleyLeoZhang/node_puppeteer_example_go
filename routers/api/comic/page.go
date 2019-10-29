@@ -32,6 +32,20 @@ import (
  *
  * @apiDescription  获取漫画章节列表
  *
+ * @apiSuccess {int}    code    错误码---200表示正常
+ * @apiSuccess {string} message 释义---对应错误码
+ * @apiSuccess {object} data    数据
+ * @apiSuccess {array}  data.list  章节列表
+ * @apiSuccess {int}    data.list.id  章节ID
+ * @apiSuccess {int}    data.list.channel  漫画渠道ID---获取漫画的渠道
+ * @apiSuccess {int}    data.list.source_id  对应渠道中的资源ID
+ * @apiSuccess {int}    data.list.sequence  章节序号
+ * @apiSuccess {string} data.list.name  章节名称
+ * @apiSuccess {string} data.list.link  章节地址
+ * @apiSuccess {int}    data.list.progress  章节对应图片拉取状态---枚举值:0=>未爬取,1=>处理中,2处理结束
+ * @apiSuccess {string} data.list.updated_at  更新时间
+ * @apiSuccess {string} data.list.created_at  创建时间
+ *
  * @apiVersion 1.0.0
  * @apiSuccessExample Success-Response:
  * HTTP/1.1 200 OK
@@ -40,15 +54,15 @@ import (
  *     "message": "success",
  *     "data":
  *     {
- *         "list": [ // 当前数据
+ *         "list": [
  *         {
  *             "id": 1,
- *             "channel": 2, // 获取漫画列表接口,对应渠道
- *             "source_id": 5830, // 对应渠道中的资源ID
- *             "sequence": 1, // 章节序号
- *             "name": "第1话", // 章节名称
- *             "link": "https://m.manhuaniu.com/manhua/5830/200258.html", // 章节地址
- *             "progress": 2, // 章节对应图片拉取状态:枚举值：0=>未爬取，1=>处理中，2处理结束
+ *             "channel": 2,
+ *             "source_id": 5830,
+ *             "sequence": 1,
+ *             "name": "第1话", 
+ *             "link": "https://m.manhuaniu.com/manhua/5830/200258.html",
+ *             "progress": 2,
  *             "updated_at": "2019-08-27 14:21:54",
  *             "created_at": "2019-08-27 14:22:37"
  *         }]
@@ -98,6 +112,39 @@ func GetPageList(c *gin.Context) {
  *
  * @apiDescription 获取漫画章节详情
  *
+ * @apiSuccess {int}    code    错误码---200表示正常
+ * @apiSuccess {string} message 释义---对应错误码
+ * @apiSuccess {object} data    数据
+ * @apiSuccess {array}  data.comic  当前漫画信息
+ * @apiSuccess {int}    data.comic.id  自增ID
+ * @apiSuccess {int}    data.comic.channel  漫画渠道ID---获取漫画的渠道
+ * @apiSuccess {int}    data.comic.source_id  对应渠道中的资源ID
+ * @apiSuccess {string} data.comic.name  章节名称
+ * @apiSuccess {string} data.comic.pic  封面图片地址
+ * @apiSuccess {string} data.comic.intro  漫画简介
+ * @apiSuccess {string} data.comic.updated_at  更新时间
+ * @apiSuccess {string} data.comic.created_at  创建时间
+ * @apiSuccess {array}  data.next_page  下一页信息
+ * @apiSuccess {int}    data.next_page.id  自增ID
+ * @apiSuccess {int}    data.next_page.channel  漫画渠道ID---获取漫画的渠道
+ * @apiSuccess {int}    data.next_page.source_id  对应渠道中的资源ID
+ * @apiSuccess {int}    data.next_page.sequence  章节序号
+ * @apiSuccess {string} data.next_page.name  章节名称
+ * @apiSuccess {string} data.next_page.link  章节地址
+ * @apiSuccess {int}    data.next_page.progress  章节对应图片拉取状态---枚举值:0=>未爬取,1=>处理中,2处理结束
+ * @apiSuccess {string} data.next_page.updated_at  更新时间
+ * @apiSuccess {string} data.next_page.created_at  创建时间
+ * @apiSuccess {array}  data.page  当前页信息
+ * @apiSuccess {int}    data.page.id  自增ID
+ * @apiSuccess {int}    data.page.channel  漫画渠道ID---获取漫画的渠道
+ * @apiSuccess {int}    data.page.source_id  对应渠道中的资源ID
+ * @apiSuccess {int}    data.page.sequence  章节序号
+ * @apiSuccess {string} data.page.name  章节名称
+ * @apiSuccess {string} data.page.link  章节地址
+ * @apiSuccess {int}    data.page.progress  章节对应图片拉取状态---枚举值:0=>未爬取,1=>处理中,2处理结束
+ * @apiSuccess {string} data.page.updated_at  更新时间
+ * @apiSuccess {string} data.page.created_at  创建时间
+ *
  * @apiVersion 1.0.0
  * @apiSuccessExample Success-Response:
  * HTTP/1.1 200 OK
@@ -105,17 +152,17 @@ func GetPageList(c *gin.Context) {
  *     "code": 200,
  *     "message": "success",
  *     "data": {
- *         "comic": { // 当前漫画信息
+ *         "comic": {
  *             "id": "1",
  *             "channel": "2",
  *             "source_id": "5830",
  *             "name": "戒魔人",
  *             "pic": "",
- *             "intro": "大一新生周小安偶然戴上一枚来历不明的商代戒指，从他口中吐出了一个恐怖的血魔人。一个人类历史上的惊天秘...",
+ *             "intro": "大一新生周小安偶然戴上一枚来历不明的商代戒指,从他口中吐出了一个恐怖的血魔人。一个人类历史上的惊天秘...",
  *             "updated_at": "2019-09-04 15:18:24",
  *             "created_at": "2019-09-03 20:37:31"
  *         },
- *         "next_page": { // 下一页信息
+ *         "next_page": {
  *             "id": 13,
  *             "channel": 2,
  *             "source_id": 5830,
@@ -126,7 +173,7 @@ func GetPageList(c *gin.Context) {
  *             "updated_at": "2019-08-27 14:21:54",
  *             "created_at": "2019-08-27 14:24:24"
  *         },
- *         "page": { // 当前页信息
+ *         "page": {
  *             "id": 12,
  *             "channel": 2,
  *             "source_id": 5830,
