@@ -19,14 +19,16 @@ type Comics struct {
 	Pic      string `json:"pic"`
 	Intro    string `json:"intro"`
 	// IsDeleted string `json:"is_deleted"`
-	UpdatedAt string `json:"updated_at"`
-	CreatedAt string `json:"created_at"`
+	Weight      string `json:"weight"`
+	MaxSequence string `json:"max_sequence"`
+	UpdatedAt   string `json:"updated_at"`
+	CreatedAt   string `json:"created_at"`
 }
 
 func GetComicList(pageNum int, pageSize int, maps interface{}) ([]*Comics, error) {
 	var ComicList []*Comics
 
-	err := db.Where(maps).Offset(pageNum).Limit(pageSize).Find(&ComicList).Error
+	err := db.Where(maps).Offset(pageNum).Order("weight desc").Limit(pageSize).Find(&ComicList).Error
 
 	if err != nil && err != gorm.ErrRecordNotFound {
 		return nil, err

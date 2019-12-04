@@ -21,10 +21,9 @@ type ComicParam struct {
 }
 
 const (
-	isOnlineYes = 1 
-	isOnlineNo = 0 
+	isOnlineYes = 1
+	isOnlineNo  = 0
 )
-
 
 func (c *ComicParam) GetList() ([]*models.Comics, error) {
 	var (

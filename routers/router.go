@@ -12,8 +12,7 @@ import (
 	// "github.com/HaleyLeoZhang/node_puppeteer_example_go/middleware/jwt"
 	// "github.com/HaleyLeoZhang/node_puppeteer_example_go/routers/api"
 	// "github.com/HaleyLeoZhang/node_puppeteer_example_go/routers/api/v1"
-		"github.com/HaleyLeoZhang/node_puppeteer_example_go/routers/api/comic"
-
+	"github.com/HaleyLeoZhang/node_puppeteer_example_go/routers/api/comic"
 )
 
 // InitRouter initialize routing information
@@ -27,9 +26,6 @@ func InitRouter() *gin.Engine {
 	api_comic.GET("page_list", comic.GetPageList)
 	api_comic.GET("page_detail", comic.GetPageDetail)
 	api_comic.GET("image_list", comic.GetImageList)
-	
-	
-
 
 	// api_comic.Use(jwt.JWT())
 	// {

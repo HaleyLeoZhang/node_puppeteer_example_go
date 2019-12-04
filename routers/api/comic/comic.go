@@ -29,7 +29,7 @@ import (
  *
  * @apiParam {int} page 页码
  *
- * @apiDescription  获取漫画列表[目前只是用下拉模式做的,后续可能会引入普通分页]
+ * @apiDescription  获取漫画列表[目前只用下拉模式做]
  *
  * @apiSuccess {int}    code    错误码---200表示正常
  * @apiSuccess {string} message 释义---对应错误码
@@ -43,8 +43,6 @@ import (
  * @apiSuccess {string} data.list.intro  漫画简介
  * @apiSuccess {string} data.list.updated_at  更新时间
  * @apiSuccess {string} data.list.created_at  创建时间
- * @apiSuccess {int}    data.page  当前页码
- * @apiSuccess {int}    data.total  数据条数
  *
  * @apiVersion 1.0.0
  * @apiSuccessExample Success-Response:
@@ -55,18 +53,42 @@ import (
  *     "data": {
  *         "list": [
  *             {
- *                 "id": "1",
+ *                 "id": "13",
  *                 "channel": "2",
- *                 "source_id": "5830",
- *                 "name": "戒魔人", 
- *                 "pic": "",
- *                 "intro": "大一新生周小安偶然戴上一枚来历不明的商代戒指,从他口中吐出了一个恐怖的血魔人。一个人类历史上的惊天秘...",
- *                 "updated_at": "2019-08-27 14:20:02",
- *                 "created_at": "2019-09-03 20:37:31"
+ *                 "source_id": "12535",
+ *                 "name": "我的守护女友",
+ *                 "pic": "https://res.nbhbzl.com/images/cover/201909/1569035676zULh0IQhqyyh_szb.",
+ *                 "intro": "末世来临，凌默的异能觉醒，他发现自己居然可以控制丧尸。 凌默利用自己的异能穿过尸潮，终于找到了心爱的...",
+ *                 "weight": "1000",
+ *                 "max_sequence": "0",
+ *                 "updated_at": "2019-12-04 11:33:34",
+ *                 "created_at": "2019-11-06 13:34:09"
+ *             },
+ *             {
+ *                 "id": "5",
+ *                 "channel": "2",
+ *                 "source_id": "3181",
+ *                 "name": "妖怪名单",
+ *                 "pic": "https://i.loli.net/2019/09/08/sQ1Cm4vYTAViL8y.jpg",
+ *                 "intro": "魅惑众生的九尾狐狸？吸人精气的合欢树妖？道家妹子求双修，仙家女神若即离。游走在这些危险分子中间可不是...",
+ *                 "weight": "0",
+ *                 "max_sequence": "0",
+ *                 "updated_at": "2019-12-04 11:33:30",
+ *                 "created_at": "2019-09-08 07:24:27"
+ *             },
+ *             {
+ *                 "id": "7",
+ *                 "channel": "2",
+ *                 "source_id": "4419",
+ *                 "name": "偷星九月天",
+ *                 "pic": "https://res.nbhbzl.com/images/cover/201804/1524371582VN_mppKONpcP64E6.jpg",
+ *                 "intro": "一场爱与梦想的奇妙冒险…… 是男仆还是热血的少年侦探？江洋大盗竟是如花美眷？！ 迷雾一层接一层，悬念...",
+ *                 "weight": "0",
+ *                 "max_sequence": "0",
+ *                 "updated_at": "2019-12-04 11:11:39",
+ *                 "created_at": "2019-09-13 12:43:58"
  *             }
- *         ],
- *         "page": 1,
- *         "total": 3
+ *         ]
  *     }
  * }
  */
@@ -95,16 +117,16 @@ func GetComicList(c *gin.Context) {
 		return
 	}
 
-	total, err := comicService.Count()
-	if err != nil {
-		appG.Response(http.StatusInternalServerError, e.SOURCE_NOT_FOUND, nil)
-		return
-	}
+	// total, err := comicService.Count()
+	// if err != nil {
+	// 	appG.Response(http.StatusInternalServerError, e.SOURCE_NOT_FOUND, nil)
+	// 	return
+	// }
 
 	data := make(map[string]interface{})
 	data["list"] = comicList
-	data["total"] = total
-	data["page"] = page
+	// data["total"] = total
+	// data["page"] = page
 	// 分页逻辑放在前端,减少后端运算
 
 	appG.Response(http.StatusOK, e.SUCCESS, data)

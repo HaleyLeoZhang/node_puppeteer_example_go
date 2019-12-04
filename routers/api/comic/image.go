@@ -50,13 +50,13 @@ import (
  *     "code": 200,
  *     "message": "success",
  *     "data": {
- *         "list": [ // 当前数据
+ *         "list": [
  *             {
  *                 "id": "1",
  *                 "page_id": "1",
  *                 "sequence": "1",
  *                 "src": "https://res.nbhbzl.com/images/comic/103/205259/1526284455iSc0TXw2NXnFcpd8.jpg",
- *                 "progress": "0", // 
+ *                 "progress": "0", //
  *                 "updated_at": "2019-08-27 14:22:29",
  *                 "created_at": "2019-08-27 14:22:29"
  *             }

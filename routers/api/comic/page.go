@@ -60,7 +60,7 @@ import (
  *             "channel": 2,
  *             "source_id": 5830,
  *             "sequence": 1,
- *             "name": "第1话", 
+ *             "name": "第1话",
  *             "link": "https://m.manhuaniu.com/manhua/5830/200258.html",
  *             "progress": 2,
  *             "updated_at": "2019-08-27 14:21:54",
