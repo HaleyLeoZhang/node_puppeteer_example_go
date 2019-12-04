@@ -41,6 +41,9 @@ import (
  * @apiSuccess {string} data.list.name  章节名称
  * @apiSuccess {string} data.list.pic  封面图片地址
  * @apiSuccess {string} data.list.intro  漫画简介
+ * @apiSuccess {string} data.list.max_sequence  对应漫画当前的最大阅读序号。对应comic_pages.sequence的对应最大值
+ * @apiSuccess {string} data.list.weight  权重值.值越大,越靠前展示
+ * @apiSuccess {string} data.list.tag  标记。枚举值: 0->没有标记,1->热门,2->连载,3->完结
  * @apiSuccess {string} data.list.updated_at  更新时间
  * @apiSuccess {string} data.list.created_at  创建时间
  *
@@ -53,40 +56,43 @@ import (
  *     "data": {
  *         "list": [
  *             {
- *                 "id": "13",
- *                 "channel": "2",
- *                 "source_id": "12535",
- *                 "name": "我的守护女友",
- *                 "pic": "https://res.nbhbzl.com/images/cover/201909/1569035676zULh0IQhqyyh_szb.",
- *                 "intro": "末世来临，凌默的异能觉醒，他发现自己居然可以控制丧尸。 凌默利用自己的异能穿过尸潮，终于找到了心爱的...",
- *                 "weight": "1000",
- *                 "max_sequence": "0",
- *                 "updated_at": "2019-12-04 11:33:34",
- *                 "created_at": "2019-11-06 13:34:09"
+ *                 "id": "9",
+ *                 "channel": "3",
+ *                 "source_id": "11406",
+ *                 "name": "天才高手",
+ *                 "pic": "https://www.onemanhua.com/comic/11406/cover.jpg",
+ *                 "intro": "不定期更新傲娇女总裁，娇羞小秘书，南非黑钻公主，特种兵女保镖，和爱吃胡萝卜的屌丝美男会擦出怎样的火花是宿命纠缠还是心机暗算，走进天才高手，带你领略不一样的助理人生。 ",
+ *                 "max_sequence": "186",
+ *                 "weight": "100",
+ *                 "tag": "0",
+ *                 "updated_at": "2019-12-04 15:58:48",
+ *                 "created_at": "2019-12-04 11:52:37"
  *             },
  *             {
- *                 "id": "5",
+ *                 "id": "1",
  *                 "channel": "2",
- *                 "source_id": "3181",
- *                 "name": "妖怪名单",
- *                 "pic": "https://i.loli.net/2019/09/08/sQ1Cm4vYTAViL8y.jpg",
- *                 "intro": "魅惑众生的九尾狐狸？吸人精气的合欢树妖？道家妹子求双修，仙家女神若即离。游走在这些危险分子中间可不是...",
- *                 "weight": "0",
+ *                 "source_id": "5830",
+ *                 "name": "戒魔人",
+ *                 "pic": "https://i.loli.net/2019/09/08/czSNHV3fnyaox65.jpg",
+ *                 "intro": "大一新生周小安偶然戴上一枚来历不明的商代戒指，从他口中吐出了一个恐怖的血魔人。一个人类历史上的惊天秘...",
  *                 "max_sequence": "0",
- *                 "updated_at": "2019-12-04 11:33:30",
- *                 "created_at": "2019-09-08 07:24:27"
+ *                 "weight": "0",
+ *                 "tag": "0",
+ *                 "updated_at": "2019-09-14 06:20:16",
+ *                 "created_at": "2019-09-03 12:37:31"
  *             },
  *             {
- *                 "id": "7",
+ *                 "id": "2",
  *                 "channel": "2",
- *                 "source_id": "4419",
- *                 "name": "偷星九月天",
- *                 "pic": "https://res.nbhbzl.com/images/cover/201804/1524371582VN_mppKONpcP64E6.jpg",
- *                 "intro": "一场爱与梦想的奇妙冒险…… 是男仆还是热血的少年侦探？江洋大盗竟是如花美眷？！ 迷雾一层接一层，悬念...",
- *                 "weight": "0",
+ *                 "source_id": "10660",
+ *                 "name": "一人之下",
+ *                 "pic": "https://i.loli.net/2019/09/05/F4nyW9iHltuK6Ur.jpg",
+ *                 "intro": "随着爷爷尸体被盗，神秘少女冯宝宝的造访，少年张楚岚的平静校园生活被彻底颠覆。急于解开爷爷和自身秘密的...",
  *                 "max_sequence": "0",
- *                 "updated_at": "2019-12-04 11:11:39",
- *                 "created_at": "2019-09-13 12:43:58"
+ *                 "weight": "0",
+ *                 "tag": "0",
+ *                 "updated_at": "2019-09-14 06:20:16",
+ *                 "created_at": "2019-09-03 12:37:33"
  *             }
  *         ]
  *     }

@@ -19,8 +19,9 @@ type Comics struct {
 	Pic      string `json:"pic"`
 	Intro    string `json:"intro"`
 	// IsDeleted string `json:"is_deleted"`
-	Weight      string `json:"weight"`
 	MaxSequence string `json:"max_sequence"`
+	Weight      string `json:"weight"`
+	Tag string `json:"tag"`
 	UpdatedAt   string `json:"updated_at"`
 	CreatedAt   string `json:"created_at"`
 }
