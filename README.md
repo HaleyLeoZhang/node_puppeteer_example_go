@@ -48,9 +48,8 @@ gofmt -w .
 ~~~bash
 project_path="/data/inner_site/projects/node_puppeteer_example_go"
 app_name="puppeteer.hlzblog.top"
-app_path=${project_path}"/"${app_name}
 
-rm -rf ${app_path} \
-&& go build -o ${app_path} -v $project_path"/." \
-&& ${app_path} ${project_path}/conf/app.ini 
+rm -rf ${app_name} \
+&& go build -o ${app_name} -v . \
+&& ${app_name} ${project_path}/conf/app.ini 
 ~~~
