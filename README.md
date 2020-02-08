@@ -37,21 +37,20 @@ go build -v .
 刚刚生成的应用地址 配置文件在系统中的绝对路径
 ~~~
 
-##### 示例
+> 格式化代码
 
 ~~~bash
-project_path="/data/common/node_puppeteer_example_go"
+gofmt -w .
+~~~
+
+##### 示例运行
+
+~~~bash
+project_path="/data/inner_site/projects/node_puppeteer_example_go"
 app_name="puppeteer.hlzblog.top"
 app_path=${project_path}"/"${app_name}
 
 rm -rf ${app_path} \
 && go build -o ${app_path} -v . \
-&& ps -ef |  grep ${project_path} | awk '{print $2}' | xargs -n 1  kill -9 \
-&& ${app_path} ${project_path}/conf/app.ini &
-~~~
-
-> 格式化代码
-
-~~~bash
-gofmt -w .
+&& ${app_path} ${project_path}/conf/app.ini 
 ~~~
