@@ -6,7 +6,7 @@ import (
 
 	"github.com/gomodule/redigo/redis"
 
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/setting"
+	"node_puppeteer_example_go/pkg/setting"
 )
 
 var RedisConn *redis.Pool

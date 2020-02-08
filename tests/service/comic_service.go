@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/comic_service"
+	"node_puppeteer_example_go/comic_service"
 )
 
 type Comic interface {

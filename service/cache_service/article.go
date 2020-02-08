@@ -11,7 +11,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/e"
+	"node_puppeteer_example_go/pkg/e"
 )
 
 type Article struct {

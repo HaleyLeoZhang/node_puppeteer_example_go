@@ -1,10 +1,10 @@
 package util
 
 import (
-	"github.com/Unknwon/com"
 	"github.com/gin-gonic/gin"
+	"github.com/unknwon/com"
 
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/setting"
+	"node_puppeteer_example_go/pkg/setting"
 )
 
 // GetPage get page parameters

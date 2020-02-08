@@ -7,12 +7,12 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/models"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/gredis"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/logging"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/setting"
-	// "github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/util"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/routers"
+	"node_puppeteer_example_go/models"
+	"node_puppeteer_example_go/pkg/gredis"
+	"node_puppeteer_example_go/pkg/logging"
+	"node_puppeteer_example_go/pkg/setting"
+	// "node_puppeteer_example_go/pkg/util"
+	"node_puppeteer_example_go/routers"
 )
 
 func init() {
@@ -25,9 +25,9 @@ func init() {
 // @title Golang Gin API
 // @version 1.0
 // @description An example of gin
-// @termsOfService https://github.com/HaleyLeoZhang/node_puppeteer_example_go
+// @termsOfService https://node_puppeteer_example_go
 // @license.name MIT
-// @license.url https://github.com/HaleyLeoZhang/node_puppeteer_example_go/blob/master/LICENSE
+// @license.url https://node_puppeteer_example_go/blob/master/LICENSE
 func main() {
 	gin.SetMode(setting.ServerSetting.RunMode)
 

@@ -6,8 +6,8 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/e"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/util"
+	"node_puppeteer_example_go/pkg/e"
+	"node_puppeteer_example_go/pkg/util"
 )
 
 // JWT is jwt middleware

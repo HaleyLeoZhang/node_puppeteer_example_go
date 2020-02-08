@@ -5,15 +5,14 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	//_ "github.com/HaleyLeoZhang/node_puppeteer_example_go/docs"
+	//_ "node_puppeteer_example_go/docs"
 	// "github.com/swaggo/gin-swagger"
 	// "github.com/swaggo/gin-swagger/swaggerFiles"
 
-	// "github.com/HaleyLeoZhang/node_puppeteer_example_go/middleware/jwt"
-	// "github.com/HaleyLeoZhang/node_puppeteer_example_go/routers/api"
-	// "github.com/HaleyLeoZhang/node_puppeteer_example_go/routers/api/v1"
-		"github.com/HaleyLeoZhang/node_puppeteer_example_go/routers/api/comic"
-
+	// "node_puppeteer_example_go/middleware/jwt"
+	// "node_puppeteer_example_go/routers/api"
+	// "node_puppeteer_example_go/routers/api/v1"
+	"node_puppeteer_example_go/routers/api/comic"
 )
 
 // InitRouter initialize routing information
@@ -27,9 +26,6 @@ func InitRouter() *gin.Engine {
 	api_comic.GET("page_list", comic.GetPageList)
 	api_comic.GET("page_detail", comic.GetPageDetail)
 	api_comic.GET("image_list", comic.GetImageList)
-	
-	
-
 
 	// api_comic.Use(jwt.JWT())
 	// {

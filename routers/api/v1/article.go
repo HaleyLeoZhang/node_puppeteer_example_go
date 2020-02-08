@@ -3,18 +3,18 @@ package v1
 import (
 	"net/http"
 
-	"github.com/Unknwon/com"
 	"github.com/astaxie/beego/validation"
 	"github.com/boombuler/barcode/qr"
 	"github.com/gin-gonic/gin"
+	"github.com/unknwon/com"
 
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/app"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/e"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/qrcode"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/setting"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/util"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/service/article_service"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/service/tag_service"
+	"node_puppeteer_example_go/pkg/app"
+	"node_puppeteer_example_go/pkg/e"
+	"node_puppeteer_example_go/pkg/qrcode"
+	"node_puppeteer_example_go/pkg/setting"
+	"node_puppeteer_example_go/pkg/util"
+	"node_puppeteer_example_go/service/article_service"
+	"node_puppeteer_example_go/service/tag_service"
 )
 
 // @Summary Get a single article

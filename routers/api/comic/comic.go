@@ -10,16 +10,16 @@ package comic
 import (
 	"net/http"
 
-	"github.com/Unknwon/com"
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
+	"github.com/unknwon/com"
 
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/app"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/e"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/setting"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/util"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/service/comic_service"
-	// "github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/logging"
+	"node_puppeteer_example_go/pkg/app"
+	"node_puppeteer_example_go/pkg/e"
+	"node_puppeteer_example_go/pkg/setting"
+	"node_puppeteer_example_go/pkg/util"
+	"node_puppeteer_example_go/service/comic_service"
+	// "node_puppeteer_example_go/pkg/logging"
 )
 
 /**
@@ -58,7 +58,7 @@ import (
  *                 "id": "1",
  *                 "channel": "2",
  *                 "source_id": "5830",
- *                 "name": "戒魔人", 
+ *                 "name": "戒魔人",
  *                 "pic": "",
  *                 "intro": "大一新生周小安偶然戴上一枚来历不明的商代戒指,从他口中吐出了一个恐怖的血魔人。一个人类历史上的惊天秘...",
  *                 "updated_at": "2019-08-27 14:20:02",

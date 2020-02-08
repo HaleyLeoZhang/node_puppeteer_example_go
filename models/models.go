@@ -14,7 +14,7 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/setting"
+	"node_puppeteer_example_go/pkg/setting"
 	"time"
 )
 

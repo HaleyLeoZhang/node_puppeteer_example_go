@@ -1,11 +1,12 @@
 # 序言
-这里将会用 [golang](https://golang.org/) 中的 [gin](https://www.yoytang.com/go-gin-doc.html) 框架 吐出图片地址数据  
+这里将会用 [golang](https://golang.org/) 中的 [gin](https://www.yoytang.com/go-gin-doc.html) 框架 吐出漫画模块相关数据  
 
-[查看接口文档](http://api_puppeteer.doc.hlzblog.top/)  
+[点此查看接口文档](http://api_puppeteer.doc.hlzblog.top/)  
 
 ## 基于框架
-该框架使用请看这里  
-[go-gin-example](https://github.com/HaleyLeoZhang/node_puppeteer_example_go/blob/master/README_ZH.md)   
+该框架使用请看这里 [go-gin-example](https://node_puppeteer_example_go/blob/master/README_ZH.md)   
+
+###### 目前包管理已调为 `gomod`  
 
 ~~~bash
 cp conf/app.ini.example conf/app.ini  
@@ -21,13 +22,32 @@ cp conf/app.ini.example conf/app.ini
 > 生成应用
 
 ~~~bash
-go build -o puppeteer.hlzblog.top main.go
+go build -o 应用的英文名 main.go
 ~~~
 
 或者  
 
 ~~~bash
 go build -v .
+~~~
+
+运行应用  
+
+~~~bash
+刚刚生成的应用地址 配置文件在系统中的绝对路径
+~~~
+
+##### 示例
+
+~~~bash
+project_path="/data/common/node_puppeteer_example_go"
+app_name="puppeteer.hlzblog.top"
+app_path=${project_path}"/"${app_name}
+
+rm -rf ${app_path} \
+&& go build -o ${app_path} -v . \
+&& ps -ef |  grep ${project_path} | awk '{print $2}' | xargs -n 1  kill -9 \
+&& ${app_path} ${project_path}/conf/app.ini &
 ~~~
 
 > 格式化代码
