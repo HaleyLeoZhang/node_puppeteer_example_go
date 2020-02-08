@@ -46,10 +46,11 @@ gofmt -w .
 ##### 示例运行
 
 ~~~bash
-project_path="/data/inner_site/projects/node_puppeteer_example_go"
+project_path="/data/www/site/puppeteer.hlzblog.top"
 app_name="puppeteer.hlzblog.top"
 
-rm -rf ${app_name} \
-&& go build -o ${app_name} -v . \
-&& ${app_name} ${project_path}/conf/app.ini 
+cd ${project_path}
+rm -rf ${app_name} 
+go build -o ${app_name} -v .
+./${app_name} ${project_path}/conf/app.ini 
 ~~~
