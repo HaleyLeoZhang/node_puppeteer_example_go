@@ -1,4 +1,4 @@
-# Go Gin Example [![rcard](https://goreportcard.com/badge/github.com/HaleyLeoZhang/node_puppeteer_example_go)](https://goreportcard.com/report/github.com/HaleyLeoZhang/node_puppeteer_example_go) [![GoDoc](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)](https://godoc.org/github.com/HaleyLeoZhang/node_puppeteer_example_go) [![License](http://img.shields.io/badge/license-mit-blue.svg?style=flat-square)](https://raw.githubusercontent.com/HaleyLeoZhang/node_puppeteer_example_go/master/LICENSE)
+# Go Gin Example [![rcard](https://goreportcard.com/badge/node_puppeteer_example_go)](https://goreportcard.com/report/node_puppeteer_example_go) [![GoDoc](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)](https://godoc.org/node_puppeteer_example_go) [![License](http://img.shields.io/badge/license-mit-blue.svg?style=flat-square)](https://raw.githubusercontent.com/HaleyLeoZhang/node_puppeteer_example_go/master/LICENSE)
 
 `gin` 的一个例子，包含许多有用特性
 
@@ -28,7 +28,7 @@
 
 ## 安装
 ```
-$ go get github.com/HaleyLeoZhang/node_puppeteer_example_go
+$ go get node_puppeteer_example_go
 ```
 
 ## 如何运行
@@ -40,7 +40,7 @@ $ go get github.com/HaleyLeoZhang/node_puppeteer_example_go
 
 ### 准备
 
-创建一个 `blog` 数据库，并且导入建表的 [SQL](https://github.com/HaleyLeoZhang/node_puppeteer_example_go/blob/master/docs/sql/blog.sql)
+创建一个 `blog` 数据库，并且导入建表的 [SQL](https://node_puppeteer_example_go/blob/master/docs/sql/blog.sql)
 
 ### 配置
 
@@ -79,17 +79,17 @@ $ go run main.go
  - using env:	export GIN_MODE=release
  - using code:	gin.SetMode(gin.ReleaseMode)
 
-[GIN-debug] GET    /auth                     --> github.com/HaleyLeoZhang/node_puppeteer_example_go/routers/api.GetAuth (3 handlers)
-[GIN-debug] GET    /swagger/*any             --> github.com/HaleyLeoZhang/node_puppeteer_example_go/vendor/github.com/swaggo/gin-swagger.WrapHandler.func1 (3 handlers)
-[GIN-debug] GET    /api/v1/tags              --> github.com/HaleyLeoZhang/node_puppeteer_example_go/routers/api/v1.GetTags (4 handlers)
-[GIN-debug] POST   /api/v1/tags              --> github.com/HaleyLeoZhang/node_puppeteer_example_go/routers/api/v1.AddTag (4 handlers)
-[GIN-debug] PUT    /api/v1/tags/:id          --> github.com/HaleyLeoZhang/node_puppeteer_example_go/routers/api/v1.EditTag (4 handlers)
-[GIN-debug] DELETE /api/v1/tags/:id          --> github.com/HaleyLeoZhang/node_puppeteer_example_go/routers/api/v1.DeleteTag (4 handlers)
-[GIN-debug] GET    /api/v1/articles          --> github.com/HaleyLeoZhang/node_puppeteer_example_go/routers/api/v1.GetArticles (4 handlers)
-[GIN-debug] GET    /api/v1/articles/:id      --> github.com/HaleyLeoZhang/node_puppeteer_example_go/routers/api/v1.GetArticle (4 handlers)
-[GIN-debug] POST   /api/v1/articles          --> github.com/HaleyLeoZhang/node_puppeteer_example_go/routers/api/v1.AddArticle (4 handlers)
-[GIN-debug] PUT    /api/v1/articles/:id      --> github.com/HaleyLeoZhang/node_puppeteer_example_go/routers/api/v1.EditArticle (4 handlers)
-[GIN-debug] DELETE /api/v1/articles/:id      --> github.com/HaleyLeoZhang/node_puppeteer_example_go/routers/api/v1.DeleteArticle (4 handlers)
+[GIN-debug] GET    /auth                     --> node_puppeteer_example_go/routers/api.GetAuth (3 handlers)
+[GIN-debug] GET    /swagger/*any             --> node_puppeteer_example_go/vendor/github.com/swaggo/gin-swagger.WrapHandler.func1 (3 handlers)
+[GIN-debug] GET    /api/v1/tags              --> node_puppeteer_example_go/routers/api/v1.GetTags (4 handlers)
+[GIN-debug] POST   /api/v1/tags              --> node_puppeteer_example_go/routers/api/v1.AddTag (4 handlers)
+[GIN-debug] PUT    /api/v1/tags/:id          --> node_puppeteer_example_go/routers/api/v1.EditTag (4 handlers)
+[GIN-debug] DELETE /api/v1/tags/:id          --> node_puppeteer_example_go/routers/api/v1.DeleteTag (4 handlers)
+[GIN-debug] GET    /api/v1/articles          --> node_puppeteer_example_go/routers/api/v1.GetArticles (4 handlers)
+[GIN-debug] GET    /api/v1/articles/:id      --> node_puppeteer_example_go/routers/api/v1.GetArticle (4 handlers)
+[GIN-debug] POST   /api/v1/articles          --> node_puppeteer_example_go/routers/api/v1.AddArticle (4 handlers)
+[GIN-debug] PUT    /api/v1/articles/:id      --> node_puppeteer_example_go/routers/api/v1.EditArticle (4 handlers)
+[GIN-debug] DELETE /api/v1/articles/:id      --> node_puppeteer_example_go/routers/api/v1.DeleteArticle (4 handlers)
 
 Listening port is 8000
 Actual pid is 4393

@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/e"
+	"node_puppeteer_example_go/pkg/e"
 )
 
 // BindAndValid binds and validates data

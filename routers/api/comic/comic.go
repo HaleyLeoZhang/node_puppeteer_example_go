@@ -10,16 +10,16 @@ package comic
 import (
 	"net/http"
 
-	"github.com/Unknwon/com"
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
+	"github.com/unknwon/com"
 
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/app"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/e"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/setting"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/util"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/service/comic_service"
-	// "github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/logging"
+	"node_puppeteer_example_go/pkg/app"
+	"node_puppeteer_example_go/pkg/e"
+	"node_puppeteer_example_go/pkg/setting"
+	"node_puppeteer_example_go/pkg/util"
+	"node_puppeteer_example_go/service/comic_service"
+	// "node_puppeteer_example_go/pkg/logging"
 )
 
 /**

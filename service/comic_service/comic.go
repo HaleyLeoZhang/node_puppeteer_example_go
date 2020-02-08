@@ -8,9 +8,9 @@ package comic_service
 // ----------------------------------------------------------------------
 
 import (
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/caches"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/models"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/e"
+	"node_puppeteer_example_go/caches"
+	"node_puppeteer_example_go/models"
+	"node_puppeteer_example_go/pkg/e"
 )
 
 type ComicParam struct {

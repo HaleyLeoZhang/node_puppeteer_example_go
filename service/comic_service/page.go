@@ -10,11 +10,11 @@ package comic_service
 import (
 	// "encoding/json"
 
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/caches"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/models"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/e"
-	// "github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/gredis"
-	// "github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/logging"
+	"node_puppeteer_example_go/caches"
+	"node_puppeteer_example_go/models"
+	"node_puppeteer_example_go/pkg/e"
+	// "node_puppeteer_example_go/pkg/gredis"
+	// "node_puppeteer_example_go/pkg/logging"
 )
 
 type PageParam struct {

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/setting"
+	"node_puppeteer_example_go/pkg/setting"
 )
 
 // getLogFilePath get the log file save path

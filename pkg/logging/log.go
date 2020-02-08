@@ -2,8 +2,8 @@ package logging
 
 import (
 	"fmt"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/pkg/file"
 	"log"
+	"node_puppeteer_example_go/pkg/file"
 	"os"
 	"path/filepath"
 	"runtime"
