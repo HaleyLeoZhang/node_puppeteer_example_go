@@ -4,7 +4,7 @@
 [点此查看接口文档](http://api_puppeteer.doc.hlzblog.top/)  
 
 ## 基于框架
-该框架使用请看这里 [go-gin-example](https://node_puppeteer_example_go/blob/master/README_ZH.md)   
+该框架使用请看这里 [go-gin-example](https://github.com/eddycjy/go-gin-example/blob/master/README_ZH.md)   
 
 ###### 目前包管理已调为 `gomod`  
 
