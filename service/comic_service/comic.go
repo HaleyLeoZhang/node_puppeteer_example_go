@@ -1,7 +1,7 @@
 package comic_service
 
 // ----------------------------------------------------------------------
-// 漫画列表-服务层
+// 漫画实体服务
 // ----------------------------------------------------------------------
 // Link  : http://www.hlzblog.top/
 // GITHUB: https://github.com/HaleyLeoZhang
@@ -13,7 +13,7 @@ import (
 	"node_puppeteer_example_go/pkg/e"
 )
 
-type ComicParam struct {
+type Comic struct {
 	PageNum  int
 	PageSize int
 	Channel  int
@@ -25,7 +25,7 @@ const (
 	isOnlineNo  = 0
 )
 
-func (c *ComicParam) GetList() ([]*models.Comics, error) {
+func (c *Comic) GetList() ([]*models.Comics, error) {
 	var (
 		ComicList []*models.Comics
 	)
@@ -37,11 +37,11 @@ func (c *ComicParam) GetList() ([]*models.Comics, error) {
 	return ComicList, nil
 }
 
-func (c *ComicParam) Count() (int, error) {
+func (c *Comic) Count() (int, error) {
 	return models.GetComicTotal(c.getMaps())
 }
 
-func (c *ComicParam) GetInfo() (*models.Comics, error) {
+func (c *Comic) GetInfo() (*models.Comics, error) {
 	var (
 		OneComic *models.Comics
 		err      error
@@ -66,7 +66,7 @@ func (c *ComicParam) GetInfo() (*models.Comics, error) {
 	return OneComic, nil
 }
 
-func (c *ComicParam) getMaps() map[string]interface{} {
+func (c *Comic) getMaps() map[string]interface{} {
 	maps := make(map[string]interface{})
 	maps["is_deleted"] = e.DATA_IS_DELETED_NO
 	maps["is_online"] = isOnlineYes

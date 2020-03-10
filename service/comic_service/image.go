@@ -1,7 +1,7 @@
 package comic_service
 
 // ----------------------------------------------------------------------
-// 漫画列表-服务层
+// 漫画图片服务
 // ----------------------------------------------------------------------
 // Link  : http://www.hlzblog.top/
 // GITHUB: https://github.com/HaleyLeoZhang
@@ -12,11 +12,11 @@ import (
 	"node_puppeteer_example_go/pkg/e"
 )
 
-type ImageParam struct {
+type Image struct {
 	PageID int
 }
 
-func (i *ImageParam) GetList() ([]*models.ComicImages, error) {
+func (i *Image) GetList() ([]*models.ComicImages, error) {
 	var (
 		ImageList []*models.ComicImages
 	)
@@ -28,7 +28,7 @@ func (i *ImageParam) GetList() ([]*models.ComicImages, error) {
 	return ImageList, nil
 }
 
-func (i *ImageParam) getMaps() map[string]interface{} {
+func (i *Image) getMaps() map[string]interface{} {
 	maps := make(map[string]interface{})
 	maps["is_deleted"] = e.DATA_IS_DELETED_NO
 

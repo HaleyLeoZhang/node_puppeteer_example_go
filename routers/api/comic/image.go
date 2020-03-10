@@ -1,7 +1,7 @@
 package comic
 
 // ----------------------------------------------------------------------
-// 漫画章节对应图片列表-控制器
+// 漫画图片控制器
 // ----------------------------------------------------------------------
 // Link  : http://www.hlzblog.top/
 // GITHUB: https://github.com/HaleyLeoZhang
@@ -16,10 +16,7 @@ import (
 
 	"node_puppeteer_example_go/pkg/app"
 	"node_puppeteer_example_go/pkg/e"
-	// "node_puppeteer_example_go/pkg/setting"
-	// "node_puppeteer_example_go/pkg/util"
 	"node_puppeteer_example_go/service/comic_service"
-	// "node_puppeteer_example_go/pkg/logging"
 )
 
 /**
@@ -77,7 +74,7 @@ func GetImageList(c *gin.Context) {
 		return
 	}
 
-	imageService := comic_service.ImageParam{
+	imageService := comic_service.Image{
 		PageID: page_id,
 	}
 	imageList, err := imageService.GetList()

@@ -1,7 +1,7 @@
 package comic
 
 // ----------------------------------------------------------------------
-// 漫画列表-控制器
+// 漫画实体控制器
 // ----------------------------------------------------------------------
 // Link  : http://www.hlzblog.top/
 // GITHUB: https://github.com/HaleyLeoZhang
@@ -19,7 +19,6 @@ import (
 	"node_puppeteer_example_go/pkg/setting"
 	"node_puppeteer_example_go/pkg/util"
 	"node_puppeteer_example_go/service/comic_service"
-	// "node_puppeteer_example_go/pkg/logging"
 )
 
 /**
@@ -112,7 +111,7 @@ func GetComicList(c *gin.Context) {
 		return
 	}
 
-	comicService := comic_service.ComicParam{
+	comicService := comic_service.Comic{
 		PageNum:  util.GetPage(c),
 		PageSize: setting.AppSetting.PageSize,
 	}

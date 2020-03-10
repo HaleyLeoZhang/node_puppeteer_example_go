@@ -21,7 +21,7 @@ type Comics struct {
 	// IsDeleted string `json:"is_deleted"`
 	MaxSequence string `json:"max_sequence"`
 	Weight      string `json:"weight"`
-	Tag string `json:"tag"`
+	Tag         string `json:"tag"`
 	UpdatedAt   string `json:"updated_at"`
 	CreatedAt   string `json:"created_at"`
 }

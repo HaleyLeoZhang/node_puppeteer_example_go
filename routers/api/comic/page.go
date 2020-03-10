@@ -1,7 +1,7 @@
 package comic
 
 // ----------------------------------------------------------------------
-// 漫画章节列表-控制器
+// 漫画章节控制器
 // ----------------------------------------------------------------------
 // Link  : http://www.hlzblog.top/
 // GITHUB: https://github.com/HaleyLeoZhang
@@ -16,10 +16,7 @@ import (
 
 	"node_puppeteer_example_go/pkg/app"
 	"node_puppeteer_example_go/pkg/e"
-	// "node_puppeteer_example_go/pkg/setting"
-	// "node_puppeteer_example_go/pkg/util"
 	"node_puppeteer_example_go/service/comic_service"
-	// "node_puppeteer_example_go/pkg/logging"
 )
 
 /**
@@ -85,7 +82,7 @@ func GetPageList(c *gin.Context) {
 		return
 	}
 
-	pageService := comic_service.PageParam{
+	pageService := comic_service.Page{
 		Channel:  channel,
 		SourceID: source_id,
 	}
@@ -201,7 +198,7 @@ func GetPageDetail(c *gin.Context) {
 	}
 
 	// 章节
-	pageService := comic_service.PageParam{
+	pageService := comic_service.Page{
 		ID: id,
 	}
 	pageInfo, err := pageService.GetInfo()
@@ -212,7 +209,7 @@ func GetPageDetail(c *gin.Context) {
 	}
 
 	// 漫画
-	comicService := comic_service.ComicParam{
+	comicService := comic_service.Comic{
 		Channel:  pageInfo.Channel,
 		SourceID: pageInfo.SourceID,
 	}

@@ -1,7 +1,7 @@
 package comic_service
 
 // ----------------------------------------------------------------------
-// 漫画列表-服务层
+// 漫画章节服务
 // ----------------------------------------------------------------------
 // Link  : http://www.hlzblog.top/
 // GITHUB: https://github.com/HaleyLeoZhang
@@ -17,13 +17,13 @@ import (
 	// "node_puppeteer_example_go/pkg/logging"
 )
 
-type PageParam struct {
+type Page struct {
 	Channel  int
 	SourceID int
 	ID       int
 }
 
-func (p *PageParam) GetList() ([]*models.ComicPages, error) {
+func (p *Page) GetList() ([]*models.ComicPages, error) {
 	var (
 		PageList []*models.ComicPages
 		err      error
@@ -48,7 +48,7 @@ func (p *PageParam) GetList() ([]*models.ComicPages, error) {
 	return PageList, nil
 }
 
-func (p *PageParam) GetInfo() (*models.ComicPages, error) {
+func (p *Page) GetInfo() (*models.ComicPages, error) {
 	var (
 		PageInfo *models.ComicPages
 		err      error
@@ -62,7 +62,7 @@ func (p *PageParam) GetInfo() (*models.ComicPages, error) {
 	return PageInfo, nil
 }
 
-func (p *PageParam) GetNextInfo() (*models.ComicPages, error) {
+func (p *Page) GetNextInfo() (*models.ComicPages, error) {
 	var (
 		NextPageInfo *models.ComicPages
 		err          error
@@ -76,7 +76,7 @@ func (p *PageParam) GetNextInfo() (*models.ComicPages, error) {
 	return NextPageInfo, nil
 }
 
-func (p *PageParam) getMaps() map[string]interface{} {
+func (p *Page) getMaps() map[string]interface{} {
 	maps := make(map[string]interface{})
 	maps["is_deleted"] = e.DATA_IS_DELETED_NO
 

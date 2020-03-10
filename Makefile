@@ -1,9 +1,15 @@
-.PHONY: build clean tool lint help
-
 all: build
 
 build:
-	@go build -v .
+	@echo "App is creating. Please wait ..."
+	@go build -o puppeteer.hlzblog.top -v . 
+	@echo "App is created"
+	@echo "Copy conf/app.ini To /usr/local/etc/puppeteer.hlzblog.top.ini ---DOING"
+	@cp conf/app.ini /usr/local/etc/puppeteer.hlzblog.top.ini
+	@echo "Copy ---DONE"
+
+ini:
+	@cp conf/app.ini /usr/local/etc/puppeteer.hlzblog.top.ini
 
 tool:
 	go vet ./...; true
@@ -13,11 +19,10 @@ lint:
 	golint ./...
 
 clean:
-	rm -rf go-gin-example
+	rm -rf puppeteer.hlzblog.top
 	go clean -i .
 
-help:
-	@echo "make: compile packages and dependencies"
-	@echo "make tool: run specified go tool"
-	@echo "make lint: golint ./..."
-	@echo "make clean: remove object files and cached files"
+test:
+	@echo "Test --- START"
+	@go test -v service/comic_service/*.go
+	@echo "Test --- END"

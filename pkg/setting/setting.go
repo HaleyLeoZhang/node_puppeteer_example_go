@@ -3,7 +3,6 @@ package setting
 import (
 	"github.com/go-ini/ini"
 	"log"
-	"os"
 	"time"
 )
 
@@ -62,15 +61,12 @@ var RedisSetting = &Redis{}
 
 var cfg *ini.File
 
-// Setup initialize the configuration instance
 func Setup() {
 	var err error
-	ini_file_path := os.Args[1]
-	cfg, err = ini.Load(ini_file_path)
+	cfg, err = ini.Load("/usr/local/etc/puppeteer.hlzblog.top.ini")
 
-	// cfg, err = ini.Load("conf/app.ini")
 	if err != nil {
-		log.Fatalf("setting.Setup, fail to parse 'conf/app.ini': %v", err)
+		log.Fatalf("setting.Setup, fail to parse '/usr/local/etc/puppeteer.hlzblog.top.ini': %v", err)
 	}
 
 	mapTo("app", AppSetting)
@@ -84,7 +80,6 @@ func Setup() {
 	RedisSetting.IdleTimeout = RedisSetting.IdleTimeout * time.Second
 }
 
-// mapTo map section
 func mapTo(section string, v interface{}) {
 	err := cfg.Section(section).MapTo(v)
 	if err != nil {
