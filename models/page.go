@@ -54,10 +54,10 @@ func GetPageInfo(ID int, maps interface{}) (*ComicPages, error) {
 	return &PageInfo, nil
 }
 
-func GetNextPageInfo(Channel int, SourceID int, ID int, maps interface{}) (*ComicPages, error) {
+func GetNextPageInfo(Channel int, SourceID int, Sequence int, maps interface{}) (*ComicPages, error) {
 	var PageInfo ComicPages
 
-	err := db.Where("channel = ? And source_id = ? And id > ?", Channel, SourceID, ID).Where(maps).Order("sequence desc").First(&PageInfo).Error
+	err := db.Where("channel = ? And source_id = ? And sequence > ?", Channel, SourceID, Sequence).Where(maps).Order("sequence desc").First(&PageInfo).Error
 
 	if err != nil && err != gorm.ErrRecordNotFound {
 		return nil, err

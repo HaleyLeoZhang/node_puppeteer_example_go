@@ -222,6 +222,7 @@ func GetPageDetail(c *gin.Context) {
 	// 下一章节ID
 	pageService.Channel = pageInfo.Channel
 	pageService.SourceID = pageInfo.SourceID
+	pageService.Sequence = pageInfo.Sequence
 	nextPageInfo, err := pageService.GetNextInfo()
 
 	if err != nil {

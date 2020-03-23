@@ -20,6 +20,7 @@ import (
 type Page struct {
 	Channel  int
 	SourceID int
+	Sequence int
 	ID       int
 }
 
@@ -68,7 +69,7 @@ func (p *Page) GetNextInfo() (*models.ComicPages, error) {
 		err          error
 	)
 
-	NextPageInfo, err = models.GetNextPageInfo(p.Channel, p.SourceID, p.ID, p.getMaps())
+	NextPageInfo, err = models.GetNextPageInfo(p.Channel, p.SourceID, p.Sequence, p.getMaps())
 	if err != nil {
 		return nil, err
 	}
