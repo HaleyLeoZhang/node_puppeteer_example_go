@@ -1,67 +1,42 @@
-package models
+package model
 
 // ----------------------------------------------------------------------
-// 漫画章节列表-模型
+// 漫画章节模型
 // ----------------------------------------------------------------------
 // Link  : http://www.hlzblog.top/
 // GITHUB: https://github.com/HaleyLeoZhang
 // ----------------------------------------------------------------------
-import (
-	"github.com/jinzhu/gorm"
-)
 
-type ComicPages struct {
-	ID       int    `json:"id"`
+type ComicPage struct {
+	*Model
 	Channel  int    `json:"channel"`
-	SourceID int    `json:"source_id"`
+	SourceId int    `json:"source_id"`
 	Sequence int    `json:"sequence"`
 	Name     string `json:"name"`
-	Link     string `json:"link"`
-	Progress int    `json:"progress"`
-	// IsDeleted int `json:"is_deleted"`
-	UpdatedAt string `json:"updated_at"`
-	CreatedAt string `json:"created_at"`
+	//Link     string `json:"link"`
+	//Progress int    `json:"progress"`
 }
 
-func GetPageList(Channel int, SourceID int, maps interface{}) ([]*ComicPages, error) {
-	var PageList []*ComicPages
-
-	query_maps := make(map[string]interface{})
-	query_maps["channel"] = Channel
-	query_maps["source_id"] = SourceID
-
-	err := db.Where(query_maps).Where(maps).Not("sequence", 0).Order("sequence asc").Find(&PageList).Error
-
-	if err != nil && err != gorm.ErrRecordNotFound {
-		return nil, err
-	}
-
-	return PageList, nil
+//数据表---必需
+func (ComicPage) TableName() string {
+	return "comic_pages"
 }
 
-func GetPageInfo(ID int, maps interface{}) (*ComicPages, error) {
-	var PageInfo ComicPages
-
-	query_maps := make(map[string]interface{})
-	query_maps["id"] = ID
-
-	err := db.Where(query_maps).Where(maps).First(&PageInfo).Error
-
-	if err != nil && err != gorm.ErrRecordNotFound {
-		return nil, err
-	}
-
-	return &PageInfo, nil
+// 验证器规则 https://blog.csdn.net/guyan0319/article/details/105918559/
+type PageListParam struct {
+	Channel  int `form:"channel" binding:"required,gte=0"`
+	SourceId int `form:"source_id" binding:"required,gte=0"`
+}
+type PageListResponse struct {
+	List *[]ComicPage `json:"list"`
 }
 
-func GetNextPageInfo(Channel int, SourceID int, Sequence int, maps interface{}) (*ComicPages, error) {
-	var PageInfo ComicPages
-
-	err := db.Where("channel = ? And source_id = ? And sequence > ?", Channel, SourceID, Sequence).Where(maps).Order("sequence asc").First(&PageInfo).Error
-
-	if err != nil && err != gorm.ErrRecordNotFound {
-		return nil, err
-	}
-
-	return &PageInfo, nil
+// 验证器规则 https://blog.csdn.net/guyan0319/article/details/105918559/
+type PageDetailParam struct {
+	PageId int `form:"page_id" binding:"required,gte=1"`
+}
+type PageDetailResponse struct {
+	Page     *ComicPage `json:"page"`
+	NextPage *ComicPage `json:"next_page"`
+	Comic    *Comic     `json:"comic"`
 }

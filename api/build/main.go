@@ -2,7 +2,11 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"node_puppeteer_example_go/api/conf"
+	"node_puppeteer_example_go/api/http"
+	"node_puppeteer_example_go/component/driver/httpserver"
+	"node_puppeteer_example_go/component/driver/owngin"
 )
 
 func main() {
@@ -10,36 +14,13 @@ func main() {
 	if err := conf.Init(); err != nil {
 		panic(err)
 	}
+	fmt.Printf("conf.Conf.Gin %+v", conf.Conf.Gin)
+	gin := owngin.New(conf.Conf.Gin)
+	httpserver.Run(conf.Conf.HttpServer, http.Init(conf.Conf, gin))
 	//app := bootstrap.New(bootstrap.Config{
 	//	Log:         conf.Conf.Log,
 	//	Tracer:      conf.Conf.Tracer,
 	//	GinServer:   conf.Conf.GinServer,
 	//	ServiceName: conf.Conf.ServiceName,
 	//})
-	//
-	////service process
-	//srv := service.New(conf.Conf)
-	//defer srv.Close()
-	//
-	//app.Init(
-	//	//http process
-	//	bootstrap.HTTPService(func(r *gins.Server, m *metrics.Metrics) {
-	//		http.Init(r, srv, m)
-	//	}),
-	//
-	//	//micro process
-	//	bootstrap.MicroService(func(s *micro.Service) {
-	//		//client
-	//		handler.SupplierServiceInit(s.Client())
-	//
-	//		//grcp
-	//		if err := pb.RegisterSupplierHandler(s.Server(), new(handler.SupplierHanders)); err != nil {
-	//			xlog.Error(err)
-	//		}
-	//	}),
-	//)
-	//
-	//if err := app.Run(); err != nil {
-	//	panic(err)
-	//}
 }

@@ -1,38 +1,45 @@
-serviceName: "node_puppeteer_example_go"
-gin:
-  name: "node_puppeteer_example_go"
-  version: 1.0.0
-  host: localhost
+serviceName: node_puppeteer_example_go
+
+httpServer:
+  name: node_puppeteer_example_go
   ip: 0.0.0.0
   port: 2333
-  timeout: 3
+  readTimeout: 1s
+  writeTimeout: 1s
+  maxHeaderBytes: 1048576
+
+gin:
+  name: node_puppeteer_example_go
   debug: true
-  pprof: false
-  readtimeout: "1s"
-  writetimeout: "1s"
+  timeout: 3s
 
 db:
-  type: "mysql"
-  server: "127.0.0.1"
+  name: node_puppeteer_example_go
+  type: mysql
+  host: 127.0.0.1
   port: 3306
-  database: "curl_avatar"
-  user: "root"
-  password: ""
+  database: curl_avatar
+  user: yth_blog
+  password: http://hlzblog.top
+  maxIdleConns: 50
+  maxOpenConns: 30
+  maxLeftTime: 30s
 
 redis:
-  name: "node_puppeteer_example_go"
-  proto: "tcp"
-  addr: "10.180.18.45:6380"
-  dialTimeout: "20ms"
-  readTimeout: "20ms"
-  writeTimeout: "20ms"
-  expire: "10s"
+  name: node_puppeteer_example_go
+  proto: tcp
+  addr: 127.0.0.1:6379
+  auth: zhangli
+  dialTimeout: 20ms
+  readTimeout: 20ms
+  writeTimeout: 20ms
+  expire: 10s
   pool:
-    active: 20
-    idle: 10
-    idleTimeout: "80s"
+    maxActive: 20
+    maxIdle: 10
+    idleTimeout: 80s
 
 log:
-  name: "node_puppeteer_example_go"
-  path: "logs/"
-  ext: "log"
+  name: node_puppeteer_example_go
+  path: logs/
+  ext: log

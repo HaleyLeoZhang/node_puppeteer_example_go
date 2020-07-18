@@ -1,38 +1,29 @@
-package models
+package model
 
 // ----------------------------------------------------------------------
-// 漫画章节对应图片列表-模型
+// 漫画图片模型
 // ----------------------------------------------------------------------
 // Link  : http://www.hlzblog.top/
 // GITHUB: https://github.com/HaleyLeoZhang
 // ----------------------------------------------------------------------
 
-import (
-	"github.com/jinzhu/gorm"
-)
-
-type ComicImages struct {
-	ID       string `json:"id"`
+type ComicImage struct {
+	*Model
 	PageID   string `json:"page_id"`
 	Sequence string `json:"sequence"`
 	Src      string `json:"src"`
-	Progress string `json:"progress"`
-	// IsDeleted string `json:"is_deleted"`
-	UpdatedAt string `json:"updated_at"`
-	CreatedAt string `json:"created_at"`
+	//Progress string `json:"progress"` // 暂时不需要
 }
 
-func GetImageList(PageID int, maps interface{}) ([]*ComicImages, error) {
-	var ImageList []*ComicImages
+//数据表---必需
+func (ComicImage) TableName() string {
+	return "comic_images"
+}
 
-	query_maps := make(map[string]interface{})
-	query_maps["page_id"] = PageID
-
-	err := db.Where(query_maps).Where(maps).Order("sequence asc").Find(&ImageList).Error
-
-	if err != nil && err != gorm.ErrRecordNotFound {
-		return nil, err
-	}
-
-	return ImageList, nil
+// 验证器规则 https://blog.csdn.net/guyan0319/article/details/105918559/
+type ImageListParam struct {
+	PageId int `form:"page_id" binding:"required,gte=1"`
+}
+type ImageListResponse struct {
+	List *[]ComicImage `json:"list"`
 }

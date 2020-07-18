@@ -1,40 +1,38 @@
 package comic
 
 import (
-"context"
-
+	"context"
+	"github.com/gomodule/redigo/redis"
+	"github.com/jinzhu/gorm"
+	"node_puppeteer_example_go/api/conf"
+	"node_puppeteer_example_go/component/driver/db"
+	ownredis "node_puppeteer_example_go/component/driver/redis"
 )
 
-//Dao struct user of color egg Dao.
 type Dao struct {
-	db         *orm.Engine
-	redis      *redis.Pool
-	httpClient *bm.Client
+	db    *gorm.DB
+	redis *redis.Pool
 }
 
-//New .
-func New(cfg *conf.Config) (d *Dao) {
-	var (
-		err error
-	)
-	d = &Dao{
-		httpClient: bm.NewClient(cfg.HttpClient),
-	}
-	if d.db, err = orm.New(cfg.Drds); err != nil {
+func New(cfg *conf.Config) *Dao {
+	var err error
+
+	d := &Dao{}
+	if d.db, err = db.New(cfg.DB); err != nil {
 		panic(err)
 	}
-	d.redis = redis.NewPool(cfg.Redis)
-	return
+	d.redis, err = ownredis.NewPool(cfg.Redis)
+	if err != nil {
+		panic(err)
+	}
+	return d
 }
 
-// Ping ping the resource.
-func (d *Dao) Ping(ctx context.Context) error {
-	return nil
-}
-
-// Close close the resource.
 func (d *Dao) Close() {
 	d.redis.Close()
 	d.db.Close()
 }
 
+func (d *Dao) Ping(ctx context.Context) error {
+	return nil
+}

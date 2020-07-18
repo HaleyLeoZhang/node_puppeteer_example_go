@@ -8,8 +8,10 @@ import (
 
 	"gopkg.in/yaml.v2"
 
-	"node_puppeteer_example_go/components/driver/DB"
-	"node_puppeteer_example_go/components/driver/Redis"
+	"node_puppeteer_example_go/component/driver/db"
+	"node_puppeteer_example_go/component/driver/httpserver"
+	"node_puppeteer_example_go/component/driver/owngin"
+	"node_puppeteer_example_go/component/driver/redis"
 )
 
 var (
@@ -19,11 +21,12 @@ var (
 
 // Config struct
 type Config struct {
-	Log         *Redis.Conf
-	HttpServer  *Gin.Conf
-	DB          *DB.Config
+	ServiceName string             `yaml:"serviceName"`
+	HttpServer  *httpserver.Config `yaml:"httpServer"`
+	Gin         *owngin.Config     `yaml:"gin"`
+	DB          *db.Config         `yaml:"db"`
 	Redis       *redis.Config
-	ServiceName string      `yaml:"serviceName" json:"serviceName"`
+	//Log         *Log.Config
 }
 
 func init() {
@@ -31,9 +34,7 @@ func init() {
 }
 
 func Init() (err error) {
-	var (
-		yamlFile string
-	)
+	var yamlFile string
 	if confPath != "" {
 		yamlFile, err = filepath.Abs(confPath)
 	} else {
