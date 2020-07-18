@@ -1,8 +1,2 @@
-.idea/
-.DS_Store
-
-runtime/*
-!runtime/qrcode/bg.jpg
-!runtime/fonts
-
-puppeteer.hlzblog.top
+api/build/app.yaml
+**/.idea

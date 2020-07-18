@@ -1,0 +1,38 @@
+serviceName: "node_puppeteer_example_go"
+gin:
+  name: "node_puppeteer_example_go"
+  version: 1.0.0
+  host: localhost
+  ip: 0.0.0.0
+  port: 2333
+  timeout: 3
+  debug: true
+  pprof: false
+  readtimeout: "1s"
+  writetimeout: "1s"
+
+db:
+  type: "mysql"
+  server: "127.0.0.1"
+  port: 3306
+  database: "curl_avatar"
+  user: "root"
+  password: ""
+
+redis:
+  name: "node_puppeteer_example_go"
+  proto: "tcp"
+  addr: "10.180.18.45:6380"
+  dialTimeout: "20ms"
+  readTimeout: "20ms"
+  writeTimeout: "20ms"
+  expire: "10s"
+  pool:
+    active: 20
+    idle: 10
+    idleTimeout: "80s"
+
+log:
+  name: "node_puppeteer_example_go"
+  path: "logs/"
+  ext: "log"

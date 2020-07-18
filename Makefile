@@ -1,27 +1,40 @@
-all: build
+all: debug
+
+debug:
+	@clear
+	@echo "App debug is loading"
+	@go run ./api/build/main.go -conf=./api/build/app.yaml
 
 build:
 	@echo "App is creating. Please wait ..."
 	@make -s clean
-	@echo "Copy conf/app.ini To /usr/local/etc/puppeteer.hlzblog.top.ini ---DOING"
+	@echo "Copy ./api/build/app.example.yaml To ./api/build/app.yaml  ---DOING"
 	@make -s ini
 	@echo "Copy ---DONE"
-	@echo "Serivce compiling ..."
-	@go build -o puppeteer.hlzblog.top -v . 
+	@echo "App compiling ..."
+	@go build -o node_puppeteer_example_go -v ./main.go -conf=./api/build/app.yaml
 	@echo "App is created"
 
+run:
+	./api/build/node_puppeteer_example_go  -conf=./api/build/app.example.yaml
+
 ini:
-	@cp conf/app.ini /usr/local/etc/puppeteer.hlzblog.top.ini
+	@cp ./api/build/app.example.yaml ./api/build/app.yaml
 
 tool:
+	@clear
 	@go vet ./...; true
 	@gofmt -w .
 
 clean:
-	@rm -rf ./puppeteer.hlzblog.top
+	@rm -rf ./node_puppeteer_example_go
 	@go clean -i .
 
 test:
+	@clear
 	@echo "Test --- START"
-	@go test -v service/comic_service/*.go
+	@# 全量测试---暂时不考虑
+	@# go test -v ./...
+	@# 指定测试
+	@go test -v ./api/service/ -conf=../../api/build/app.yaml
 	@echo "Test --- END"
