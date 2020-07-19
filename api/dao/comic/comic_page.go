@@ -1,13 +1,14 @@
 package comic
 
 import (
+	"context"
 	"fmt"
 	"github.com/jinzhu/gorm"
 	"node_puppeteer_example_go/api/constant"
 	"node_puppeteer_example_go/api/model"
 )
 
-func (d *Dao) GetPageList(maps map[string]interface{}) (*[]model.ComicPage, error) {
+func (d *Dao) GetPageList(ctx context.Context, maps map[string]interface{}) (*[]model.ComicPage, error) {
 	pageList := make([]model.ComicPage, 0)
 	maps["is_deleted"] = constant.TABLE_BASE_IS_DELETED_NO
 
@@ -21,7 +22,7 @@ func (d *Dao) GetPageList(maps map[string]interface{}) (*[]model.ComicPage, erro
 	return &pageList, nil
 }
 
-func (d *Dao) GetPageInfo(id int) (*model.ComicPage, error) {
+func (d *Dao) GetPageInfo(ctx context.Context, id int) (*model.ComicPage, error) {
 	pageInfo := &model.ComicPage{}
 
 	maps := make(map[string]interface{})
@@ -38,7 +39,7 @@ func (d *Dao) GetPageInfo(id int) (*model.ComicPage, error) {
 	return pageInfo, nil
 }
 
-func (d *Dao) GetMextPageInfo(id int) (*model.ComicPage, error) {
+func (d *Dao) GetMextPageInfo(ctx context.Context, id int) (*model.ComicPage, error) {
 	pageInfo := &model.ComicPage{}
 
 	maps := make(map[string]interface{})
@@ -55,7 +56,7 @@ func (d *Dao) GetMextPageInfo(id int) (*model.ComicPage, error) {
 	return pageInfo, nil
 }
 
-func (d *Dao) GetNextPageInfo(Channel int, SourceId int, Sequence int) (*model.ComicPage, error) {
+func (d *Dao) GetNextPageInfo(ctx context.Context, Channel int, SourceId int, Sequence int) (*model.ComicPage, error) {
 	pageInfo := &model.ComicPage{}
 
 	maps := make(map[string]interface{})
@@ -66,6 +67,7 @@ func (d *Dao) GetNextPageInfo(Channel int, SourceId int, Sequence int) (*model.C
 		First(&pageInfo).Error
 
 	if err != nil && err != gorm.ErrRecordNotFound {
+		fmt.Printf("error %+v", err)
 		return nil, err
 	}
 

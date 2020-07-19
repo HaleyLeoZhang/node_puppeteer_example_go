@@ -14,7 +14,7 @@ type ComicPage struct {
 	Sequence int    `json:"sequence"`
 	Name     string `json:"name"`
 	//Link     string `json:"link"`
-	Progress int    `json:"progress"`
+	Progress int `json:"progress"`
 }
 
 //数据表---必需

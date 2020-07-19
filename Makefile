@@ -12,7 +12,7 @@ build:
 	@make -s ini
 	@echo "Copy ---DONE"
 	@echo "App compiling ..."
-	@go build -o node_puppeteer_example_go -v ./main.go -conf=./api/build/app.yaml
+	@go build -o ./api/build/node_puppeteer_example_go -v ./api/build/main.go -conf=./api/build/app.yaml
 	@echo "App is created"
 
 run:

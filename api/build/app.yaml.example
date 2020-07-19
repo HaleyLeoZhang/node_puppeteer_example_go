@@ -19,8 +19,8 @@ db:
   host: 127.0.0.1
   port: 3306
   database: curl_avatar
-  user: yth_blog
-  password: http://hlzblog.top
+  user: root
+  password:
   maxIdleConns: 50
   maxOpenConns: 30
   maxLeftTime: 30s
@@ -29,7 +29,7 @@ redis:
   name: node_puppeteer_example_go
   proto: tcp
   addr: 127.0.0.1:6379
-  auth: zhangli
+  auth:
   dialTimeout: 20ms
   readTimeout: 20ms
   writeTimeout: 20ms

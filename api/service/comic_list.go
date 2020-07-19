@@ -10,7 +10,7 @@ func (s *Service) ComicList(ctx context.Context, param *model.ComicListParam) (*
 	page := param.Page
 	size := 20
 	maps := make(map[string]interface{})
-	list, err := s.comicDao.GetComicList(page, size, maps)
+	list, err := s.comicDao.GetComicList(ctx, page, size, maps)
 	if nil != err {
 		ctx = context.WithValue(ctx, constant.HTTP_CONTEXT_GET_CODE, constant.HTTP_RESPONSE_CODE_GENERAL_FAIL)
 		context.WithCancel(ctx)

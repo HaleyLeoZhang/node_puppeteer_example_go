@@ -1,13 +1,14 @@
 package comic
 
 import (
+	"context"
 	"fmt"
 	"github.com/jinzhu/gorm"
 	"node_puppeteer_example_go/api/constant"
 	"node_puppeteer_example_go/api/model"
 )
 
-func (d *Dao) GetImageList(pageId int) (*[]model.ComicImage, error) {
+func (d *Dao) GetImageList(ctx context.Context, pageId int) (*[]model.ComicImage, error) {
 	imageList := make([]model.ComicImage, 0)
 	maps := make(map[string]interface{})
 	maps["page_id"] = pageId

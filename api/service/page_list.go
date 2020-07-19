@@ -13,7 +13,7 @@ func (s *Service) PageList(ctx context.Context, param *model.PageListParam) (*mo
 	maps := make(map[string]interface{})
 	maps["channel"] = channel
 	maps["source_id"] = sourceId
-	list, err := s.comicDao.GetPageList(maps)
+	list, err := s.comicDao.GetPageList(ctx, maps)
 	if nil != err {
 		ctx = context.WithValue(ctx, constant.HTTP_CONTEXT_GET_CODE, constant.HTTP_RESPONSE_CODE_GENERAL_FAIL)
 		context.WithCancel(ctx)

@@ -9,8 +9,8 @@ package model
 
 type ComicImage struct {
 	*Model
-	PageID   string `json:"page_id"`
-	Sequence string `json:"sequence"`
+	PageID   int    `json:"page_id"`
+	Sequence int    `json:"sequence"`
 	Src      string `json:"src"`
 	//Progress string `json:"progress"` // 暂时不需要
 }

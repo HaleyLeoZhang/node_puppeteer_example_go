@@ -9,14 +9,14 @@ package model
 
 type Comic struct {
 	*Model
-	Channel     string `json:"channel"`
-	SourceID    string `json:"source_id"`
+	Channel     int    `json:"channel"`
+	SourceID    int    `json:"source_id"`
 	Name        string `json:"name"`
 	Pic         string `json:"pic"`
 	Intro       string `json:"intro"`
-	MaxSequence string `json:"max_sequence"`
-	Weight      string `json:"weight"`
-	Tag         string `json:"tag"`
+	MaxSequence int    `json:"max_sequence"`
+	Weight      int    `json:"weight"`
+	Tag         int    `json:"tag"`
 }
 
 //数据表---必需
