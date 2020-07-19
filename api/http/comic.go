@@ -9,6 +9,7 @@ package http
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/golang/groupcache/singleflight"
 	"node_puppeteer_example_go/api/constant"
 	"node_puppeteer_example_go/api/model"
 	"node_puppeteer_example_go/component/driver/owngin"
@@ -102,10 +103,17 @@ func (Comic) GetList(c *gin.Context) {
 		return
 	}
 
-	res, err := srv.ComicList(ownGin.C, param)
-	if nil != err {
-		fmt.Printf("error: %+v", err)
-	}
+	// 幂等请求，防止击穿 说明文档 https://segmentfault.com/a/1190000018464029
+	g := &singleflight.Group{}
+	groupKey := fmt.Sprintf("comic_list_%v", param.Page)
+	var res *model.ComicListResponse
+	g.Do(groupKey, func() (interface{}, error) {
+		res, err = srv.ComicList(ownGin.C, param)
+		if nil != err {
+			fmt.Printf("error: %+v", err)
+		}
+		return res, err
+	})
 	ownGin.Response(constant.HTTP_RESPONSE_CODE_SUCCESS, res)
 }
 
@@ -165,11 +173,17 @@ func (Comic) GetPageList(c *gin.Context) {
 		ownGin.Response(constant.HTTP_RESPONSE_CODE_PARAM_INVALID, nil)
 		return
 	}
-
-	res, err := srv.PageList(ownGin.C, param)
-	if nil != err {
-		fmt.Printf("error: %+v", err)
-	}
+	var res *model.PageListResponse
+	// 幂等请求，防止击穿 说明文档 https://segmentfault.com/a/1190000018464029
+	g := &singleflight.Group{}
+	groupKey := fmt.Sprintf("page_list_%v_%v", param.Channel, param.SourceId)
+	g.Do(groupKey, func() (interface{}, error) {
+		res, err = srv.PageList(ownGin.C, param)
+		if nil != err {
+			fmt.Printf("error: %+v", err)
+		}
+		return res, err
+	})
 	ownGin.Response(constant.HTTP_RESPONSE_CODE_SUCCESS, res)
 }
 
@@ -267,10 +281,17 @@ func (Comic) GetPageDetail(c *gin.Context) {
 		return
 	}
 
-	res, err := srv.PageDetail(ownGin.C, param)
-	if nil != err {
-		fmt.Printf("error: %+v", err)
-	}
+	var res *model.PageDetailResponse
+	// 幂等请求，防止击穿 说明文档 https://segmentfault.com/a/1190000018464029
+	g := &singleflight.Group{}
+	groupKey := fmt.Sprintf("page_detail_%v", param.PageId)
+	g.Do(groupKey, func() (interface{}, error) {
+		res, err = srv.PageDetail(ownGin.C, param)
+		if nil != err {
+			fmt.Printf("error: %+v", err)
+		}
+		return res, err
+	})
 
 	ownGin.Response(constant.HTTP_RESPONSE_CODE_SUCCESS, res)
 }
@@ -327,10 +348,17 @@ func (Comic) GetImageList(c *gin.Context) {
 		return
 	}
 
-	res, err := srv.ImageList(ownGin.C, param)
-	if nil != err {
-		fmt.Printf("error: %+v", err)
-	}
+	var res *model.ImageListResponse
+	// 幂等请求，防止击穿 说明文档 https://segmentfault.com/a/1190000018464029
+	g := &singleflight.Group{}
+	groupKey := fmt.Sprintf("image_list_%v", param.PageId)
+	g.Do(groupKey, func() (interface{}, error) {
+		res, err = srv.ImageList(ownGin.C, param)
+		if nil != err {
+			fmt.Printf("error: %+v", err)
+		}
+		return res, err
+	})
 
 	ownGin.Response(constant.HTTP_RESPONSE_CODE_SUCCESS, res)
 }
