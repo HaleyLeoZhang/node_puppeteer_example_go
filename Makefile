@@ -2,24 +2,26 @@ all: debug
 
 debug:
 	@clear
-	@echo "App debug is loading"
+	@echo "APP debug is loading"
 	@go run ./api/build/main.go -conf=./api/build/app.yaml
 
 build:
-	@echo "App is creating. Please wait ..."
+	@clear
+	@echo "New APP is creating. Please wait ..."
 	@make -s clean
-	@echo "Copy ./api/build/app.example.yaml To ./api/build/app.yaml  ---DOING"
-	@make -s ini
-	@echo "Copy ---DONE"
 	@echo "App compiling ..."
-	@go build -o ./api/build/node_puppeteer_example_go -v ./api/build/main.go -conf=./api/build/app.yaml
+	@go build -o ./api/build/node_puppeteer_example_go -v ./api/build/main.go
 	@echo "App is created"
 
 run:
-	./api/build/node_puppeteer_example_go  -conf=./api/build/app.example.yaml
+	@clear
+	@echo "APP is runing. Please wait ..."
+	@./api/build/node_puppeteer_example_go  -conf=./api/build/app.yaml
 
 ini:
+	@clear
 	@cp ./api/build/app.example.yaml ./api/build/app.yaml
+	@echo "Copy yaml success"
 
 tool:
 	@clear
@@ -27,8 +29,9 @@ tool:
 	@gofmt -w .
 
 clean:
-	@rm -rf ./node_puppeteer_example_go
-	@go clean -i .
+	@echo "Remove Old APP ... "
+	@rm -rf ./api/build/node_puppeteer_example_go
+	@echo "Remove Old App --- Done"
 
 test:
 	@clear

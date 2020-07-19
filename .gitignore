@@ -1,2 +1,3 @@
 api/build/app.yaml
 **/.idea
+**/node_puppeteer_example_go

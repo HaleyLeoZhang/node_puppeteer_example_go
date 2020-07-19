@@ -27,7 +27,7 @@ make
 
 ~~~bash
 make build
-./puppeteer.hlzblog.top
+make run
 ~~~
 
 > 格式化代码
