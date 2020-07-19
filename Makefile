@@ -7,15 +7,14 @@ debug:
 
 build:
 	@clear
-	@echo "New APP is creating. Please wait ..."
 	@make -s clean
-	@echo "App compiling ..."
+	@echo "New APP is creating. Please wait ..."
 	@go build -o ./api/build/node_puppeteer_example_go -v ./api/build/main.go
 	@echo "App is created"
 
 run:
 	@clear
-	@echo "APP is runing. Please wait ..."
+	@echo "APP is loading. Please wait ..."
 	@./api/build/node_puppeteer_example_go  -conf=./api/build/app.yaml
 
 ini:

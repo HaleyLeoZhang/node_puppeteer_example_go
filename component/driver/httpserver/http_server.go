@@ -29,5 +29,8 @@ func Run(c *Config, routersInit *gin.Engine) {
 		MaxHeaderBytes: c.MaxHeaderBytes,
 	}
 	log.Printf("Start http server listening %s", addrString)
-	server.ListenAndServe()
+	err := server.ListenAndServe()
+	if err != nil {
+		log.Fatalf("HttpServer.Err %+v", err)
+	}
 }
