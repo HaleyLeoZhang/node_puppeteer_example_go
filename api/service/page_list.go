@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	"node_puppeteer_example_go/api/constant"
+	"github.com/spiegel-im-spiegel/logf"
 	"node_puppeteer_example_go/api/model"
 )
 
@@ -15,8 +15,7 @@ func (s *Service) PageList(ctx context.Context, param *model.PageListParam) (*mo
 	maps["source_id"] = sourceId
 	list, err := s.comicDao.GetPageList(ctx, maps)
 	if nil != err {
-		ctx = context.WithValue(ctx, constant.HTTP_CONTEXT_GET_CODE, constant.HTTP_RESPONSE_CODE_GENERAL_FAIL)
-		context.WithCancel(ctx)
+		logf.Errorf("PageList.Error.%+v", err)
 		return nil, err
 	}
 	res := &model.PageListResponse{

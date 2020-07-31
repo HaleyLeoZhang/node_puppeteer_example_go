@@ -1,13 +1,29 @@
 package owngin
 
-import "C"
 import (
 	"context"
 	"github.com/gin-gonic/gin"
+	log "github.com/spiegel-im-spiegel/logf"
 	"net/http"
-	"node_puppeteer_example_go/api/constant"
 	"time"
 )
+
+// ---------------------------------------------------------------------
+// 		业务错误 Error 模型
+// ---------------------------------------------------------------------
+type BusinessError struct {
+	Code    int
+	Message string
+	error   *error
+}
+
+func (b *BusinessError) Error() string {
+	return b.Message
+}
+
+// ---------------------------------------------------------------------
+// 		HTTP 响应模型
+// ---------------------------------------------------------------------
 
 type ResponseModel struct {
 	Code int         `json:"code"`
@@ -15,23 +31,31 @@ type ResponseModel struct {
 	Data interface{} `json:"data"`
 }
 
-// HTTP 正常响应模型
-func (o *OwnGin) Response(errCode int, data interface{}) {
+// HTTP 响应模型
+func (o *OwnGin) Response(err error, data interface{}) {
+	code := HTTP_RESPONSE_CODE_SUCCESS
+	message := ""
+	if err != nil {
+		switch err.(type) {
+		case *BusinessError:
+			businessError := err.(*BusinessError)
+			code = businessError.Code
+			message = businessError.Message
+			data = nil
+			log.Printf("Response.BusinessError.%+v", err)
+		default:
+			code = HTTP_RESPONSE_CODE_UNKNOWN_FAIL
+			message = "服务繁忙"
+			data = nil
+			log.Errorf("Response.Error.%+v", err)
+		}
+	}
 	o.GinContext.JSON(http.StatusOK, ResponseModel{
-		Code: errCode,
-		Msg:  getMsg(errCode),
+		Code: code,
+		Msg:  message,
 		Data: data,
 	})
 	return
-}
-
-func getMsg(code int) string {
-	msg, ok := constant.HTTP_RESPONSE_MAP[code]
-	if ok {
-		return msg
-	}
-
-	return constant.HTTP_RESPONSE_MAP[constant.HTTP_RESPONSE_CODE_GENERAL_FAIL]
 }
 
 func NewOwnGin(c *gin.Context) *OwnGin {
@@ -42,23 +66,5 @@ func NewOwnGin(c *gin.Context) *OwnGin {
 		GinContext: c,
 		C:          ctx,
 	}
-	//go listenCancelContext(o)
 	return o
-}
-
-func listenCancelContext(o *OwnGin) {
-	select {
-	case <-o.C.Done():
-		errCode := getCode(o.C)
-		o.Response(errCode, nil)
-		o.GinContext.Abort()
-	}
-}
-
-func getCode(ctx context.Context) int {
-	errCode := ctx.Value(constant.HTTP_CONTEXT_GET_CODE)
-	if nil == errCode {
-		return constant.HTTP_RESPONSE_CODE_GENERAL_FAIL
-	}
-	return errCode.(int)
 }

@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/golang/groupcache/singleflight"
-	"node_puppeteer_example_go/api/constant"
+	log "github.com/spiegel-im-spiegel/logf"
 	"node_puppeteer_example_go/api/model"
 	"node_puppeteer_example_go/component/driver/owngin"
 )
@@ -99,7 +99,8 @@ func (Comic) GetList(c *gin.Context) {
 	param := &model.ComicListParam{}
 	err := c.Bind(param)
 	if err != nil {
-		ownGin.Response(constant.HTTP_RESPONSE_CODE_PARAM_INVALID, nil)
+		err = &owngin.BusinessError{Code: owngin.HTTP_RESPONSE_CODE_PARAM_INVALID, Message: err.Error()}
+		ownGin.Response(err, nil)
 		return
 	}
 
@@ -110,11 +111,11 @@ func (Comic) GetList(c *gin.Context) {
 	g.Do(groupKey, func() (interface{}, error) {
 		res, err = srv.ComicList(ownGin.C, param)
 		if nil != err {
-			fmt.Printf("error: %+v", err)
+			log.Errorf("router.GetList.Err.%+v", err)
 		}
 		return res, err
 	})
-	ownGin.Response(constant.HTTP_RESPONSE_CODE_SUCCESS, res)
+	ownGin.Response(err, res)
 }
 
 /**
@@ -170,7 +171,9 @@ func (Comic) GetPageList(c *gin.Context) {
 	param := &model.PageListParam{}
 	err := c.Bind(param)
 	if err != nil {
-		ownGin.Response(constant.HTTP_RESPONSE_CODE_PARAM_INVALID, nil)
+		log.Errorf("router.GetPageList.Err.%v", err)
+		err = &owngin.BusinessError{Code: owngin.HTTP_RESPONSE_CODE_PARAM_INVALID, Message: err.Error()}
+		ownGin.Response(err, nil)
 		return
 	}
 	var res *model.PageListResponse
@@ -180,11 +183,11 @@ func (Comic) GetPageList(c *gin.Context) {
 	g.Do(groupKey, func() (interface{}, error) {
 		res, err = srv.PageList(ownGin.C, param)
 		if nil != err {
-			fmt.Printf("error: %+v", err)
+			log.Errorf("router.GetList.Err.%+v", err)
 		}
 		return res, err
 	})
-	ownGin.Response(constant.HTTP_RESPONSE_CODE_SUCCESS, res)
+	ownGin.Response(err, res)
 }
 
 /**
@@ -277,7 +280,8 @@ func (Comic) GetPageDetail(c *gin.Context) {
 	param := &model.PageDetailParam{}
 	err := c.Bind(param)
 	if err != nil {
-		ownGin.Response(constant.HTTP_RESPONSE_CODE_PARAM_INVALID, nil)
+		err = &owngin.BusinessError{Code: owngin.HTTP_RESPONSE_CODE_PARAM_INVALID, Message: err.Error()}
+		ownGin.Response(err, nil)
 		return
 	}
 
@@ -288,12 +292,12 @@ func (Comic) GetPageDetail(c *gin.Context) {
 	g.Do(groupKey, func() (interface{}, error) {
 		res, err = srv.PageDetail(ownGin.C, param)
 		if nil != err {
-			fmt.Printf("error: %+v", err)
+			log.Errorf("router.GetList.Err.%+v", err)
 		}
 		return res, err
 	})
 
-	ownGin.Response(constant.HTTP_RESPONSE_CODE_SUCCESS, res)
+	ownGin.Response(err, res)
 }
 
 /**
@@ -344,7 +348,8 @@ func (Comic) GetImageList(c *gin.Context) {
 	param := &model.ImageListParam{}
 	err := c.Bind(param)
 	if err != nil {
-		ownGin.Response(constant.HTTP_RESPONSE_CODE_PARAM_INVALID, nil)
+		err = &owngin.BusinessError{Code: owngin.HTTP_RESPONSE_CODE_PARAM_INVALID, Message: err.Error()}
+		ownGin.Response(err, nil)
 		return
 	}
 
@@ -355,10 +360,9 @@ func (Comic) GetImageList(c *gin.Context) {
 	g.Do(groupKey, func() (interface{}, error) {
 		res, err = srv.ImageList(ownGin.C, param)
 		if nil != err {
-			fmt.Printf("error: %+v", err)
+			log.Errorf("router.GetList.Err.%+v", err)
 		}
 		return res, err
 	})
-
-	ownGin.Response(constant.HTTP_RESPONSE_CODE_SUCCESS, res)
+	ownGin.Response(err, res)
 }

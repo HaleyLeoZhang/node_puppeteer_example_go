@@ -24,8 +24,8 @@ func (ComicPage) TableName() string {
 
 // 验证器规则 https://blog.csdn.net/guyan0319/article/details/105918559/
 type PageListParam struct {
-	Channel  int `form:"channel" binding:"required,gte=0"`
-	SourceId int `form:"source_id" binding:"required,gte=0"`
+	Channel  int `form:"channel" binding:"gte=1"`
+	SourceId int `form:"source_id" binding:"gte=0"`
 }
 type PageListResponse struct {
 	List *[]ComicPage `json:"list"`
@@ -33,7 +33,7 @@ type PageListResponse struct {
 
 // 验证器规则 https://blog.csdn.net/guyan0319/article/details/105918559/
 type PageDetailParam struct {
-	PageId int `form:"page_id" binding:"required,gte=1"`
+	PageId int `form:"page_id" binding:"gte=1"`
 }
 type PageDetailResponse struct {
 	Page     *ComicPage `json:"page"`

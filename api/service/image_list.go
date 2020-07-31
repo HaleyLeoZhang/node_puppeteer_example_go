@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	"node_puppeteer_example_go/api/constant"
+	"github.com/spiegel-im-spiegel/logf"
 	"node_puppeteer_example_go/api/model"
 )
 
@@ -10,8 +10,7 @@ func (s *Service) ImageList(ctx context.Context, param *model.ImageListParam) (*
 	pageId := param.PageId
 	list, err := s.comicDao.GetImageList(ctx, pageId)
 	if nil != err {
-		ctx = context.WithValue(ctx, constant.HTTP_CONTEXT_GET_CODE, constant.HTTP_RESPONSE_CODE_GENERAL_FAIL)
-		context.WithCancel(ctx)
+		logf.Errorf("ImageList.Error.%+v", err)
 		return nil, err
 	}
 	res := &model.ImageListResponse{

@@ -14,16 +14,15 @@ func Init(c *conf.Config, e *gin.Engine) *gin.Engine {
 	//e.Use(setDefaultResponse)
 
 	{
+		comic := &Comic{}
 		/**
 		 * 用户端API
 		 */
-		// 老接口重构
-		// - 这一组接口下的术语定义 收藏、订阅 文档 http://wiki.shihuo.cn/pages/viewpage.action?pageId=20261307
 		e.Group("api/comic").
-			GET("comic_list", Comic{}.GetList).
-			GET("page_list", Comic{}.GetPageList).
-			GET("page_detail", Comic{}.GetPageDetail).
-			GET("image_list", Comic{}.GetImageList)
+			GET("comic_list", comic.GetList).
+			GET("page_list", comic.GetPageList).
+			GET("page_detail", comic.GetPageDetail).
+			GET("image_list", comic.GetImageList)
 	}
 	//api_comic.GET("page_detail", comic.GetPageDetail)
 	//api_comic.GET("image_list", comic.GetImageList)
