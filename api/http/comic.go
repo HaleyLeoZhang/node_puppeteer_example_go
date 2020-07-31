@@ -99,7 +99,7 @@ func (Comic) GetList(c *gin.Context) {
 	param := &model.ComicListParam{}
 	err := c.Bind(param)
 	if err != nil {
-		err = &owngin.BusinessError{Code: owngin.HTTP_RESPONSE_CODE_PARAM_INVALID, Message: err.Error()}
+		err = &owngin.BusinessError{Code: owngin.HTTP_RESPONSE_CODE_PARAM_INVALID, Message: "Param is invalid"}
 		ownGin.Response(err, nil)
 		return
 	}
@@ -172,7 +172,7 @@ func (Comic) GetPageList(c *gin.Context) {
 	err := c.Bind(param)
 	if err != nil {
 		log.Errorf("router.GetPageList.Err.%v", err)
-		err = &owngin.BusinessError{Code: owngin.HTTP_RESPONSE_CODE_PARAM_INVALID, Message: err.Error()}
+		err = &owngin.BusinessError{Code: owngin.HTTP_RESPONSE_CODE_PARAM_INVALID, Message: "Param is invalid"}
 		ownGin.Response(err, nil)
 		return
 	}
@@ -280,7 +280,7 @@ func (Comic) GetPageDetail(c *gin.Context) {
 	param := &model.PageDetailParam{}
 	err := c.Bind(param)
 	if err != nil {
-		err = &owngin.BusinessError{Code: owngin.HTTP_RESPONSE_CODE_PARAM_INVALID, Message: err.Error()}
+		err = &owngin.BusinessError{Code: owngin.HTTP_RESPONSE_CODE_PARAM_INVALID, Message: "Param is invalid"}
 		ownGin.Response(err, nil)
 		return
 	}
@@ -348,7 +348,7 @@ func (Comic) GetImageList(c *gin.Context) {
 	param := &model.ImageListParam{}
 	err := c.Bind(param)
 	if err != nil {
-		err = &owngin.BusinessError{Code: owngin.HTTP_RESPONSE_CODE_PARAM_INVALID, Message: err.Error()}
+		err = &owngin.BusinessError{Code: owngin.HTTP_RESPONSE_CODE_PARAM_INVALID, Message: "Param is invalid"}
 		ownGin.Response(err, nil)
 		return
 	}
