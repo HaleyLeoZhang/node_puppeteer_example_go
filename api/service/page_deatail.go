@@ -4,7 +4,6 @@ import (
 	"context"
 	"github.com/spiegel-im-spiegel/logf"
 	"node_puppeteer_example_go/api/model"
-	"node_puppeteer_example_go/component/driver/owngin"
 )
 
 func (s *Service) PageDetail(ctx context.Context, param *model.PageDetailParam) (*model.PageDetailResponse, error) {

@@ -20,7 +20,7 @@ type Comic struct {
 }
 
 //数据表---必需
-func (Comic) TableName() string {
+func (c *Comic) TableName() string {
 	return "comics"
 }
 
@@ -30,5 +30,5 @@ type ComicListParam struct {
 }
 
 type ComicListResponse struct {
-	List *[]Comic `json:"list"`
+	List []*Comic `json:"list"`
 }

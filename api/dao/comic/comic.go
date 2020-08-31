@@ -3,28 +3,31 @@ package comic
 import (
 	"context"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"github.com/jinzhu/gorm"
 	"node_puppeteer_example_go/api/constant"
 	"node_puppeteer_example_go/api/model"
 	"node_puppeteer_example_go/component/driver/db"
+	"node_puppeteer_example_go/component/driver/owngin"
 )
 
-func (d *Dao) GetComicList(ctx context.Context, page int, size int, maps map[string]interface{}) (*[]model.Comic, error) {
-	comicList := make([]model.Comic, 0)
+func (d *Dao) GetComicList(ctx context.Context, page int, size int, maps map[string]interface{}) (comicList []*model.Comic, err error) {
+	comicList = make([]*model.Comic, 0)
+	comicInfo := &model.Comic{}
+
 	offset, size := db.GetPageInfo(page, size)
 
 	maps["is_deleted"] = constant.TABLE_BASE_IS_DELETED_NO
 
-	err := d.db.Where(maps).Offset(offset).Order("weight DESC").Limit(size).Find(&comicList).Error
+	err = d.db.Table(comicInfo.TableName()).
+		Where(maps).Offset(offset).Order("weight DESC").Limit(size).Find(&comicList).Error
 
 	if err != nil && err != gorm.ErrRecordNotFound {
 		fmt.Printf("error %+v", err)
-		return &comicList, err
+		return
 	}
 
-	return &comicList, nil
+	return
 }
 
 func (d *Dao) GetComicInfo(ctx context.Context, Channel int, SourceID int) (*model.Comic, error) {
@@ -34,7 +37,8 @@ func (d *Dao) GetComicInfo(ctx context.Context, Channel int, SourceID int) (*mod
 	maps["channel"] = Channel
 	maps["source_id"] = SourceID
 
-	err := d.db.Where(maps).First(&comicInfo).Error
+	err := d.db.Table(comicInfo.TableName()).
+		Where(maps).First(&comicInfo).Error
 
 	if err != nil && err != gorm.ErrRecordNotFound {
 		fmt.Printf("error %+v", err)
@@ -49,7 +53,7 @@ func (d *Dao) GetComicInfo(ctx context.Context, Channel int, SourceID int) (*mod
 // --------------------------------
 func cacheKeyGetComicInfo(Channel int, SourceID int) string {
 	prefix := constant.CACHE_PREFIX_TYPE_FRONT
-	namespace := fmt.Sprintf("page_detail_comic_%v_%v", Channel, SourceID) // https://sh-api.shihuo.cn/app_swoole_zone/sub
+	namespace := fmt.Sprintf("page_detail_comic_%v_%v", Channel, SourceID)
 	version := "v1"
 	suffix := constant.CACHE_SUFFIX_TYPE_CACHED
 	cacheKey := fmt.Sprintf("%v:%v:%v:%v", prefix, namespace, version, suffix)
@@ -106,11 +110,11 @@ func (d *Dao) GetComicInfoWithCache(ctx context.Context, Channel int, SourceID i
 	} else {
 		// 处理缓存穿透
 		if 0 == comic.ID {
-			return nil, errors.New("漫画不存在!") // 用 感叹号区分错误类型
+			return nil, &owngin.BusinessError{Code: owngin.HTTP_RESPONSE_CODE_SOURCE_NOT_FOUND, Message: "漫画不存在!"}
 		}
 	}
 	if nil == comic {
-		return nil, errors.New("漫画不存在")
+		return nil, &owngin.BusinessError{Code: owngin.HTTP_RESPONSE_CODE_SOURCE_NOT_FOUND, Message: "漫画不存在"}
 	}
 	return comic, err
 }

@@ -18,7 +18,7 @@ type ComicPage struct {
 }
 
 //数据表---必需
-func (ComicPage) TableName() string {
+func (c *ComicPage) TableName() string {
 	return "comic_pages"
 }
 
@@ -28,7 +28,7 @@ type PageListParam struct {
 	SourceId int `form:"source_id" binding:"gte=0"`
 }
 type PageListResponse struct {
-	List *[]ComicPage `json:"list"`
+	List []*ComicPage `json:"list"`
 }
 
 // 验证器规则 https://blog.csdn.net/guyan0319/article/details/105918559/

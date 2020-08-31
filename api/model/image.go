@@ -16,7 +16,7 @@ type ComicImage struct {
 }
 
 //数据表---必需
-func (ComicImage) TableName() string {
+func (c *ComicImage) TableName() string {
 	return "comic_images"
 }
 
@@ -25,5 +25,5 @@ type ImageListParam struct {
 	PageId int `form:"page_id" binding:"required,gte=1"`
 }
 type ImageListResponse struct {
-	List *[]ComicImage `json:"list"`
+	List []*ComicImage `json:"list"`
 }
