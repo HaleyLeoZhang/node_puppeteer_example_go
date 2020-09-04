@@ -3,14 +3,15 @@ package http
 // ----------------------------------------------------------------------
 // 漫画控制器
 // ----------------------------------------------------------------------
-// Link  : http://www.hlzblog.top/
+// Link  : http://www.hlzbownlog.top/
 // GITHUB: https://github.com/HaleyLeoZhang
 // ----------------------------------------------------------------------
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/golang/groupcache/singleflight"
-	log "github.com/spiegel-im-spiegel/logf"
+	"node_puppeteer_example_go/component/driver/ownlog"
+
 	"node_puppeteer_example_go/api/model"
 	"node_puppeteer_example_go/component/driver/owngin"
 )
@@ -111,7 +112,7 @@ func (Comic) GetList(c *gin.Context) {
 	g.Do(groupKey, func() (interface{}, error) {
 		res, err = srv.ComicList(ownGin.C, param)
 		if nil != err {
-			log.Errorf("router.GetList.Err.%+v", err)
+			ownlog.Errorf("router.GetList.Err.%+v", err)
 		}
 		return res, err
 	})
@@ -171,7 +172,7 @@ func (Comic) GetPageList(c *gin.Context) {
 	param := &model.PageListParam{}
 	err := c.Bind(param)
 	if err != nil {
-		log.Errorf("router.GetPageList.Err.%v", err)
+		ownlog.Errorf("router.GetPageList.Err.%v", err)
 		err = &owngin.BusinessError{Code: owngin.HTTP_RESPONSE_CODE_PARAM_INVALID, Message: "Param is invalid"}
 		ownGin.Response(err, nil)
 		return
@@ -183,7 +184,7 @@ func (Comic) GetPageList(c *gin.Context) {
 	g.Do(groupKey, func() (interface{}, error) {
 		res, err = srv.PageList(ownGin.C, param)
 		if nil != err {
-			log.Errorf("router.GetList.Err.%+v", err)
+			ownlog.Errorf("router.GetList.Err.%+v", err)
 		}
 		return res, err
 	})
@@ -292,7 +293,7 @@ func (Comic) GetPageDetail(c *gin.Context) {
 	g.Do(groupKey, func() (interface{}, error) {
 		res, err = srv.PageDetail(ownGin.C, param)
 		if nil != err {
-			log.Errorf("router.GetList.Err.%+v", err)
+			ownlog.Errorf("router.GetList.Err.%+v", err)
 		}
 		return res, err
 	})
@@ -360,7 +361,7 @@ func (Comic) GetImageList(c *gin.Context) {
 	g.Do(groupKey, func() (interface{}, error) {
 		res, err = srv.ImageList(ownGin.C, param)
 		if nil != err {
-			log.Errorf("router.GetList.Err.%+v", err)
+			ownlog.Errorf("router.GetList.Err.%+v", err)
 		}
 		return res, err
 	})

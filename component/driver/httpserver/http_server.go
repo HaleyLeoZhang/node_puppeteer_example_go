@@ -3,19 +3,19 @@ package httpserver
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"log"
 	"net/http"
+	"node_puppeteer_example_go/component/driver/ownlog"
 	"time"
 )
 
 type Config struct {
-	Name           string        `yaml:"name"` // 用于 Trace 识别
-	Ip             string        `yaml:"ip"`
-	Port           int           `yaml:"port"`
-	Timeout        string        `yaml:"timeout"`
-	ReadTimeout    time.Duration `yaml:"readTimeout"`
-	WriteTimeout   time.Duration `yaml:"writeTimeout"`
-	MaxHeaderBytes int           `yaml:"maxHeaderBytes"`
+	Name           string        `yaml:"name" json:"name"` // 用于 Trace 识别
+	Ip             string        `yaml:"ip" json:"ip"`
+	Port           int           `yaml:"port" json:"port"`
+	Timeout        string        `yaml:"timeout" json:"timeout"`
+	ReadTimeout    time.Duration `yaml:"readTimeout" json:"readTimeout"`
+	WriteTimeout   time.Duration `yaml:"writeTimeout" json:"writeTimeout"`
+	MaxHeaderBytes int           `yaml:"maxHeaderBytes" json:"maxHeaderBytes"`
 }
 
 func Run(c *Config, routersInit *gin.Engine) {
@@ -28,9 +28,9 @@ func Run(c *Config, routersInit *gin.Engine) {
 		WriteTimeout:   c.WriteTimeout,
 		MaxHeaderBytes: c.MaxHeaderBytes,
 	}
-	log.Printf("Start http server listening %s", addrString)
+	ownlog.Infof("Start http server listening %s", addrString)
 	err := server.ListenAndServe()
 	if err != nil {
-		log.Fatalf("HttpServer.Err %+v", err)
+		ownlog.Errorf("HttpServer.Err %+v", err)
 	}
 }

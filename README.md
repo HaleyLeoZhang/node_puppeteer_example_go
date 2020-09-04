@@ -36,6 +36,16 @@ make run
 make tool
 ~~~
 
+> 优雅关闭
+
+会监听指定信号 ctrl+c 、kill 进程Pid，关闭各种链接后，慢慢退出  
+
+~~~bash
+- 请不要用 kil -9 程序监听不到退出
+- 调试的时候 kill 目标请杀掉对应 tmp 进程即可 
+~~~
+
+
 ###### 注意事项
 
 > Goland

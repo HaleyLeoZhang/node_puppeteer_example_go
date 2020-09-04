@@ -41,5 +41,5 @@ redis:
 
 log:
   name: node_puppeteer_example_go
-  path: logs/
-  ext: log
+  stdout: true
+  dir: ""

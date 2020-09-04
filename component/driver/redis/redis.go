@@ -8,21 +8,21 @@ import (
 
 //  DB使用默认0库
 type Config struct {
-	Name         string        `yaml:"name"` // 用于 Trace 识别
-	Proto        string        `yaml:"proto"`
-	Addr         string        `yaml:"addr"`
-	Auth         string        `yaml:"auth"`
-	DialTimeout  time.Duration `yaml:"dialTimeout"`
-	ReadTimeout  time.Duration `yaml:"readTimeout"`
-	WriteTimeout time.Duration `yaml:"writeTimeout"`
-	SlowLog      time.Duration `yaml:"slowLog"`
-	Pool         PoolConfig    `yaml:"pool"`
+	Name         string        `yaml:"name" json:"name"` // 用于 Trace 识别
+	Proto        string        `yaml:"proto" json:"proto"`
+	Addr         string        `yaml:"addr" json:"addr"`
+	Auth         string        `yaml:"auth" json:"auth"`
+	DialTimeout  time.Duration `yaml:"dialTimeout" json:"dialTimeout"`
+	ReadTimeout  time.Duration `yaml:"readTimeout" json:"readTimeout"`
+	WriteTimeout time.Duration `yaml:"writeTimeout" json:"writeTimeout"`
+	SlowLog      time.Duration `yaml:"slowLog" json:"slowLog"`
+	Pool         PoolConfig    `yaml:"pool" json:"pool"`
 }
 
 type PoolConfig struct {
-	MaxActive   int           `yaml:"maxActive"`
-	MaxIdle     int           `yaml:"maxIdle"`
-	IdleTimeout time.Duration `yaml:"idleTimeout"`
+	MaxActive   int           `yaml:"maxActive" json:"maxActive"`
+	MaxIdle     int           `yaml:"maxIdle" json:"maxIdle"`
+	IdleTimeout time.Duration `yaml:"idleTimeout" json:"idleTimeout"`
 }
 
 func NewPool(c *Config) (*redis.Pool, error) {

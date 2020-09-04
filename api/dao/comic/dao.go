@@ -1,11 +1,11 @@
 package comic
 
 import (
-	"context"
 	"github.com/gomodule/redigo/redis"
 	"github.com/jinzhu/gorm"
 	"node_puppeteer_example_go/api/conf"
 	"node_puppeteer_example_go/component/driver/db"
+	"node_puppeteer_example_go/component/driver/ownlog"
 	ownredis "node_puppeteer_example_go/component/driver/redis"
 )
 
@@ -29,10 +29,12 @@ func New(cfg *conf.Config) *Dao {
 }
 
 func (d *Dao) Close() {
-	d.redis.Close()
-	d.db.Close()
-}
-
-func (d *Dao) Ping(ctx context.Context) error {
-	return nil
+	err := d.redis.Close()
+	if err != nil {
+		ownlog.Errorf("CloseComicDao.redis.Err(%+v)", err)
+	}
+	err = d.db.Close()
+	if err != nil {
+		ownlog.Errorf("CloseComicDao.db.Err(%+v)", err)
+	}
 }

@@ -16,9 +16,9 @@ type OwnGin struct {
 }
 
 type Config struct {
-	Name    string        `yaml:"name"` // 用于 Trace 识别
-	Debug   bool          `yaml:"debug"`
-	Timeout time.Duration `yaml:"timeout"`
+	Name    string        `yaml:"name" json:"name"` // 用于 Trace 识别
+	Debug   bool          `yaml:"debug" json:"debug"`
+	Timeout time.Duration `yaml:"timeout" json:"timeout"`
 }
 
 func New(c *Config) *gin.Engine {
@@ -30,6 +30,6 @@ func New(c *Config) *gin.Engine {
 
 	r := gin.New()
 	r.Use(gin.Logger())
-	r.Use(gin.Recovery())
+	//r.Use(gin.Recovery()) // 外部 recovery
 	return r
 }

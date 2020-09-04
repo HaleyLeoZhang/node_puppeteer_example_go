@@ -13,7 +13,7 @@ type DB struct {
 }
 
 type Config struct {
-	Name         string        `yaml:"name"` // 用于 Trace 识别
+	Name         string        `yaml:"name" json:"name"` // 用于 Trace 识别
 	Type         string        `yaml:"type" json:"type"`
 	Host         string        `yaml:"host" json:"host"`
 	Port         int           `yaml:"port" json:"port"`

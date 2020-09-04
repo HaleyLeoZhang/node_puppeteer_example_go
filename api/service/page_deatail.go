@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/spiegel-im-spiegel/logf"
 	"node_puppeteer_example_go/api/model"
+	"node_puppeteer_example_go/component/driver/ownlog"
 	"node_puppeteer_example_go/component/errgroup"
 )
 
@@ -12,7 +13,7 @@ func (s *Service) PageDetail(ctx context.Context, param *model.PageDetailParam) 
 	pageId := param.PageId
 	currentPage, err := s.comicDao.GetPageInfo(ctx, pageId)
 	if nil != err {
-		logf.Errorf("PageDetail.Step1.Error.%+v", err)
+		ownlog.Errorf("PageDetail.Step1.Error.%+v", err)
 		return nil, err
 	}
 	var nextPage *model.ComicPage

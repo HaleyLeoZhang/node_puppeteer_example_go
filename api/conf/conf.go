@@ -2,7 +2,6 @@ package conf
 
 import (
 	"flag"
-	"fmt"
 	"io/ioutil"
 	"path/filepath"
 
@@ -11,6 +10,7 @@ import (
 	"node_puppeteer_example_go/component/driver/db"
 	"node_puppeteer_example_go/component/driver/httpserver"
 	"node_puppeteer_example_go/component/driver/owngin"
+	"node_puppeteer_example_go/component/driver/ownlog"
 	"node_puppeteer_example_go/component/driver/redis"
 )
 
@@ -21,12 +21,12 @@ var (
 
 // Config struct
 type Config struct {
-	ServiceName string             `yaml:"serviceName"`
-	HttpServer  *httpserver.Config `yaml:"httpServer"`
-	Gin         *owngin.Config     `yaml:"gin"`
-	DB          *db.Config         `yaml:"db"`
-	Redis       *redis.Config
-	//Log         *Log.Config
+	ServiceName string             `yaml:"serviceName" json:"serviceName"`
+	HttpServer  *httpserver.Config `yaml:"httpServer" json:"httpServer"`
+	Gin         *owngin.Config     `yaml:"gin" json:"gin"`
+	DB          *db.Config         `yaml:"db" json:"db"`
+	Redis       *redis.Config      `yaml:"redis" json:"redis"`
+	Log         *ownlog.Config     `yaml:"log" json:"log"`
 }
 
 func init() {
@@ -51,7 +51,6 @@ func Init() (err error) {
 	if err != nil {
 		return
 	}
-	fmt.Println(Conf)
 	go load()
 	return
 }

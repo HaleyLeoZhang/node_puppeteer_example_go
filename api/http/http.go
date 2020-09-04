@@ -2,14 +2,13 @@ package http
 
 import (
 	"github.com/gin-gonic/gin"
-	"node_puppeteer_example_go/api/conf"
 	"node_puppeteer_example_go/api/service"
 )
 
 var srv *service.Service
 
-func Init(c *conf.Config, e *gin.Engine) *gin.Engine {
-	srv = service.New(c)
+func Init(e *gin.Engine, srvInjection *service.Service) *gin.Engine {
+	srv = srvInjection
 
 	//e.Use(setDefaultResponse)
 

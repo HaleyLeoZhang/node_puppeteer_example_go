@@ -3,8 +3,8 @@ package owngin
 import (
 	"context"
 	"github.com/gin-gonic/gin"
-	log "github.com/spiegel-im-spiegel/logf"
 	"net/http"
+	"node_puppeteer_example_go/component/driver/ownlog"
 	"time"
 )
 
@@ -42,12 +42,12 @@ func (o *OwnGin) Response(err error, data interface{}) {
 			code = businessError.Code
 			message = businessError.Message
 			data = nil
-			log.Printf("Response.BusinessError.%+v", err)
+			ownlog.Infof("Response.BusinessError.%+v", err)
 		default:
 			code = HTTP_RESPONSE_CODE_UNKNOWN_FAIL
 			message = "服务繁忙"
 			data = nil
-			log.Errorf("Response.Error.%+v", err)
+			ownlog.Errorf("Response.Error.%+v", err)
 		}
 	}
 	o.GinContext.JSON(http.StatusOK, ResponseModel{
