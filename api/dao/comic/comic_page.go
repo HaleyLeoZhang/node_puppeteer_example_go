@@ -2,8 +2,8 @@ package comic
 
 import (
 	"context"
-	"fmt"
 	"github.com/jinzhu/gorm"
+	"github.com/pkg/errors"
 	"node_puppeteer_example_go/api/constant"
 	"node_puppeteer_example_go/api/model"
 )
@@ -16,8 +16,13 @@ func (d *Dao) GetPageList(ctx context.Context, maps map[string]interface{}) (pag
 	err = d.db.Table(pageInfo.TableName()).
 		Where(maps).Not("sequence", 0).Order("sequence ASC").Find(&pageList).Error
 
-	if err != nil && err != gorm.ErrRecordNotFound {
-		fmt.Printf("error %+v", err)
+	if  err == gorm.ErrRecordNotFound {
+		err = nil
+		return
+	}
+
+	if err != nil {
+		err = errors.WithStack(err)
 		return
 	}
 
@@ -34,26 +39,13 @@ func (d *Dao) GetPageInfo(ctx context.Context, id int) (pageInfo *model.ComicPag
 	err = d.db.Table(pageInfo.TableName()).
 		Where(maps).First(&pageInfo).Error
 
-	if err != nil && err != gorm.ErrRecordNotFound {
-		fmt.Printf("error %+v", err)
+	if  err == gorm.ErrRecordNotFound {
+		err = nil
 		return
 	}
 
-	return
-}
-
-func (d *Dao) GetMextPageInfo(ctx context.Context, id int) (pageInfo *model.ComicPage, err error) {
-	pageInfo = &model.ComicPage{}
-
-	maps := make(map[string]interface{})
-	maps["id"] = id
-	maps["is_deleted"] = constant.TABLE_BASE_IS_DELETED_NO
-
-	err = d.db.Table(pageInfo.TableName()).
-		Where(maps).First(&pageInfo).Error
-
-	if err != nil && err != gorm.ErrRecordNotFound {
-		fmt.Printf("error %+v", err)
+	if err != nil {
+		err = errors.WithStack(err)
 		return
 	}
 
@@ -71,9 +63,14 @@ func (d *Dao) GetNextPageInfo(ctx context.Context, Channel int, SourceId int, Se
 		Order("sequence ASC").
 		First(&pageInfo).Error
 
-	if err != nil && err != gorm.ErrRecordNotFound {
-		fmt.Printf("error %+v", err)
-		return nil, err
+	if  err == gorm.ErrRecordNotFound {
+		err = nil
+		return
+	}
+
+	if err != nil {
+		err = errors.WithStack(err)
+		return
 	}
 
 	return pageInfo, nil

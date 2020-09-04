@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/jinzhu/gorm"
+	"github.com/pkg/errors"
 	"node_puppeteer_example_go/api/constant"
 	"node_puppeteer_example_go/api/model"
 	"node_puppeteer_example_go/component/driver/db"
@@ -22,30 +23,40 @@ func (d *Dao) GetComicList(ctx context.Context, page int, size int, maps map[str
 	err = d.db.Table(comicInfo.TableName()).
 		Where(maps).Offset(offset).Order("weight DESC").Limit(size).Find(&comicList).Error
 
-	if err != nil && err != gorm.ErrRecordNotFound {
-		fmt.Printf("error %+v", err)
+	if  err == gorm.ErrRecordNotFound {
+		err = nil
+		return
+	}
+
+	if err != nil {
+		err = errors.WithStack(err)
 		return
 	}
 
 	return
 }
 
-func (d *Dao) GetComicInfo(ctx context.Context, Channel int, SourceID int) (*model.Comic, error) {
-	comicInfo := &model.Comic{}
+func (d *Dao) GetComicInfo(ctx context.Context, Channel int, SourceID int) (comicInfo *model.Comic, err error) {
+	comicInfo = &model.Comic{}
 
 	maps := make(map[string]interface{})
 	maps["channel"] = Channel
 	maps["source_id"] = SourceID
 
-	err := d.db.Table(comicInfo.TableName()).
+	err = d.db.Table(comicInfo.TableName()).
 		Where(maps).First(&comicInfo).Error
 
-	if err != nil && err != gorm.ErrRecordNotFound {
-		fmt.Printf("error %+v", err)
-		return nil, err
+	if err == gorm.ErrRecordNotFound {
+		err = nil
+		return
 	}
 
-	return comicInfo, nil
+	if err != nil {
+		err = errors.WithStack(err)
+		return
+	}
+
+	return
 }
 
 // --------------------------------
@@ -64,7 +75,7 @@ func (d *Dao) CacheSetComicInfo(ctx context.Context, comic *model.Comic) error {
 	cacheKey := cacheKeyGetComicInfo(comic.Channel, comic.SourceID)
 	byteValue, err := json.Marshal(comic)
 	if nil != err {
-		fmt.Printf("error %+v", err)
+		err = errors.WithStack(err)
 		return err
 	}
 	ttl := 300 // 缓存时间，单位，秒
@@ -73,7 +84,7 @@ func (d *Dao) CacheSetComicInfo(ctx context.Context, comic *model.Comic) error {
 	defer conn.Close()
 	_, err = conn.Do("SET", cacheKey, byteValue, "EX", ttl)
 	if err != nil {
-		fmt.Printf("error %+v", err)
+		err = errors.WithStack(err)
 		return err
 	}
 	return err
@@ -89,7 +100,7 @@ func (d *Dao) CacheGetComicInfo(ctx context.Context, Channel int, SourceID int) 
 	}
 	comic := &model.Comic{}
 	if nil == byteValue {
-		return nil, err
+		return nil, nil
 	}
 	json.Unmarshal(byteValue.([]byte), comic)
 	return comic, nil
