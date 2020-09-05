@@ -6,6 +6,13 @@
 * `Makefile` 集成命令
 * [查看接口文档](http://api_puppeteer.doc.hlzblog.top/)  
 
+### 性能表现
+
+![](readme_performance.png)  
+`图 01 - API性能表现`  
+
+因 `漫画列表页` 数据量可能大一些，所以可能会超过 `10ms` 的响应结果  
+
 > 运行前要求
 
 生成好 `app.ini`  
