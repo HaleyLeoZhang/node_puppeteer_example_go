@@ -23,7 +23,7 @@ func (d *Dao) GetComicList(ctx context.Context, page int, size int, maps map[str
 	err = d.db.Table(comicInfo.TableName()).
 		Where(maps).Offset(offset).Order("weight DESC").Limit(size).Find(&comicList).Error
 
-	if  err == gorm.ErrRecordNotFound {
+	if err == gorm.ErrRecordNotFound {
 		err = nil
 		return
 	}

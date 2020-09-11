@@ -16,7 +16,7 @@ func (d *Dao) GetPageList(ctx context.Context, maps map[string]interface{}) (pag
 	err = d.db.Table(pageInfo.TableName()).
 		Where(maps).Not("sequence", 0).Order("sequence ASC").Find(&pageList).Error
 
-	if  err == gorm.ErrRecordNotFound {
+	if err == gorm.ErrRecordNotFound {
 		err = nil
 		return
 	}
@@ -39,7 +39,7 @@ func (d *Dao) GetPageInfo(ctx context.Context, id int) (pageInfo *model.ComicPag
 	err = d.db.Table(pageInfo.TableName()).
 		Where(maps).First(&pageInfo).Error
 
-	if  err == gorm.ErrRecordNotFound {
+	if err == gorm.ErrRecordNotFound {
 		err = nil
 		return
 	}
@@ -63,7 +63,7 @@ func (d *Dao) GetNextPageInfo(ctx context.Context, Channel int, SourceId int, Se
 		Order("sequence ASC").
 		First(&pageInfo).Error
 
-	if  err == gorm.ErrRecordNotFound {
+	if err == gorm.ErrRecordNotFound {
 		err = nil
 		return
 	}

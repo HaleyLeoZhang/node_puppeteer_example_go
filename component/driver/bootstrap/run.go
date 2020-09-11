@@ -51,8 +51,8 @@ func (b *Bootstrap) Stop(callback func()) {
 		case err := <-b.NotifyError:
 			ownlog.Errorf("Bootstrap.Start.Err(%+v)", err)
 			b.ExitSignal <- syscall.SIGINT
-		//case <-time.After(time.Second * 3): // 检测进程是否存活，暂不需要
-		//	ownlog.Info("Bootstrap.Loop.Alive")
+			//case <-time.After(time.Second * 3): // 检测进程是否存活，暂不需要
+			//	ownlog.Info("Bootstrap.Loop.Alive")
 		}
 		ownlog.Info("Bootstrap.test")
 	}

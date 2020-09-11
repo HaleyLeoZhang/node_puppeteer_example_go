@@ -18,7 +18,7 @@ func (d *Dao) GetImageList(ctx context.Context, pageId int) (imageList []*model.
 	err = d.db.Table(imageInfo.TableName()). // 以此减小反射的开销
 							Where(maps).Find(&imageList).Error
 
-	if  err == gorm.ErrRecordNotFound {
+	if err == gorm.ErrRecordNotFound {
 		err = nil
 		return
 	}
