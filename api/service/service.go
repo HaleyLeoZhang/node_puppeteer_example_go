@@ -4,7 +4,7 @@ import (
 	"node_puppeteer_example_go/api/conf"
 	"node_puppeteer_example_go/api/dao/comic"
 	//"node_puppeteer_example_go/api/dao/cache"
-	"node_puppeteer_example_go/component/driver/ownlog"
+	"github.com/HaleyLeoZhang/go-component/driver/xlog"
 )
 
 type Service struct {
@@ -24,5 +24,5 @@ func New(cfg *conf.Config) *Service {
 // Close close the resource.
 func (s *Service) Close() {
 	s.comicDao.Close()
-	ownlog.Info("Close.comicDao.Done")
+	xlog.Info("Close.comicDao.Done")
 }

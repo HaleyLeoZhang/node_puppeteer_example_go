@@ -3,17 +3,17 @@ package service
 import (
 	"context"
 	"fmt"
+	"github.com/HaleyLeoZhang/go-component/driver/xlog"
+	"github.com/HaleyLeoZhang/go-component/errgroup"
 	"github.com/spiegel-im-spiegel/logf"
 	"node_puppeteer_example_go/api/model"
-	"node_puppeteer_example_go/component/driver/ownlog"
-	"node_puppeteer_example_go/component/errgroup"
 )
 
 func (s *Service) PageDetail(ctx context.Context, param *model.PageDetailParam) (res *model.PageDetailResponse, err error) {
 	pageId := param.PageId
 	currentPage, err := s.comicDao.GetPageInfo(ctx, pageId)
 	if nil != err {
-		ownlog.Errorf("PageDetail.Step1.Error.%+v", err)
+		xlog.Errorf("PageDetail.Step1.Error.%+v", err)
 		return nil, err
 	}
 	var nextPage *model.ComicPage

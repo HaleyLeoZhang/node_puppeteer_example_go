@@ -6,7 +6,7 @@ import (
 
 // 设置默认返回
 func setDefaultResponse(c *gin.Context) {
-	//ownGin := &owngin.OwnGin{C: c}
+	//xGin := &xgin.xGin{C: c}
 	// TODO
 	c.Next()
 }

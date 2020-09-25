@@ -4,12 +4,12 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/HaleyLeoZhang/go-component/driver/db"
+	"github.com/HaleyLeoZhang/go-component/driver/xgin"
 	"github.com/jinzhu/gorm"
 	"github.com/pkg/errors"
 	"node_puppeteer_example_go/api/constant"
 	"node_puppeteer_example_go/api/model"
-	"node_puppeteer_example_go/component/driver/db"
-	"node_puppeteer_example_go/component/driver/owngin"
 )
 
 func (d *Dao) GetComicList(ctx context.Context, page int, size int, maps map[string]interface{}) (comicList []*model.Comic, err error) {
@@ -121,11 +121,11 @@ func (d *Dao) GetComicInfoWithCache(ctx context.Context, Channel int, SourceID i
 	} else {
 		// 处理缓存穿透
 		if 0 == comic.ID {
-			return nil, &owngin.BusinessError{Code: owngin.HTTP_RESPONSE_CODE_SOURCE_NOT_FOUND, Message: "漫画不存在!"}
+			return nil, &xgin.BusinessError{Code: xgin.HTTP_RESPONSE_CODE_SOURCE_NOT_FOUND, Message: "漫画不存在!"}
 		}
 	}
 	if nil == comic {
-		return nil, &owngin.BusinessError{Code: owngin.HTTP_RESPONSE_CODE_SOURCE_NOT_FOUND, Message: "漫画不存在"}
+		return nil, &xgin.BusinessError{Code: xgin.HTTP_RESPONSE_CODE_SOURCE_NOT_FOUND, Message: "漫画不存在"}
 	}
 	return comic, err
 }

@@ -3,17 +3,17 @@ package http
 // ----------------------------------------------------------------------
 // 漫画控制器
 // ----------------------------------------------------------------------
-// Link  : http://www.hlzbownlog.top/
+// Link  : http://www.hlzbxlog.top/
 // GITHUB: https://github.com/HaleyLeoZhang
 // ----------------------------------------------------------------------
 import (
 	"fmt"
+	"github.com/HaleyLeoZhang/go-component/driver/xlog"
 	"github.com/gin-gonic/gin"
 	"github.com/golang/groupcache/singleflight"
-	"node_puppeteer_example_go/component/driver/ownlog"
 
+	"github.com/HaleyLeoZhang/go-component/driver/xgin"
 	"node_puppeteer_example_go/api/model"
-	"node_puppeteer_example_go/component/driver/owngin"
 )
 
 type Comic struct{}
@@ -95,13 +95,13 @@ type Comic struct{}
  * }
  */
 func (Comic) GetList(c *gin.Context) {
-	ownGin := owngin.NewOwnGin(c)
+	xGin := xgin.NewxGin(c)
 
 	param := &model.ComicListParam{}
 	err := c.Bind(param)
 	if err != nil {
-		err = &owngin.BusinessError{Code: owngin.HTTP_RESPONSE_CODE_PARAM_INVALID, Message: "Param is invalid"}
-		ownGin.Response(err, nil)
+		err = &xgin.BusinessError{Code: xgin.HTTP_RESPONSE_CODE_PARAM_INVALID, Message: "Param is invalid"}
+		xGin.Response(err, nil)
 		return
 	}
 
@@ -110,13 +110,13 @@ func (Comic) GetList(c *gin.Context) {
 	groupKey := fmt.Sprintf("comic_list_%v", param.Page)
 	var res *model.ComicListResponse
 	g.Do(groupKey, func() (interface{}, error) {
-		res, err = srv.ComicList(ownGin.C, param)
+		res, err = srv.ComicList(xGin.C, param)
 		if nil != err {
-			ownlog.Errorf("router.GetList.Err.%+v", err)
+			xlog.Errorf("router.GetList.Err.%+v", err)
 		}
 		return res, err
 	})
-	ownGin.Response(err, res)
+	xGin.Response(err, res)
 }
 
 /**
@@ -167,14 +167,14 @@ func (Comic) GetList(c *gin.Context) {
  * }
  */
 func (Comic) GetPageList(c *gin.Context) {
-	ownGin := owngin.NewOwnGin(c)
+	xGin := xgin.NewxGin(c)
 
 	param := &model.PageListParam{}
 	err := c.Bind(param)
 	if err != nil {
-		ownlog.Errorf("router.GetPageList.Err.%v", err)
-		err = &owngin.BusinessError{Code: owngin.HTTP_RESPONSE_CODE_PARAM_INVALID, Message: "Param is invalid"}
-		ownGin.Response(err, nil)
+		xlog.Errorf("router.GetPageList.Err.%v", err)
+		err = &xgin.BusinessError{Code: xgin.HTTP_RESPONSE_CODE_PARAM_INVALID, Message: "Param is invalid"}
+		xGin.Response(err, nil)
 		return
 	}
 	var res *model.PageListResponse
@@ -182,13 +182,13 @@ func (Comic) GetPageList(c *gin.Context) {
 	g := &singleflight.Group{}
 	groupKey := fmt.Sprintf("page_list_%v_%v", param.Channel, param.SourceId)
 	g.Do(groupKey, func() (interface{}, error) {
-		res, err = srv.PageList(ownGin.C, param)
+		res, err = srv.PageList(xGin.C, param)
 		if nil != err {
-			ownlog.Errorf("router.GetList.Err.%+v", err)
+			xlog.Errorf("router.GetList.Err.%+v", err)
 		}
 		return res, err
 	})
-	ownGin.Response(err, res)
+	xGin.Response(err, res)
 }
 
 /**
@@ -276,13 +276,13 @@ func (Comic) GetPageList(c *gin.Context) {
  * }
  */
 func (Comic) GetPageDetail(c *gin.Context) {
-	ownGin := owngin.NewOwnGin(c)
+	xGin := xgin.NewxGin(c)
 
 	param := &model.PageDetailParam{}
 	err := c.Bind(param)
 	if err != nil {
-		err = &owngin.BusinessError{Code: owngin.HTTP_RESPONSE_CODE_PARAM_INVALID, Message: "Param is invalid"}
-		ownGin.Response(err, nil)
+		err = &xgin.BusinessError{Code: xgin.HTTP_RESPONSE_CODE_PARAM_INVALID, Message: "Param is invalid"}
+		xGin.Response(err, nil)
 		return
 	}
 
@@ -291,14 +291,14 @@ func (Comic) GetPageDetail(c *gin.Context) {
 	g := &singleflight.Group{}
 	groupKey := fmt.Sprintf("page_detail_%v", param.PageId)
 	g.Do(groupKey, func() (interface{}, error) {
-		res, err = srv.PageDetail(ownGin.C, param)
+		res, err = srv.PageDetail(xGin.C, param)
 		if nil != err {
-			ownlog.Errorf("router.GetList.Err.%+v", err)
+			xlog.Errorf("router.GetList.Err.%+v", err)
 		}
 		return res, err
 	})
 
-	ownGin.Response(err, res)
+	xGin.Response(err, res)
 }
 
 /**
@@ -344,13 +344,13 @@ func (Comic) GetPageDetail(c *gin.Context) {
  * }
  */
 func (Comic) GetImageList(c *gin.Context) {
-	ownGin := owngin.NewOwnGin(c)
+	xGin := xgin.NewxGin(c)
 
 	param := &model.ImageListParam{}
 	err := c.Bind(param)
 	if err != nil {
-		err = &owngin.BusinessError{Code: owngin.HTTP_RESPONSE_CODE_PARAM_INVALID, Message: "Param is invalid"}
-		ownGin.Response(err, nil)
+		err = &xgin.BusinessError{Code: xgin.HTTP_RESPONSE_CODE_PARAM_INVALID, Message: "Param is invalid"}
+		xGin.Response(err, nil)
 		return
 	}
 
@@ -359,11 +359,11 @@ func (Comic) GetImageList(c *gin.Context) {
 	g := &singleflight.Group{}
 	groupKey := fmt.Sprintf("image_list_%v", param.PageId)
 	g.Do(groupKey, func() (interface{}, error) {
-		res, err = srv.ImageList(ownGin.C, param)
+		res, err = srv.ImageList(xGin.C, param)
 		if nil != err {
-			ownlog.Errorf("router.GetList.Err.%+v", err)
+			xlog.Errorf("router.GetList.Err.%+v", err)
 		}
 		return res, err
 	})
-	ownGin.Response(err, res)
+	xGin.Response(err, res)
 }

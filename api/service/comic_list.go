@@ -2,9 +2,9 @@ package service
 
 import (
 	"context"
+	"github.com/HaleyLeoZhang/go-component/driver/xlog"
 	"node_puppeteer_example_go/api/constant"
 	"node_puppeteer_example_go/api/model"
-	"node_puppeteer_example_go/component/driver/ownlog"
 )
 
 func (s *Service) ComicList(ctx context.Context, param *model.ComicListParam) (*model.ComicListResponse, error) {
@@ -14,7 +14,7 @@ func (s *Service) ComicList(ctx context.Context, param *model.ComicListParam) (*
 	maps["is_online"] = constant.TABLE_COMIC_IS_ONLINE_YES
 	list, err := s.comicDao.GetComicList(ctx, page, size, maps)
 	if nil != err {
-		ownlog.Errorf("ComicList.Error.%+v", err)
+		xlog.Errorf("ComicList.Error.%+v", err)
 		return nil, err
 	}
 	res := &model.ComicListResponse{
