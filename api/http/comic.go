@@ -8,11 +8,11 @@ package http
 // ----------------------------------------------------------------------
 import (
 	"fmt"
-	"github.com/HaleyLeoZhang/go-component/driver/xlog"
 	"github.com/gin-gonic/gin"
 	"github.com/golang/groupcache/singleflight"
 
 	"github.com/HaleyLeoZhang/go-component/driver/xgin"
+	"github.com/HaleyLeoZhang/go-component/driver/xlog"
 	"node_puppeteer_example_go/api/model"
 )
 
@@ -95,7 +95,7 @@ type Comic struct{}
  * }
  */
 func (Comic) GetList(c *gin.Context) {
-	xGin := xgin.NewxGin(c)
+	xGin := xgin.NewGin(c)
 
 	param := &model.ComicListParam{}
 	err := c.Bind(param)
@@ -167,7 +167,7 @@ func (Comic) GetList(c *gin.Context) {
  * }
  */
 func (Comic) GetPageList(c *gin.Context) {
-	xGin := xgin.NewxGin(c)
+	xGin := xgin.NewGin(c)
 
 	param := &model.PageListParam{}
 	err := c.Bind(param)
@@ -276,7 +276,7 @@ func (Comic) GetPageList(c *gin.Context) {
  * }
  */
 func (Comic) GetPageDetail(c *gin.Context) {
-	xGin := xgin.NewxGin(c)
+	xGin := xgin.NewGin(c)
 
 	param := &model.PageDetailParam{}
 	err := c.Bind(param)
@@ -344,7 +344,7 @@ func (Comic) GetPageDetail(c *gin.Context) {
  * }
  */
 func (Comic) GetImageList(c *gin.Context) {
-	xGin := xgin.NewxGin(c)
+	xGin := xgin.NewGin(c)
 
 	param := &model.ImageListParam{}
 	err := c.Bind(param)
