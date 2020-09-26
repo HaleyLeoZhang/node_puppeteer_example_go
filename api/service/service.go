@@ -23,6 +23,10 @@ func New(cfg *conf.Config) *Service {
 
 // Close close the resource.
 func (s *Service) Close() {
+	// 各种消费者
+	// - 暂无
+	// 各种数据库
+	// - 平滑关闭，建议数据库相关的关闭放到最后
 	s.comicDao.Close()
 	xlog.Info("Close.comicDao.Done")
 }

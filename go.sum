@@ -1,5 +1,5 @@
-github.com/HaleyLeoZhang/go-component v1.0.1 h1:SQq3Qvat/zBOxDptUcfrURJs8bRKje9/RMVt6iDi9qk=
-github.com/HaleyLeoZhang/go-component v1.0.1/go.mod h1:Rx8unytyYNLf/nsP/KDxZuwPDJqOQL1SUupcxHLVZqs=
+github.com/HaleyLeoZhang/go-component v1.1.0 h1:fwN1ASq5h20asaWW8jwM89hNGobGnWZnyxfahAyVzYo=
+github.com/HaleyLeoZhang/go-component v1.1.0/go.mod h1:Rx8unytyYNLf/nsP/KDxZuwPDJqOQL1SUupcxHLVZqs=
 github.com/PuerkitoBio/goquery v1.5.1/go.mod h1:GsLWisAFVj4WgDibEWF4pvYnkVQBpKBKeU+7zCJoLcc=
 github.com/andybalholm/cascadia v1.1.0/go.mod h1:GsXiBklL0woXo1j/WYWtSYYC4ouU9PqHO0sqidkEA4Y=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
