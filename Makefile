@@ -2,25 +2,26 @@ all: debug
 
 debug:
 	@clear
-	@echo "APP debug is loading"
+	@echo "App API debug is loading"
 	@go run ./api/build/main.go -conf=./api/build/app.yaml
 
 build:
 	@clear
-	@make -s clean
-	@echo "New APP is creating. Please wait ..."
-	@go build -o ./api/build/node_puppeteer_example_go -v ./api/build/main.go
-	@echo "App is created"
+	@echo "App API is creating. Please wait ..."
+	@rm -rf ./app_api
+	@echo "App API compiling ..."
+	@go build -o ./app_api -v ./api/build/main.go
+	@echo "App API is created"
 
 run:
 	@clear
 	@echo "APP is loading. Please wait ..."
-	@./api/build/node_puppeteer_example_go  -conf=./api/build/app.yaml
+	@./app_api  -conf=./api/build/app.yaml
 
 ini:
 	@clear
 	@cp ./api/build/app.example.yaml ./api/build/app.yaml
-	@echo "Copy yaml success"
+	@echo "API config.yaml initial success"
 
 tool:
 	@clear
@@ -28,9 +29,21 @@ tool:
 	@gofmt -w .
 
 clean:
-	@echo "Remove Old APP ... "
-	@rm -rf ./api/build/node_puppeteer_example_go
-	@echo "Remove Old App --- Done"
+	@clear
+	@echo "Remove Old Apps ... "
+	@rm -rf ./app_api
+	@rm -rf ./app_job
+	@rm -rf ./app_admin
+	@go clean -i .
+	@echo "Remove Old Apps --- Done"
+
+easyjson:
+	@clear
+    # 以下会为 api/model 目录下的所有结构体生成 easyjson 文件
+	@echo "Creating easyjson file for api/model"
+	@rm -rf api/model/*_easyjson.go
+	@easyjson -all api/model/*.go # 格式化 json ，需要 https://github.com/mailru/easyjson
+	@echo "Created API easyjson file Success"
 
 test:
 	@clear

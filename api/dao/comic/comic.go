@@ -2,11 +2,11 @@ package comic
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"github.com/HaleyLeoZhang/go-component/driver/db"
 	"github.com/HaleyLeoZhang/go-component/driver/xgin"
 	"github.com/jinzhu/gorm"
+	"github.com/mailru/easyjson"
 	"github.com/pkg/errors"
 	"node_puppeteer_example_go/api/constant"
 	"node_puppeteer_example_go/api/model"
@@ -73,7 +73,7 @@ func cacheKeyGetComicInfo(Channel int, SourceID int) string {
 
 func (d *Dao) CacheSetComicInfo(ctx context.Context, comic *model.Comic) error {
 	cacheKey := cacheKeyGetComicInfo(comic.Channel, comic.SourceID)
-	byteValue, err := json.Marshal(comic)
+	byteValue, err := easyjson.Marshal(comic)
 	if nil != err {
 		err = errors.WithStack(err)
 		return err
@@ -102,7 +102,7 @@ func (d *Dao) CacheGetComicInfo(ctx context.Context, Channel int, SourceID int) 
 	if nil == byteValue {
 		return nil, nil
 	}
-	json.Unmarshal(byteValue.([]byte), comic)
+	easyjson.Unmarshal(byteValue.([]byte), comic)
 	return comic, nil
 }
 

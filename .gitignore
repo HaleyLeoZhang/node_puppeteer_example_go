@@ -1,4 +1,7 @@
 api/build/app.yaml
 **/.idea
-**/node_puppeteer_example_go
-**/go.mod
+**/.DS_Store
+app_api
+app_job
+app_admin
+**/go.sum
