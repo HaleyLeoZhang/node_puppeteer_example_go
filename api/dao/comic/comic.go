@@ -9,12 +9,12 @@ import (
 	"github.com/mailru/easyjson"
 	"github.com/pkg/errors"
 	"node_puppeteer_example_go/api/constant"
-	"node_puppeteer_example_go/api/model"
+	"node_puppeteer_example_go/api/model/po"
 )
 
-func (d *Dao) GetComicList(ctx context.Context, page int, size int, maps map[string]interface{}) (comicList []*model.Comic, err error) {
-	comicList = make([]*model.Comic, 0)
-	comicInfo := &model.Comic{}
+func (d *Dao) GetComicList(ctx context.Context, page int, size int, maps map[string]interface{}) (comicList []*po.Comic, err error) {
+	comicList = make([]*po.Comic, 0)
+	comicInfo := &po.Comic{}
 
 	offset, size := db.GetPageInfo(page, size)
 
@@ -36,8 +36,8 @@ func (d *Dao) GetComicList(ctx context.Context, page int, size int, maps map[str
 	return
 }
 
-func (d *Dao) GetComicInfo(ctx context.Context, Channel int, SourceID int) (comicInfo *model.Comic, err error) {
-	comicInfo = &model.Comic{}
+func (d *Dao) GetComicInfo(ctx context.Context, Channel int, SourceID int) (comicInfo *po.Comic, err error) {
+	comicInfo = &po.Comic{}
 
 	maps := make(map[string]interface{})
 	maps["channel"] = Channel
@@ -71,7 +71,7 @@ func cacheKeyGetComicInfo(Channel int, SourceID int) string {
 	return cacheKey
 }
 
-func (d *Dao) CacheSetComicInfo(ctx context.Context, comic *model.Comic) error {
+func (d *Dao) CacheSetComicInfo(ctx context.Context, comic *po.Comic) error {
 	cacheKey := cacheKeyGetComicInfo(comic.Channel, comic.SourceID)
 	byteValue, err := easyjson.Marshal(comic)
 	if nil != err {
@@ -90,7 +90,7 @@ func (d *Dao) CacheSetComicInfo(ctx context.Context, comic *model.Comic) error {
 	return err
 }
 
-func (d *Dao) CacheGetComicInfo(ctx context.Context, Channel int, SourceID int) (*model.Comic, error) {
+func (d *Dao) CacheGetComicInfo(ctx context.Context, Channel int, SourceID int) (*po.Comic, error) {
 	cacheKey := cacheKeyGetComicInfo(Channel, SourceID)
 	conn := d.redis.Get()
 	defer conn.Close()
@@ -98,7 +98,7 @@ func (d *Dao) CacheGetComicInfo(ctx context.Context, Channel int, SourceID int) 
 	if err != nil {
 		return nil, err
 	}
-	comic := &model.Comic{}
+	comic := &po.Comic{}
 	if nil == byteValue {
 		return nil, nil
 	}
@@ -106,7 +106,7 @@ func (d *Dao) CacheGetComicInfo(ctx context.Context, Channel int, SourceID int) 
 	return comic, nil
 }
 
-func (d *Dao) GetComicInfoWithCache(ctx context.Context, Channel int, SourceID int) (*model.Comic, error) {
+func (d *Dao) GetComicInfoWithCache(ctx context.Context, Channel int, SourceID int) (*po.Comic, error) {
 	comic, err := d.CacheGetComicInfo(ctx, Channel, SourceID)
 	if nil == comic {
 		comic, err = d.GetComicInfo(ctx, Channel, SourceID)

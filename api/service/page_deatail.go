@@ -6,18 +6,19 @@ import (
 	"github.com/HaleyLeoZhang/go-component/driver/xlog"
 	"github.com/HaleyLeoZhang/go-component/errgroup"
 	"github.com/spiegel-im-spiegel/logf"
-	"node_puppeteer_example_go/api/model"
+	"node_puppeteer_example_go/api/model/po"
+	"node_puppeteer_example_go/api/model/vo"
 )
 
-func (s *Service) PageDetail(ctx context.Context, param *model.PageDetailParam) (res *model.PageDetailResponse, err error) {
+func (s *Service) PageDetail(ctx context.Context, param *vo.PageDetailParam) (res *vo.PageDetailResponse, err error) {
 	pageId := param.PageId
 	currentPage, err := s.comicDao.GetPageInfo(ctx, pageId)
 	if nil != err {
 		xlog.Errorf("PageDetail.Step1.Error.%+v", err)
 		return nil, err
 	}
-	var nextPage *model.ComicPage
-	var comic *model.Comic
+	var nextPage *po.ComicPage
+	var comic *po.Comic
 	g := &errgroup.Group{}
 	g.GOMAXPROCS(2)
 	g.Go(func(context.Context) (err error) {
@@ -41,7 +42,7 @@ func (s *Service) PageDetail(ctx context.Context, param *model.PageDetailParam) 
 		fmt.Printf("err: %v", err)
 		return
 	}
-	res = &model.PageDetailResponse{
+	res = &vo.PageDetailResponse{
 		Page:     currentPage,
 		NextPage: nextPage,
 		Comic:    comic,

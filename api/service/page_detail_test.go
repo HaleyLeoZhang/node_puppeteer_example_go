@@ -2,12 +2,12 @@ package service
 
 import (
 	"encoding/json"
-	"node_puppeteer_example_go/api/model"
+	"node_puppeteer_example_go/api/model/vo"
 	"testing"
 )
 
 func TestService_PageDetail(t *testing.T) {
-	param := &model.PageDetailParam{
+	param := &vo.PageDetailParam{
 		PageId: ctx.Value("page_id").(int),
 	}
 	res, err := svr.PageDetail(ctx, param)
@@ -26,11 +26,11 @@ func Benchmark_PageDetail(t *testing.B) {
 	//这样这些时间不影响我们测试函数本身的性能
 
 	t.StartTimer() //重新开始时间
-	param := &model.PageDetailParam{
+	param := &vo.PageDetailParam{
 		PageId: ctx.Value("page_id").(int),
 	}
 
-	t.N=1234 //自定义执行1234次
+	t.N = 100000 //自定义执行1234次
 
 	for i := 0; i < t.N; i++ {
 		res, err := svr.PageDetail(ctx, param)

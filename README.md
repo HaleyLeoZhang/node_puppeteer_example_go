@@ -32,7 +32,7 @@ make
 
 如果修改了 `Model` 层数据结构，请重新生成 `easyjson` 
 ~~~bash
-make easyjson
+make json
 ~~~
 
 > 生成并运行应用

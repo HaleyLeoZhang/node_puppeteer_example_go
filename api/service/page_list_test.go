@@ -2,12 +2,12 @@ package service
 
 import (
 	"encoding/json"
-	"node_puppeteer_example_go/api/model"
+	"node_puppeteer_example_go/api/model/vo"
 	"testing"
 )
 
 func TestService_PageList(t *testing.T) {
-	param := &model.PageListParam{
+	param := &vo.PageListParam{
 		Channel:  ctx.Value("channel").(int),
 		SourceId: ctx.Value("source_id").(int),
 	}

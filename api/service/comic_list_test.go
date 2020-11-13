@@ -2,12 +2,12 @@ package service
 
 import (
 	"encoding/json"
-	"node_puppeteer_example_go/api/model"
+	"node_puppeteer_example_go/api/model/vo"
 	"testing"
 )
 
 func TestService_ComicList(t *testing.T) {
-	param := &model.ComicListParam{
+	param := &vo.ComicListParam{
 		Page: ctx.Value("page").(int),
 	}
 	res, err := svr.ComicList(ctx, param)

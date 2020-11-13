@@ -3,10 +3,10 @@ package service
 import (
 	"context"
 	"github.com/HaleyLeoZhang/go-component/driver/xlog"
-	"node_puppeteer_example_go/api/model"
+	"node_puppeteer_example_go/api/model/vo"
 )
 
-func (s *Service) PageList(ctx context.Context, param *model.PageListParam) (*model.PageListResponse, error) {
+func (s *Service) PageList(ctx context.Context, param *vo.PageListParam) (*vo.PageListResponse, error) {
 	channel := param.Channel
 	sourceId := param.SourceId
 
@@ -18,7 +18,7 @@ func (s *Service) PageList(ctx context.Context, param *model.PageListParam) (*mo
 		xlog.Errorf("PageList.Error.%+v", err)
 		return nil, err
 	}
-	res := &model.PageListResponse{
+	res := &vo.PageListResponse{
 		List: list,
 	}
 	return res, nil

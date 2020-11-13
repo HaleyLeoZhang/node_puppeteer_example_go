@@ -4,10 +4,10 @@ import (
 	"context"
 	"github.com/HaleyLeoZhang/go-component/driver/xlog"
 	"node_puppeteer_example_go/api/constant"
-	"node_puppeteer_example_go/api/model"
+	"node_puppeteer_example_go/api/model/vo"
 )
 
-func (s *Service) ComicList(ctx context.Context, param *model.ComicListParam) (*model.ComicListResponse, error) {
+func (s *Service) ComicList(ctx context.Context, param *vo.ComicListParam) (*vo.ComicListResponse, error) {
 	page := param.Page
 	size := 20
 	maps := make(map[string]interface{})
@@ -17,7 +17,7 @@ func (s *Service) ComicList(ctx context.Context, param *model.ComicListParam) (*
 		xlog.Errorf("ComicList.Error.%+v", err)
 		return nil, err
 	}
-	res := &model.ComicListResponse{
+	res := &vo.ComicListResponse{
 		List: list,
 	}
 	return res, nil

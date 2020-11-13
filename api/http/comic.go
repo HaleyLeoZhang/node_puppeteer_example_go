@@ -10,10 +10,10 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/golang/groupcache/singleflight"
+	"node_puppeteer_example_go/api/model/vo"
 
 	"github.com/HaleyLeoZhang/go-component/driver/xgin"
 	"github.com/HaleyLeoZhang/go-component/driver/xlog"
-	"node_puppeteer_example_go/api/model"
 )
 
 type Comic struct{}
@@ -97,7 +97,7 @@ type Comic struct{}
 func (Comic) GetList(c *gin.Context) {
 	xGin := xgin.NewGin(c)
 
-	param := &model.ComicListParam{}
+	param := &vo.ComicListParam{}
 	err := c.Bind(param)
 	if err != nil {
 		err = &xgin.BusinessError{Code: xgin.HTTP_RESPONSE_CODE_PARAM_INVALID, Message: "Param is invalid"}
@@ -108,7 +108,7 @@ func (Comic) GetList(c *gin.Context) {
 	// 幂等请求，防止击穿 说明文档 https://segmentfault.com/a/1190000018464029
 	g := &singleflight.Group{}
 	groupKey := fmt.Sprintf("comic_list_%v", param.Page)
-	var res *model.ComicListResponse
+	var res *vo.ComicListResponse
 	g.Do(groupKey, func() (interface{}, error) {
 		res, err = srv.ComicList(xGin.C, param)
 		if nil != err {
@@ -169,7 +169,7 @@ func (Comic) GetList(c *gin.Context) {
 func (Comic) GetPageList(c *gin.Context) {
 	xGin := xgin.NewGin(c)
 
-	param := &model.PageListParam{}
+	param := &vo.PageListParam{}
 	err := c.Bind(param)
 	if err != nil {
 		xlog.Errorf("router.GetPageList.Err.%v", err)
@@ -177,7 +177,7 @@ func (Comic) GetPageList(c *gin.Context) {
 		xGin.Response(err, nil)
 		return
 	}
-	var res *model.PageListResponse
+	var res *vo.PageListResponse
 	// 幂等请求，防止击穿 说明文档 https://segmentfault.com/a/1190000018464029
 	g := &singleflight.Group{}
 	groupKey := fmt.Sprintf("page_list_%v_%v", param.Channel, param.SourceId)
@@ -278,7 +278,7 @@ func (Comic) GetPageList(c *gin.Context) {
 func (Comic) GetPageDetail(c *gin.Context) {
 	xGin := xgin.NewGin(c)
 
-	param := &model.PageDetailParam{}
+	param := &vo.PageDetailParam{}
 	err := c.Bind(param)
 	if err != nil {
 		err = &xgin.BusinessError{Code: xgin.HTTP_RESPONSE_CODE_PARAM_INVALID, Message: "Param is invalid"}
@@ -286,7 +286,7 @@ func (Comic) GetPageDetail(c *gin.Context) {
 		return
 	}
 
-	var res *model.PageDetailResponse
+	var res *vo.PageDetailResponse
 	// 幂等请求，防止击穿 说明文档 https://segmentfault.com/a/1190000018464029
 	g := &singleflight.Group{}
 	groupKey := fmt.Sprintf("page_detail_%v", param.PageId)
@@ -346,7 +346,7 @@ func (Comic) GetPageDetail(c *gin.Context) {
 func (Comic) GetImageList(c *gin.Context) {
 	xGin := xgin.NewGin(c)
 
-	param := &model.ImageListParam{}
+	param := &vo.ImageListParam{}
 	err := c.Bind(param)
 	if err != nil {
 		err = &xgin.BusinessError{Code: xgin.HTTP_RESPONSE_CODE_PARAM_INVALID, Message: "Param is invalid"}
@@ -354,7 +354,7 @@ func (Comic) GetImageList(c *gin.Context) {
 		return
 	}
 
-	var res *model.ImageListResponse
+	var res *vo.ImageListResponse
 	// 幂等请求，防止击穿 说明文档 https://segmentfault.com/a/1190000018464029
 	g := &singleflight.Group{}
 	groupKey := fmt.Sprintf("image_list_%v", param.PageId)

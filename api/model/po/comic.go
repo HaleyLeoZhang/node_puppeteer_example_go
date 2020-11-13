@@ -1,4 +1,4 @@
-package model
+package po
 
 // ----------------------------------------------------------------------
 // 漫画基础信息模型
@@ -22,13 +22,4 @@ type Comic struct {
 //数据表---必需
 func (c *Comic) TableName() string {
 	return "comics"
-}
-
-// 验证器规则 https://blog.csdn.net/guyan0319/article/details/105918559/
-type ComicListParam struct {
-	Page int `form:"page" binding:"gte=1"`
-}
-
-type ComicListResponse struct {
-	List []*Comic `json:"list"`
 }

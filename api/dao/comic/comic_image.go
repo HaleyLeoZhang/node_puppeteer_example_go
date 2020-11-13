@@ -5,12 +5,12 @@ import (
 	"github.com/jinzhu/gorm"
 	"github.com/pkg/errors"
 	"node_puppeteer_example_go/api/constant"
-	"node_puppeteer_example_go/api/model"
+	"node_puppeteer_example_go/api/model/po"
 )
 
-func (d *Dao) GetImageList(ctx context.Context, pageId int) (imageList []*model.ComicImage, err error) {
-	imageList = make([]*model.ComicImage, 0)
-	imageInfo := &model.ComicImage{}
+func (d *Dao) GetImageList(ctx context.Context, pageId int) (imageList []*po.ComicImage, err error) {
+	imageList = make([]*po.ComicImage, 0)
+	imageInfo := &po.ComicImage{}
 	maps := make(map[string]interface{})
 	maps["page_id"] = pageId
 	maps["is_deleted"] = constant.TABLE_BASE_IS_DELETED_NO

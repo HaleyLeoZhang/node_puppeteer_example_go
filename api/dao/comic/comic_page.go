@@ -5,12 +5,12 @@ import (
 	"github.com/jinzhu/gorm"
 	"github.com/pkg/errors"
 	"node_puppeteer_example_go/api/constant"
-	"node_puppeteer_example_go/api/model"
+	"node_puppeteer_example_go/api/model/po"
 )
 
-func (d *Dao) GetPageList(ctx context.Context, maps map[string]interface{}) (pageList []*model.ComicPage, err error) {
-	pageList = make([]*model.ComicPage, 0)
-	pageInfo := &model.ComicPage{}
+func (d *Dao) GetPageList(ctx context.Context, maps map[string]interface{}) (pageList []*po.ComicPage, err error) {
+	pageList = make([]*po.ComicPage, 0)
+	pageInfo := &po.ComicPage{}
 	maps["is_deleted"] = constant.TABLE_BASE_IS_DELETED_NO
 
 	err = d.db.Table(pageInfo.TableName()).
@@ -29,8 +29,8 @@ func (d *Dao) GetPageList(ctx context.Context, maps map[string]interface{}) (pag
 	return
 }
 
-func (d *Dao) GetPageInfo(ctx context.Context, id int) (pageInfo *model.ComicPage, err error) {
-	pageInfo = &model.ComicPage{}
+func (d *Dao) GetPageInfo(ctx context.Context, id int) (pageInfo *po.ComicPage, err error) {
+	pageInfo = &po.ComicPage{}
 
 	maps := make(map[string]interface{})
 	maps["id"] = id
@@ -52,8 +52,8 @@ func (d *Dao) GetPageInfo(ctx context.Context, id int) (pageInfo *model.ComicPag
 	return
 }
 
-func (d *Dao) GetNextPageInfo(ctx context.Context, Channel int, SourceId int, Sequence int) (pageInfo *model.ComicPage, err error) {
-	pageInfo = &model.ComicPage{}
+func (d *Dao) GetNextPageInfo(ctx context.Context, Channel int, SourceId int, Sequence int) (pageInfo *po.ComicPage, err error) {
+	pageInfo = &po.ComicPage{}
 
 	maps := make(map[string]interface{})
 	maps["is_deleted"] = constant.TABLE_BASE_IS_DELETED_NO
