@@ -3,7 +3,6 @@ package comic
 import (
 	"context"
 	"fmt"
-	"github.com/HaleyLeoZhang/go-component/driver/db"
 	"github.com/HaleyLeoZhang/go-component/driver/xgin"
 	"github.com/jinzhu/gorm"
 	"github.com/mailru/easyjson"
@@ -12,16 +11,26 @@ import (
 	"node_puppeteer_example_go/api/model/po"
 )
 
-func (d *Dao) GetComicList(ctx context.Context, page int, size int, maps map[string]interface{}) (comicList []*po.Comic, err error) {
-	comicList = make([]*po.Comic, 0)
+func (d *Dao) GetComicList(ctx context.Context, where map[string]interface{}, attr map[string]interface{}) (res []*po.Comic, err error) {
+	res = make([]*po.Comic, 0)
 	comicInfo := &po.Comic{}
 
-	offset, size := db.GetPageInfo(page, size)
+	chain := d.db
 
-	maps["is_deleted"] = constant.TABLE_BASE_IS_DELETED_NO
+	if v, exist := attr["limit"]; exist {
+		chain = chain.Limit(v)
+	}
+	if v, exist := attr["offset"]; exist {
+		chain = chain.Offset(v)
+	}
+	if v, exist := attr["order_by"]; exist {
+		chain = chain.Order(v)
+	}
+	if v, exist := attr["select"]; exist {
+		chain = chain.Select(v)
+	}
 
-	err = d.db.Table(comicInfo.TableName()).
-		Where(maps).Offset(offset).Order("weight DESC").Limit(size).Find(&comicList).Error
+	err = chain.Table(comicInfo.TableName()).Where(where).Find(&res).Error
 
 	if err == gorm.ErrRecordNotFound {
 		err = nil

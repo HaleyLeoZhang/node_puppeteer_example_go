@@ -12,6 +12,8 @@ func Init(e *gin.Engine, srvInjection *service.Service) *gin.Engine {
 
 	//e.Use(setDefaultResponse)
 
+	// TODO 待增加 gin.C的 trace_id；记录日志时，使用trace_id
+	// TODO 接口级缓存
 	{
 		comic := &Comic{}
 		/**

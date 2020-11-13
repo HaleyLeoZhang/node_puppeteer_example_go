@@ -6,7 +6,7 @@ import (
 	"node_puppeteer_example_go/api/model/vo"
 )
 
-func (s *Service) PageList(ctx context.Context, param *vo.PageListParam) (*vo.PageListResponse, error) {
+func (s *Service) PageList(ctx context.Context, param *vo.PageListParam) (res *vo.PageListResponse, err error) {
 	channel := param.Channel
 	sourceId := param.SourceId
 
@@ -16,10 +16,10 @@ func (s *Service) PageList(ctx context.Context, param *vo.PageListParam) (*vo.Pa
 	list, err := s.comicDao.GetPageList(ctx, maps)
 	if nil != err {
 		xlog.Errorf("PageList.Error.%+v", err)
-		return nil, err
+		return
 	}
-	res := &vo.PageListResponse{
+	res = &vo.PageListResponse{
 		List: list,
 	}
-	return res, nil
+	return
 }
