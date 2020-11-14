@@ -20,6 +20,7 @@ func (s *Service) ComicList(ctx context.Context, param *vo.ComicListParam) (res 
 	whereMap["is_deleted"] = constant.TABLE_BASE_IS_DELETED_NO
 
 	attrMap := make(map[string]interface{})
+	attrMap["limit"] =  size
 	attrMap["offset"] = (page - 1) * size
 	attrMap["order_by"] = "weight DESC,id DESC" // 权重高、新创建的在前面
 
