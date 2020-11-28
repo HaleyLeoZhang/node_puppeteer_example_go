@@ -38,8 +38,7 @@ make json
 > 生成并运行应用
 
 ~~~bash
-make build
-make run
+make build && make run
 ~~~
 
 > 格式化代码
