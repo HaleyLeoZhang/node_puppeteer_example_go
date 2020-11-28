@@ -22,15 +22,15 @@ func TestMain(m *testing.M) {
 		Name:  "local—redis",
 		Proto: "tcp",
 		Addr:  "192.168.56.110:6379",
-		Auth:  "zhangli",
+		Auth:  "",
 	}
 	cfg.DB = &db.Config{
 		Name:     "local-db",
 		Type:     "mysql",
 		Port:     3306,
 		Database: "curl_avatar",
-		User:     "yth_blog",
-		Password: "http://hlzblog.top",
+		User:     "",
+		Password: "",
 	}
 	svr = New(cfg)
 	ctx = context.Background()
