@@ -4,8 +4,8 @@ import (
 	"context"
 	"github.com/jinzhu/gorm"
 	"github.com/pkg/errors"
-	"node_puppeteer_example_go/api/constant"
-	"node_puppeteer_example_go/api/model/po"
+	constant2 "node_puppeteer_example_go/common/constant"
+	"node_puppeteer_example_go/common/model/po"
 )
 
 func (d *Dao) GetImageList(ctx context.Context, pageId int) (imageList []*po.ComicImage, err error) {
@@ -13,7 +13,7 @@ func (d *Dao) GetImageList(ctx context.Context, pageId int) (imageList []*po.Com
 	imageInfo := &po.ComicImage{}
 	maps := make(map[string]interface{})
 	maps["page_id"] = pageId
-	maps["is_deleted"] = constant.TABLE_BASE_IS_DELETED_NO
+	maps["is_deleted"] = constant2.TABLE_BASE_IS_DELETED_NO
 
 	err = d.db.Table(imageInfo.TableName()). // 以此减小反射的开销
 							Where(maps).Find(&imageList).Error

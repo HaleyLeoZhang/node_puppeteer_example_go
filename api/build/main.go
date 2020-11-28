@@ -1,9 +1,7 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
-	"fmt"
 	"github.com/HaleyLeoZhang/go-component/driver/bootstrap"
 	"github.com/HaleyLeoZhang/go-component/driver/httpserver"
 	"github.com/HaleyLeoZhang/go-component/driver/xgin"
@@ -18,11 +16,6 @@ func main() {
 	if err := conf.Init(); err != nil {
 		panic(err)
 	}
-	confString, err := json.Marshal(conf.Conf)
-	if err != nil {
-		panic(err)
-	}
-	fmt.Printf("\nconf.Conf %+v\n\n", string(confString))
 
 	oneService := service.New(conf.Conf)
 	xlog.Init(conf.Conf.Log)

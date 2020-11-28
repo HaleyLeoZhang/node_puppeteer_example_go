@@ -7,8 +7,8 @@ import (
 	"github.com/jinzhu/gorm"
 	"github.com/mailru/easyjson"
 	"github.com/pkg/errors"
-	"node_puppeteer_example_go/api/constant"
-	"node_puppeteer_example_go/api/model/po"
+	constant2 "node_puppeteer_example_go/common/constant"
+	"node_puppeteer_example_go/common/model/po"
 )
 
 func (d *Dao) GetComicList(ctx context.Context, where map[string]interface{}, attr map[string]interface{}) (res []*po.Comic, err error) {
@@ -72,10 +72,10 @@ func (d *Dao) GetComicInfo(ctx context.Context, Channel int, SourceID int) (comi
 // 漫画基础信息缓存
 // --------------------------------
 func cacheKeyGetComicInfo(Channel int, SourceID int) string {
-	prefix := constant.CACHE_PREFIX_TYPE_FRONT
+	prefix := constant2.CACHE_PREFIX_TYPE_FRONT
 	namespace := fmt.Sprintf("page_detail_comic_%v_%v", Channel, SourceID)
 	version := "v1"
-	suffix := constant.CACHE_SUFFIX_TYPE_CACHED
+	suffix := constant2.CACHE_SUFFIX_TYPE_CACHED
 	cacheKey := fmt.Sprintf("%v:%v:%v:%v", prefix, namespace, version, suffix)
 	return cacheKey
 }

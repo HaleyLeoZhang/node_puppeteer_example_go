@@ -7,7 +7,7 @@ import (
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
-	po "node_puppeteer_example_go/api/model/po"
+	po "node_puppeteer_example_go/common/model/po"
 )
 
 // suppress unused package warning
@@ -18,7 +18,7 @@ var (
 	_ easyjson.Marshaler
 )
 
-func easyjson65b40f0eDecodeNodePuppeteerExampleGoApiModelVo(in *jlexer.Lexer, out *PageListResponse) {
+func easyjsonEa649aceDecodeNodePuppeteerExampleGoCommonModelVo(in *jlexer.Lexer, out *ImageListResponse) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -45,21 +45,21 @@ func easyjson65b40f0eDecodeNodePuppeteerExampleGoApiModelVo(in *jlexer.Lexer, ou
 				in.Delim('[')
 				if out.List == nil {
 					if !in.IsDelim(']') {
-						out.List = make([]*po.ComicPage, 0, 8)
+						out.List = make([]*po.ComicImage, 0, 8)
 					} else {
-						out.List = []*po.ComicPage{}
+						out.List = []*po.ComicImage{}
 					}
 				} else {
 					out.List = (out.List)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v1 *po.ComicPage
+					var v1 *po.ComicImage
 					if in.IsNull() {
 						in.Skip()
 						v1 = nil
 					} else {
 						if v1 == nil {
-							v1 = new(po.ComicPage)
+							v1 = new(po.ComicImage)
 						}
 						(*v1).UnmarshalEasyJSON(in)
 					}
@@ -78,7 +78,7 @@ func easyjson65b40f0eDecodeNodePuppeteerExampleGoApiModelVo(in *jlexer.Lexer, ou
 		in.Consumed()
 	}
 }
-func easyjson65b40f0eEncodeNodePuppeteerExampleGoApiModelVo(out *jwriter.Writer, in PageListResponse) {
+func easyjsonEa649aceEncodeNodePuppeteerExampleGoCommonModelVo(out *jwriter.Writer, in ImageListResponse) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -106,29 +106,29 @@ func easyjson65b40f0eEncodeNodePuppeteerExampleGoApiModelVo(out *jwriter.Writer,
 }
 
 // MarshalJSON supports json.Marshaler interface
-func (v PageListResponse) MarshalJSON() ([]byte, error) {
+func (v ImageListResponse) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson65b40f0eEncodeNodePuppeteerExampleGoApiModelVo(&w, v)
+	easyjsonEa649aceEncodeNodePuppeteerExampleGoCommonModelVo(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
-func (v PageListResponse) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson65b40f0eEncodeNodePuppeteerExampleGoApiModelVo(w, v)
+func (v ImageListResponse) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjsonEa649aceEncodeNodePuppeteerExampleGoCommonModelVo(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
-func (v *PageListResponse) UnmarshalJSON(data []byte) error {
+func (v *ImageListResponse) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson65b40f0eDecodeNodePuppeteerExampleGoApiModelVo(&r, v)
+	easyjsonEa649aceDecodeNodePuppeteerExampleGoCommonModelVo(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
-func (v *PageListResponse) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson65b40f0eDecodeNodePuppeteerExampleGoApiModelVo(l, v)
+func (v *ImageListResponse) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjsonEa649aceDecodeNodePuppeteerExampleGoCommonModelVo(l, v)
 }
-func easyjson65b40f0eDecodeNodePuppeteerExampleGoApiModelVo1(in *jlexer.Lexer, out *PageListParam) {
+func easyjsonEa649aceDecodeNodePuppeteerExampleGoCommonModelVo1(in *jlexer.Lexer, out *ImageListParam) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -147,10 +147,8 @@ func easyjson65b40f0eDecodeNodePuppeteerExampleGoApiModelVo1(in *jlexer.Lexer, o
 			continue
 		}
 		switch key {
-		case "Channel":
-			out.Channel = int(in.Int())
-		case "SourceId":
-			out.SourceId = int(in.Int())
+		case "PageId":
+			out.PageId = int(in.Int())
 		default:
 			in.SkipRecursive()
 		}
@@ -161,43 +159,38 @@ func easyjson65b40f0eDecodeNodePuppeteerExampleGoApiModelVo1(in *jlexer.Lexer, o
 		in.Consumed()
 	}
 }
-func easyjson65b40f0eEncodeNodePuppeteerExampleGoApiModelVo1(out *jwriter.Writer, in PageListParam) {
+func easyjsonEa649aceEncodeNodePuppeteerExampleGoCommonModelVo1(out *jwriter.Writer, in ImageListParam) {
 	out.RawByte('{')
 	first := true
 	_ = first
 	{
-		const prefix string = ",\"Channel\":"
+		const prefix string = ",\"PageId\":"
 		out.RawString(prefix[1:])
-		out.Int(int(in.Channel))
-	}
-	{
-		const prefix string = ",\"SourceId\":"
-		out.RawString(prefix)
-		out.Int(int(in.SourceId))
+		out.Int(int(in.PageId))
 	}
 	out.RawByte('}')
 }
 
 // MarshalJSON supports json.Marshaler interface
-func (v PageListParam) MarshalJSON() ([]byte, error) {
+func (v ImageListParam) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson65b40f0eEncodeNodePuppeteerExampleGoApiModelVo1(&w, v)
+	easyjsonEa649aceEncodeNodePuppeteerExampleGoCommonModelVo1(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
-func (v PageListParam) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson65b40f0eEncodeNodePuppeteerExampleGoApiModelVo1(w, v)
+func (v ImageListParam) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjsonEa649aceEncodeNodePuppeteerExampleGoCommonModelVo1(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
-func (v *PageListParam) UnmarshalJSON(data []byte) error {
+func (v *ImageListParam) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson65b40f0eDecodeNodePuppeteerExampleGoApiModelVo1(&r, v)
+	easyjsonEa649aceDecodeNodePuppeteerExampleGoCommonModelVo1(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
-func (v *PageListParam) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson65b40f0eDecodeNodePuppeteerExampleGoApiModelVo1(l, v)
+func (v *ImageListParam) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjsonEa649aceDecodeNodePuppeteerExampleGoCommonModelVo1(l, v)
 }

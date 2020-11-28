@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/golang/groupcache/singleflight"
-	"node_puppeteer_example_go/api/model/vo"
+	"node_puppeteer_example_go/common/model/vo"
 
 	"github.com/HaleyLeoZhang/go-component/driver/xgin"
 	"github.com/HaleyLeoZhang/go-component/driver/xlog"

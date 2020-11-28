@@ -2,7 +2,7 @@ package service
 
 import (
 	"encoding/json"
-	"node_puppeteer_example_go/api/model/vo"
+	"node_puppeteer_example_go/common/model/vo"
 	"testing"
 )
 

@@ -6,7 +6,7 @@ import (
 	"github.com/HaleyLeoZhang/go-component/driver/xredis"
 	"github.com/gomodule/redigo/redis"
 	"github.com/jinzhu/gorm"
-	"node_puppeteer_example_go/api/conf"
+	"node_puppeteer_example_go/common/conf"
 )
 
 type Dao struct {

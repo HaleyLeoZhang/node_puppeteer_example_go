@@ -7,7 +7,7 @@ import (
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
-	po "node_puppeteer_example_go/api/model/po"
+	po "node_puppeteer_example_go/common/model/po"
 )
 
 // suppress unused package warning
@@ -18,7 +18,7 @@ var (
 	_ easyjson.Marshaler
 )
 
-func easyjsonB7d71091DecodeNodePuppeteerExampleGoApiModelVo(in *jlexer.Lexer, out *PageDetailResponse) {
+func easyjsonB7d71091DecodeNodePuppeteerExampleGoCommonModelVo(in *jlexer.Lexer, out *PageDetailResponse) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -77,7 +77,7 @@ func easyjsonB7d71091DecodeNodePuppeteerExampleGoApiModelVo(in *jlexer.Lexer, ou
 		in.Consumed()
 	}
 }
-func easyjsonB7d71091EncodeNodePuppeteerExampleGoApiModelVo(out *jwriter.Writer, in PageDetailResponse) {
+func easyjsonB7d71091EncodeNodePuppeteerExampleGoCommonModelVo(out *jwriter.Writer, in PageDetailResponse) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -114,27 +114,27 @@ func easyjsonB7d71091EncodeNodePuppeteerExampleGoApiModelVo(out *jwriter.Writer,
 // MarshalJSON supports json.Marshaler interface
 func (v PageDetailResponse) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjsonB7d71091EncodeNodePuppeteerExampleGoApiModelVo(&w, v)
+	easyjsonB7d71091EncodeNodePuppeteerExampleGoCommonModelVo(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v PageDetailResponse) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjsonB7d71091EncodeNodePuppeteerExampleGoApiModelVo(w, v)
+	easyjsonB7d71091EncodeNodePuppeteerExampleGoCommonModelVo(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *PageDetailResponse) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjsonB7d71091DecodeNodePuppeteerExampleGoApiModelVo(&r, v)
+	easyjsonB7d71091DecodeNodePuppeteerExampleGoCommonModelVo(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *PageDetailResponse) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjsonB7d71091DecodeNodePuppeteerExampleGoApiModelVo(l, v)
+	easyjsonB7d71091DecodeNodePuppeteerExampleGoCommonModelVo(l, v)
 }
-func easyjsonB7d71091DecodeNodePuppeteerExampleGoApiModelVo1(in *jlexer.Lexer, out *PageDetailParam) {
+func easyjsonB7d71091DecodeNodePuppeteerExampleGoCommonModelVo1(in *jlexer.Lexer, out *PageDetailParam) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -165,7 +165,7 @@ func easyjsonB7d71091DecodeNodePuppeteerExampleGoApiModelVo1(in *jlexer.Lexer, o
 		in.Consumed()
 	}
 }
-func easyjsonB7d71091EncodeNodePuppeteerExampleGoApiModelVo1(out *jwriter.Writer, in PageDetailParam) {
+func easyjsonB7d71091EncodeNodePuppeteerExampleGoCommonModelVo1(out *jwriter.Writer, in PageDetailParam) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -180,23 +180,23 @@ func easyjsonB7d71091EncodeNodePuppeteerExampleGoApiModelVo1(out *jwriter.Writer
 // MarshalJSON supports json.Marshaler interface
 func (v PageDetailParam) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjsonB7d71091EncodeNodePuppeteerExampleGoApiModelVo1(&w, v)
+	easyjsonB7d71091EncodeNodePuppeteerExampleGoCommonModelVo1(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v PageDetailParam) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjsonB7d71091EncodeNodePuppeteerExampleGoApiModelVo1(w, v)
+	easyjsonB7d71091EncodeNodePuppeteerExampleGoCommonModelVo1(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *PageDetailParam) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjsonB7d71091DecodeNodePuppeteerExampleGoApiModelVo1(&r, v)
+	easyjsonB7d71091DecodeNodePuppeteerExampleGoCommonModelVo1(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *PageDetailParam) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjsonB7d71091DecodeNodePuppeteerExampleGoApiModelVo1(l, v)
+	easyjsonB7d71091DecodeNodePuppeteerExampleGoCommonModelVo1(l, v)
 }

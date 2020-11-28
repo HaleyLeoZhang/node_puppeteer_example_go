@@ -7,7 +7,7 @@ import (
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
-	po "node_puppeteer_example_go/api/model/po"
+	po "node_puppeteer_example_go/common/model/po"
 )
 
 // suppress unused package warning
@@ -18,7 +18,7 @@ var (
 	_ easyjson.Marshaler
 )
 
-func easyjson4bdbca46DecodeNodePuppeteerExampleGoApiModelVo(in *jlexer.Lexer, out *ComicListResponse) {
+func easyjson4bdbca46DecodeNodePuppeteerExampleGoCommonModelVo(in *jlexer.Lexer, out *ComicListResponse) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -78,7 +78,7 @@ func easyjson4bdbca46DecodeNodePuppeteerExampleGoApiModelVo(in *jlexer.Lexer, ou
 		in.Consumed()
 	}
 }
-func easyjson4bdbca46EncodeNodePuppeteerExampleGoApiModelVo(out *jwriter.Writer, in ComicListResponse) {
+func easyjson4bdbca46EncodeNodePuppeteerExampleGoCommonModelVo(out *jwriter.Writer, in ComicListResponse) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -108,27 +108,27 @@ func easyjson4bdbca46EncodeNodePuppeteerExampleGoApiModelVo(out *jwriter.Writer,
 // MarshalJSON supports json.Marshaler interface
 func (v ComicListResponse) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson4bdbca46EncodeNodePuppeteerExampleGoApiModelVo(&w, v)
+	easyjson4bdbca46EncodeNodePuppeteerExampleGoCommonModelVo(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v ComicListResponse) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson4bdbca46EncodeNodePuppeteerExampleGoApiModelVo(w, v)
+	easyjson4bdbca46EncodeNodePuppeteerExampleGoCommonModelVo(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *ComicListResponse) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson4bdbca46DecodeNodePuppeteerExampleGoApiModelVo(&r, v)
+	easyjson4bdbca46DecodeNodePuppeteerExampleGoCommonModelVo(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *ComicListResponse) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson4bdbca46DecodeNodePuppeteerExampleGoApiModelVo(l, v)
+	easyjson4bdbca46DecodeNodePuppeteerExampleGoCommonModelVo(l, v)
 }
-func easyjson4bdbca46DecodeNodePuppeteerExampleGoApiModelVo1(in *jlexer.Lexer, out *ComicListParam) {
+func easyjson4bdbca46DecodeNodePuppeteerExampleGoCommonModelVo1(in *jlexer.Lexer, out *ComicListParam) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -159,7 +159,7 @@ func easyjson4bdbca46DecodeNodePuppeteerExampleGoApiModelVo1(in *jlexer.Lexer, o
 		in.Consumed()
 	}
 }
-func easyjson4bdbca46EncodeNodePuppeteerExampleGoApiModelVo1(out *jwriter.Writer, in ComicListParam) {
+func easyjson4bdbca46EncodeNodePuppeteerExampleGoCommonModelVo1(out *jwriter.Writer, in ComicListParam) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -174,23 +174,23 @@ func easyjson4bdbca46EncodeNodePuppeteerExampleGoApiModelVo1(out *jwriter.Writer
 // MarshalJSON supports json.Marshaler interface
 func (v ComicListParam) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson4bdbca46EncodeNodePuppeteerExampleGoApiModelVo1(&w, v)
+	easyjson4bdbca46EncodeNodePuppeteerExampleGoCommonModelVo1(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v ComicListParam) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson4bdbca46EncodeNodePuppeteerExampleGoApiModelVo1(w, v)
+	easyjson4bdbca46EncodeNodePuppeteerExampleGoCommonModelVo1(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *ComicListParam) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson4bdbca46DecodeNodePuppeteerExampleGoApiModelVo1(&r, v)
+	easyjson4bdbca46DecodeNodePuppeteerExampleGoCommonModelVo1(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *ComicListParam) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson4bdbca46DecodeNodePuppeteerExampleGoApiModelVo1(l, v)
+	easyjson4bdbca46DecodeNodePuppeteerExampleGoCommonModelVo1(l, v)
 }

@@ -32,38 +32,38 @@ clean:
 	@clear
 	@echo "Remove Old Apps ... "
 	@rm -rf ./app_api
-	@#rm -rf ./app_job # 2020-11-14 暂无计划
+	@#rm -rf ./app_job # 2020-11-29 计划中
 	@#rm -rf ./app_admin # 2020-11-14 暂无计划
 	@go clean -i .
 	@echo "Remove Old Apps --- Done"
 
 json:
 	@clear
-	@echo "Creating easyjson file for api/model/*"
-	@rm -rf api/model/*/*easyjson*.go
-	@easyjson -all api/model/*/*.go # 格式化 json ，需要 https://github.com/mailru/easyjson
-	@echo "Created api/model/* easyjson file Success"
+	@echo "Creating easyjson file for common/model/*"
+	@rm -rf common/model/*/*easyjson*.go
+	@easyjson -all common/model/*/*.go # 格式化 json ，需要 https://github.com/mailru/easyjson
+	@echo "Created common/model/* easyjson file Success"
 
 jsonbo:
 	@clear
-	@echo "Creating easyjson file for api/model/bo"
-	@rm -rf api/model/bo/*easyjson*.go
-	@easyjson -all api/model/bo/*.go # 格式化 json ，需要 https://github.com/mailru/easyjson
-	@echo "Created api/model/bo easyjson file Success"
+	@echo "Creating easyjson file for common/model/bo"
+	@rm -rf common/model/bo/*easyjson*.go
+	@easyjson -all common/model/bo/*.go # 格式化 json ，需要 https://github.com/mailru/easyjson
+	@echo "Created common/model/bo easyjson file Success"
 
 jsonp:
 	@clear
-	@echo "Creating easyjson file for api/model/po"
-	@rm -rf api/model/po/*easyjson*.go
-	@easyjson -all api/model/po/*.go # 格式化 json ，需要 https://github.com/mailru/easyjson
-	@echo "Created api/model/po easyjson file Success"
+	@echo "Creating easyjson file for common/model/po"
+	@rm -rf common/model/po/*easyjson*.go
+	@easyjson -all common/model/po/*.go # 格式化 json ，需要 https://github.com/mailru/easyjson
+	@echo "Created common/model/po easyjson file Success"
 
 jsonvo:
 	@clear
-	@echo "Creating easyjson file for api/model/vo"
-	@rm -rf api/model/vo/*easyjson*.go
-	@easyjson -all api/model/vo/*.go # 格式化 json ，需要 https://github.com/mailru/easyjson
-	@echo "Created api/model/vo easyjson file Success"
+	@echo "Creating easyjson file for common/model/vo"
+	@rm -rf common/model/vo/*easyjson*.go
+	@easyjson -all common/model/vo/*.go # 格式化 json ，需要 https://github.com/mailru/easyjson
+	@echo "Created common/model/vo easyjson file Success"
 
 test:
 	@clear
