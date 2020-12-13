@@ -26,7 +26,6 @@ func easyjson220accf5DecodeNodePuppeteerExampleGoCommonModelPo(in *jlexer.Lexer,
 		in.Skip()
 		return
 	}
-	out.Model = new(Model)
 	in.Delim('{')
 	for !in.IsDelim('}') {
 		key := in.UnsafeFieldName(false)

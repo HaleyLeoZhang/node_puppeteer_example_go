@@ -8,7 +8,7 @@ package po
 // ----------------------------------------------------------------------
 
 type Comic struct {
-	*Model
+	Model
 	Channel     int    `json:"channel"`
 	SourceID    int    `json:"source_id"`
 	Name        string `json:"name"`

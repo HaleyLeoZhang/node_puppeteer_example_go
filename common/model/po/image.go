@@ -8,7 +8,7 @@ package po
 // ----------------------------------------------------------------------
 
 type ComicImage struct {
-	*Model
+	Model
 	PageID   int    `json:"page_id"`
 	Sequence int    `json:"sequence"`
 	Src      string `json:"src"`
