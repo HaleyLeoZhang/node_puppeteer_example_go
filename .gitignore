@@ -1,4 +1,4 @@
-api/build/app.yaml
+**/app.yaml
 **/.idea
 **/.DS_Store
 app_api
