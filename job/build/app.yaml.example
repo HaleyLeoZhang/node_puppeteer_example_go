@@ -21,8 +21,8 @@ db:
   database: curl_avatar
   user: root
   password:
-  maxIdleConns: 50
-  maxOpenConns: 30
+  maxIdleConns: 5
+  maxOpenConns: 50
   maxLeftTime: 30s
 
 redis:
