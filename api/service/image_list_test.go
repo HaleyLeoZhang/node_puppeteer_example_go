@@ -2,13 +2,13 @@ package service
 
 import (
 	"encoding/json"
-	"node_puppeteer_example_go/common/model/vo"
+	"node_puppeteer_example_go/api/model"
 	"testing"
 )
 
 func TestService_ImageList(t *testing.T) {
 
-	param := &vo.ImageListParam{
+	param := &model.ImageListParam{
 		PageId: ctx.Value("page_id").(int),
 	}
 	res, err := svr.ImageList(ctx, param)

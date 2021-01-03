@@ -1,5 +1,7 @@
 package po
 
+import "time"
+
 // ----------------------------------------------------------------------
 // 基础模型
 // ----------------------------------------------------------------------
@@ -8,8 +10,8 @@ package po
 // ----------------------------------------------------------------------
 
 type Model struct {
-	ID int `gorm:"primary_key" json:"id"`
-	//IsDeleted string `json:"is_deleted"` // 暂时用不上
-	//UpdatedAt string `json:"updated_at"` // 暂时用不上
-	//CreatedAt string `json:"created_at"` // 暂时用不上
+	Id        int       `gorm:"primary_key" json:"id"`
+	Status    uint8     `json:"status"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }

@@ -6,13 +6,13 @@ import (
 	"testing"
 )
 
-func TestService_ComicList(t *testing.T) {
-	param := &model.ComicListParam{
-		Page: ctx.Value("page").(int),
+func TestService_PageList(t *testing.T) {
+	param := &model.ChapterListParam{
+		ComicId: ctx.Value("comic_id").(int),
 	}
-	res, err := svr.ComicList(ctx, param)
+	res, err := svr.ChapterList(ctx, param)
 	if nil != err {
-		t.Fatalf("Err: %+v", err)
+		t.Fatalf("Err: %v", err)
 		return
 	}
 	raw, _ := json.Marshal(res)

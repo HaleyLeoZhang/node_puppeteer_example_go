@@ -1,19 +1,25 @@
 package service
 
 import (
-	"node_puppeteer_example_go/common/conf"
-	"node_puppeteer_example_go/common/dao/comic"
-	//"node_puppeteer_example_go/api/dao/cache"
 	"github.com/HaleyLeoZhang/go-component/driver/xlog"
+	"node_puppeteer_example_go/common/conf"
+	"node_puppeteer_example_go/common/dao/cache"
+	"node_puppeteer_example_go/common/dao/curl_avatar"
 )
 
 type Service struct {
-	ComicDao *comic.Dao
+	CurlAvatarDao *curl_avatar.Dao
+	CacheDao      *cache.Dao
 }
 
 func New(cfg *conf.Config) *Service {
 	s := &Service{}
-	s.ComicDao = comic.New(cfg)
+	if cfg.Redis != nil {
+		s.CacheDao = cache.New(cfg.Redis)
+	}
+	if cfg.DB != nil {
+		s.CurlAvatarDao = curl_avatar.New(cfg.DB)
+	}
 	return s
 }
 
@@ -23,6 +29,11 @@ func (s *Service) Close() {
 	// - 暂无
 	// 各种数据库
 	// - 平滑关闭，建议数据库相关的关闭放到最后
-	s.ComicDao.Close()
-	xlog.Info("Close.commonService.comicDao.Done")
+	if s.CacheDao != nil {
+		s.CacheDao.Close()
+	}
+	if s.CurlAvatarDao != nil {
+		s.CurlAvatarDao.Close()
+	}
+	xlog.Info("Close.commonService.Done")
 }

@@ -9,17 +9,16 @@ package po
 
 type Comic struct {
 	Model
-	Channel     int    `json:"channel"`
-	SourceID    int    `json:"source_id"`
-	Name        string `json:"name"`
-	Pic         string `json:"pic"`
-	Intro       string `json:"intro"`
-	MaxSequence int    `json:"max_sequence"`
-	Weight      int    `json:"weight"`
-	Tag         int    `json:"tag"`
+	RelatedId int    `json:"related_id"`
+	Name      string `json:"name"`
+	Pic       string `json:"pic"`
+	Intro     string `json:"intro"`
+	Weight    int    `json:"weight"`
+	Tag       int    `json:"tag"`
+	Method    int    `json:"method"`
 }
 
 //数据表---必需
 func (c *Comic) TableName() string {
-	return "comics"
+	return "comic"
 }
