@@ -151,8 +151,6 @@ func (Comic) GetChapterList(c *gin.Context) {
  * @apiSuccess {object} data    数据
  * @apiSuccess {array}  data.comic  当前漫画信息
  * @apiSuccess {int}    data.comic.id  漫画ID
- * @apiSuccess {string} data.comic.name  漫画名
- * @apiSuccess {string} data.comic.intro  漫画简介
  * @apiSuccess {array}  data.next_chapter  下一章节信息
  * @apiSuccess {int}    data.next_chapter.id  章节ID
  * @apiSuccess {string} data.next_chapter.name  章节名
@@ -179,9 +177,7 @@ func (Comic) GetChapterList(c *gin.Context) {
  *             "name": "第2话 族炼日"
  *         },
  *         "comic": {
- *             "id": 1,
- *             "name": "百炼成神",
- *             "intro": "漫画简介：现在身为卑微家奴的罗征，本身家中大少爷，因家族败落，妹妹被强大势力囚禁，无奈只得听命于人。可是天无绝人之路，父亲留给他的古书中竟然暗藏炼器神法，可将人炼制成器！而隐藏在这背后的神秘力量到底是什么？这是一场与命运的较量。"
+ *             "id": 1
  *         }
  *     }
  * }

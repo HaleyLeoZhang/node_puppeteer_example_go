@@ -36,7 +36,7 @@ func (s *Service) ChapterDetail(ctx context.Context, param *model.ChapterDetailP
 	eg.GOMAXPROCS(2)
 
 	supplierId := chapter.RelatedId
-	chapterIdForComic := chapterId // 防止并发读取变量
+	supplierIdForComic := chapter.RelatedId // 防止并发读取变量
 
 	eg.Go(func(context.Context) (errNil error) {
 		errNil = nil // 一般并发业务不使用这个err返回
@@ -58,7 +58,16 @@ func (s *Service) ChapterDetail(ctx context.Context, param *model.ChapterDetailP
 	eg.Go(func(context.Context) (errNil error) {
 		errNil = nil // 一般并发业务不使用这个err返回
 
-		comic, errBusiness := s.commonService.CurlAvatarDao.ComicGetOne(ctx, chapterIdForComic)
+		supplier, errBusiness := s.commonService.CurlAvatarDao.SupplierGetOne(ctx, supplierIdForComic)
+		if nil != errBusiness {
+			xlog.Errorf("ChapterDetail.Error(%+v)", err)
+			return
+		}
+		if supplier == nil {
+			return
+		}
+		comicId := supplier.RelatedId
+		comic, errBusiness := s.commonService.CurlAvatarDao.ComicGetOne(ctx, comicId)
 		if nil != errBusiness {
 			xlog.Errorf("ChapterDetail.Error(%+v)", err)
 			return
@@ -68,7 +77,6 @@ func (s *Service) ChapterDetail(ctx context.Context, param *model.ChapterDetailP
 		}
 		res.Comic.Id = comic.Id
 		res.Comic.Name = comic.Name
-		res.Comic.Intro = comic.Intro
 		return
 	})
 	_ = eg.Wait()

@@ -40,8 +40,6 @@ func easyjson3d5e63e5DecodeNodePuppeteerExampleGoApiModel(in *jlexer.Lexer, out 
 			out.Id = int(in.Int())
 		case "name":
 			out.Name = string(in.String())
-		case "intro":
-			out.Intro = string(in.String())
 		default:
 			in.SkipRecursive()
 		}
@@ -65,11 +63,6 @@ func easyjson3d5e63e5EncodeNodePuppeteerExampleGoApiModel(out *jwriter.Writer, i
 		const prefix string = ",\"name\":"
 		out.RawString(prefix)
 		out.String(string(in.Name))
-	}
-	{
-		const prefix string = ",\"intro\":"
-		out.RawString(prefix)
-		out.String(string(in.Intro))
 	}
 	out.RawByte('}')
 }

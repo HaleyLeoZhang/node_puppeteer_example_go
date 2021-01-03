@@ -19,5 +19,4 @@ type ChapterDetailResponseChapter struct {
 type ChapterDetailResponseComic struct {
 	Id    int    `json:"id"`
 	Name  string `json:"name"`
-	Intro string `json:"intro"`
 }
