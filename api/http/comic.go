@@ -9,7 +9,6 @@ package http
 import (
 	"fmt"
 	"github.com/HaleyLeoZhang/go-component/driver/xgin"
-	"github.com/HaleyLeoZhang/go-component/driver/xlog"
 	"github.com/gin-gonic/gin"
 	"github.com/golang/groupcache/singleflight"
 	"node_puppeteer_example_go/api/model"
@@ -222,30 +221,21 @@ func (Comic) GetChapterDetail(c *gin.Context) {
  * @apiSuccess {string} message 释义---对应错误码
  * @apiSuccess {object} data    数据
  * @apiSuccess {array}  data.list  章节对应图片列表
- * @apiSuccess {int}    data.list.id  图片ID
- * @apiSuccess {int}    data.list.page_id  章节ID
- * @apiSuccess {int}    data.list.sequence 图片展示序号
- * @apiSuccess {string} data.list.src 图片地址
- * @apiSuccess {int}    data.list.progress 下载状态---枚举值:0=>待下载,1=>下载中,2下载成功
- * @apiSuccess {string} data.list.updated_at  更新时间
- * @apiSuccess {string} data.list.created_at  创建时间
+ * @apiSuccess {int}    data.list.sequence  图片序号
+ * @apiSuccess {string} data.list.src_origin 第三方图片地址
+ * @apiSuccess {string} data.list.src_own 自维护图片地址
  *
  * @apiVersion 1.0.0
  * @apiSuccessExample Success-Response:
- * HTTP/1.1 200 OK
  * {
  *     "code": 200,
- *     "message": "success",
+ *     "message": "",
  *     "data": {
  *         "list": [
  *             {
- *                 "id": "1",
- *                 "page_id": "1",
- *                 "sequence": "1",
- *                 "src": "https://res.nbhbzl.com/images/comic/103/205259/1526284455iSc0TXw2NXnFcpd8.jpg",
- *                 "progress": "0", //
- *                 "updated_at": "2019-08-27 14:22:29",
- *                 "created_at": "2019-08-27 14:22:29"
+ *                 "sequence": 1,
+ *                 "src_origin": "https://res.xiaoqinre.com/images/comic/638/1274640/15857202282wMInh8oDBKxjITV.jpg",
+ *                 "src_own": ""
  *             }
  *         ]
  *     }
@@ -262,16 +252,12 @@ func (Comic) GetImageList(c *gin.Context) {
 		return
 	}
 
-	var res *model.ImageListResponse
 	// 幂等请求，防止击穿 说明文档 https://segmentfault.com/a/1190000018464029
 	g := &singleflight.Group{}
-	groupKey := fmt.Sprintf("image_list_%v", param.PageId)
-	g.Do(groupKey, func() (interface{}, error) {
-		res, err = srv.ImageList(xGin.C, param)
-		if nil != err {
-			xlog.Errorf("router.GetList.Err.%+v", err)
-		}
-		return res, err
+	groupKey := fmt.Sprintf("image_list_%v", param.ChapterId)
+	res, err := g.Do(groupKey, func() (data interface{}, errBusiness error) {
+		data, errBusiness = srv.ImageList(xGin.C, param)
+		return
 	})
 	xGin.Response(err, res)
 }

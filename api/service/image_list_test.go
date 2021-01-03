@@ -9,13 +9,13 @@ import (
 func TestService_ImageList(t *testing.T) {
 
 	param := &model.ImageListParam{
-		PageId: ctx.Value("page_id").(int),
+		ChapterId: ctx.Value("chapter_id").(int),
 	}
 	res, err := svr.ImageList(ctx, param)
 	if nil != err {
-		t.Fatalf("Err: %v", err)
-	} else {
-		raw, _ := json.Marshal(res)
-		t.Logf("res %+v param %v", string(raw), param)
+		t.Fatalf("Err: %+v", err)
+		return
 	}
+	raw, _ := json.Marshal(res)
+	t.Logf("res %+v param %v", string(raw), param)
 }

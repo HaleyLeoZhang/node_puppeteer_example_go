@@ -37,33 +37,25 @@ clean:
 	@go clean -i .
 	@echo "Remove Old Apps --- Done"
 
+
+json:
+	@make jsoncommon
+	@make jsonapi
+	@clear
+	@echo "Creating all easyjson file success"
+
 jsonclean:
 	@rm -rf common/model/*/*easyjson*.go
 	@rm -rf api/model/*easyjson*.go
 
-json:
+jsoncommon:
 	@clear
-	@echo "Creating all easyjson file"
+	@echo "Creating common easyjson file"
 	@rm -rf common/model/*/*easyjson*.go
 	@easyjson -all common/model/*/*.go # 格式化 json ，需要 https://github.com/mailru/easyjson
 	@echo "Created common/model/* easyjson file Success"
-	@make jsonvo
 
-jsonbo:
-	@clear
-	@echo "Creating easyjson file for common/model/bo"
-	@rm -rf common/model/bo/*easyjson*.go
-	@easyjson -all common/model/bo/*.go # 格式化 json ，需要 https://github.com/mailru/easyjson
-	@echo "Created common/model/bo easyjson file Success"
-
-jsonpo:
-	@clear
-	@echo "Creating easyjson file for common/model/po"
-	@rm -rf common/model/po/*easyjson*.go
-	@easyjson -all common/model/po/*.go # 格式化 json ，需要 https://github.com/mailru/easyjson
-	@echo "Created common/model/po easyjson file Success"
-
-jsonvo:
+jsonapi:
 	@clear
 	@echo "Creating easyjson file for api/model/"
 	@rm -rf api/model/*easyjson*.go

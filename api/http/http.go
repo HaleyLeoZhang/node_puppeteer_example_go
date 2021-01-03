@@ -21,7 +21,7 @@ func Init(e *gin.Engine, srvInjection *service.Service) *gin.Engine {
 		routComic.GET("comic/list", comic.GetList)
 		routComic.GET("chapter/list", comic.GetChapterList)
 		routComic.GET("chapter/detail", comic.GetChapterDetail)
-		//routComic.GET("image/list", comic.GetImageList)
+		routComic.GET("image/list", comic.GetImageList)
 	}
 
 	return e
