@@ -59,12 +59,12 @@ func (d *Dao) SupplierChapterGetOne(ctx context.Context, id int) (res *po.Suppli
 	return
 }
 
-func (d *Dao) SupplierChapterGetNextOne(ctx context.Context, id int, supplierId int) (res *po.SupplierChapter, err error) {
+func (d *Dao) SupplierChapterGetNextOne(ctx context.Context, sequence int, supplierId int) (res *po.SupplierChapter, err error) {
 	res = &po.SupplierChapter{}
 	err = nil
 
 	chain := d.db
-	err = chain.Table(res.TableName()).Where("id > ? AND related_id = ? AND status = ? ", id, supplierId, constant.BASE_TABLE_ONLINE).
+	err = chain.Table(res.TableName()).Where("sequence > ? AND related_id = ? AND status = ? ", sequence, supplierId, constant.BASE_TABLE_ONLINE).
 		Order("sequence asc").First(&res).Error
 	if gorm.IsRecordNotFoundError(err) {
 		res = nil

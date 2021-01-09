@@ -37,11 +37,12 @@ func (s *Service) ChapterDetail(ctx context.Context, param *model.ChapterDetailP
 
 	supplierId := chapter.RelatedId
 	supplierIdForComic := chapter.RelatedId // 防止并发读取变量
+	currentSequence := chapter.Sequence
 
 	eg.Go(func(context.Context) (errNil error) {
 		errNil = nil // 一般并发业务不使用这个err返回
 
-		nextChapter, errBusiness := s.commonService.CurlAvatarDao.SupplierChapterGetNextOne(ctx, chapterId, supplierId)
+		nextChapter, errBusiness := s.commonService.CurlAvatarDao.SupplierChapterGetNextOne(ctx, currentSequence, supplierId)
 		if nil != errBusiness {
 			xlog.Errorf("ChapterDetail.Error(%+v)", err)
 			return

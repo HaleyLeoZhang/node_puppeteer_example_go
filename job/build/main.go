@@ -20,7 +20,7 @@ func main() {
 	app := bootstrap.New()
 	app.Start(func() { // 此部分代码，请勿阻塞进程
 		// 通知错误
-		//
+		// TODO 功能规划中 2021-1-9 20:12:55
 		return
 	}).Stop(func() {
 		oneService.Close()
