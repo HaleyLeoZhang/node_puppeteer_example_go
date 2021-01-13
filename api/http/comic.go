@@ -205,9 +205,9 @@ func (Comic) GetChapterDetail(c *gin.Context) {
 }
 
 /**
- * @api {get} /api/curl_avatar/image_list 漫画章节对应图片列表
+ * @api {get} /api/image/list 漫画章节对应图片列表
  * @apiName image_list
- * @apiGroup Comic
+ * @apiGroup Chapter
  *
  * @apiParam {int} page_id 章节ID
  *
