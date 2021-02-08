@@ -141,7 +141,7 @@ func (Comic) GetChapterList(c *gin.Context) {
  * @apiName detail
  * @apiGroup Chapter
  *
- * @apiParam {int} id 漫画章节ID
+ * @apiParam {int} id 章节ID
  *
  * @apiDescription 获取漫画章节详情
  *
