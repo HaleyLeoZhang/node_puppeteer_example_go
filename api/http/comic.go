@@ -88,8 +88,7 @@ func (Comic) GetList(c *gin.Context) {
  * @apiName list
  * @apiGroup Chapter
  *
- * @apiParam {int} channel 漫画渠道ID
- * @apiParam {int} source_id 对应渠道中的资源ID
+ * @apiParam {int} comic_id 漫画ID
  *
  * @apiDescription  获取漫画章节列表
  *
@@ -142,7 +141,7 @@ func (Comic) GetChapterList(c *gin.Context) {
  * @apiName detail
  * @apiGroup Chapter
  *
- * @apiParam {int} page_id 漫画章节列表接口中list对应的id
+ * @apiParam {int} id 漫画章节ID
  *
  * @apiDescription 获取漫画章节详情
  *
@@ -209,7 +208,7 @@ func (Comic) GetChapterDetail(c *gin.Context) {
  * @apiName image_list
  * @apiGroup Chapter
  *
- * @apiParam {int} page_id 章节ID
+ * @apiParam {int} chapter_id 章节ID
  *
  * @apiDescription  获取漫画章节对应图片列表
  *
