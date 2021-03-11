@@ -5,7 +5,6 @@ import (
 	"github.com/HaleyLeoZhang/go-component/driver/xgin"
 	"github.com/HaleyLeoZhang/go-component/driver/xlog"
 	"github.com/HaleyLeoZhang/go-component/errgroup"
-	"github.com/pkg/errors"
 	"node_puppeteer_example_go/api/model"
 )
 
@@ -25,7 +24,6 @@ func (s *Service) ChapterDetail(ctx context.Context, param *model.ChapterDetailP
 	}
 	if chapter == nil {
 		err = &xgin.BusinessError{Code: xgin.HTTP_RESPONSE_CODE_SOURCE_NOT_FOUND, Message: "chapter is not exists"}
-		err = errors.WithStack(err)
 		return
 	}
 	res.Chapter.Id = chapter.Id
@@ -44,7 +42,7 @@ func (s *Service) ChapterDetail(ctx context.Context, param *model.ChapterDetailP
 
 		nextChapter, errBusiness := s.commonService.CurlAvatarDao.SupplierChapterGetNextOne(ctx, currentSequence, supplierId)
 		if nil != errBusiness {
-			xlog.Errorf("ChapterDetail.Error(%+v)", err)
+			xlog.Errorf("ChapterDetail.Error(%+v)", errBusiness)
 			return
 		}
 		if nextChapter == nil {
@@ -61,7 +59,7 @@ func (s *Service) ChapterDetail(ctx context.Context, param *model.ChapterDetailP
 
 		supplier, errBusiness := s.commonService.CurlAvatarDao.SupplierGetOne(ctx, supplierIdForComic)
 		if nil != errBusiness {
-			xlog.Errorf("ChapterDetail.Error(%+v)", err)
+			xlog.Errorf("ChapterDetail.Error(%+v)", errBusiness)
 			return
 		}
 		if supplier == nil {
