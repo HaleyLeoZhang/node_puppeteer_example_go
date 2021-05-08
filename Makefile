@@ -31,7 +31,7 @@ docker:
 	@docker-compose up -d # 启动 docker-compile 编排 
 
 docker_network:
-	@docker network create --subnet=172.38.0.0/24 network_node_go # 创建 docker 网卡
+	@docker network create --subnet=172.38.0.0/24  network_puppeteer_go # 创建 docker 网卡
 
 
 ini:
