@@ -1,6 +1,6 @@
 module node_puppeteer_example_go
 
-go 1.14
+go 1.15
 
 require (
 	github.com/HaleyLeoZhang/go-component v1.5.2 
