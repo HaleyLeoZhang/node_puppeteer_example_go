@@ -4,7 +4,7 @@ httpServer:
   name: node_puppeteer_example_go_job
   ip: 0.0.0.0
   port: 2333
-  readTimeout: 1s
+  pprof: false
   writeTimeout: 1s
   maxHeaderBytes: 1048576
 

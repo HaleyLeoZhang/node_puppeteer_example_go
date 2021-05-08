@@ -5,6 +5,7 @@ import (
 	"flag"
 	"github.com/HaleyLeoZhang/go-component/driver/db"
 	"github.com/HaleyLeoZhang/go-component/driver/xredis"
+	"github.com/HaleyLeoZhang/go-component/errgroup"
 	"node_puppeteer_example_go/common/conf"
 	"os"
 	"testing"
@@ -35,4 +36,13 @@ func TestMain(m *testing.M) {
 	svr = New(cfg)
 	ctx = context.Background()
 	os.Exit(m.Run())
+}
+
+func TestService_sdasd(t *testing.T){
+	//
+	c := make(chan int , 2)
+	eg := errgroup.Group{}
+	eg.Go(func(ctx context.Context) error {
+		c <- 1
+	})
 }
