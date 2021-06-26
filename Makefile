@@ -27,8 +27,8 @@ cr:
 docker:
 	@mkdir -p /tmp/comic_api
 	@make -is docker_network
-	@docker-compose down # 删除老的镜像
-	@docker-compose up -d # 启动 docker-compile 编排 
+	@docker-compose -p puppeteer-go down # 删除老的镜像
+	@docker-compose -p puppeteer-go up -d # 启动 docker-compile 编排
 
 docker_network:
 	@docker network create --subnet=172.38.0.0/24  network_puppeteer_go # 创建 docker 网卡
