@@ -8,7 +8,7 @@ services:
         working_dir: /app
         restart: always
         volumes:
-            - /data/www/site/puppeteer.hlzblog.top:/app:cached # 重要！！！ 此部分请依据自己的项目位置 进行调整
+            - ./:/app:cached
             - /tmp/comic_api:/tmp/comic_api:cached
         ports:
             - 8100:8100
@@ -19,6 +19,15 @@ services:
             default:
                 ipv4_address: 172.38.0.2
         command:  bash -c "export GO111MODULE=on && export GOPROXY=https://goproxy.io && export TERM=xterm && mkdir -p /tmp/comic_api && cd /app && make cr"
+        # cgroups 部署资源限制
+        deploy:
+            resources:
+                limits: # cpu最大使用数
+                    cpus: '0.3' # 该服务cpu资源可用百分比，单个cpu打满就是 100%, 这里的 1.0 就是 100% 的 意思
+                    memory: 200M
+                    #reservations: # cpu最小使用数 --- 只能在 swarm 中用
+                    #cpus: '0.2'
+                    #memory: 200M
 
 networks:
     default:
