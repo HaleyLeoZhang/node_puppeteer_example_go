@@ -14,18 +14,19 @@ services:
             - 8100:8100
         environment:
             TZ: Asia/Shanghai
-            NODE_ENV: production
+            GO111MODULE: "on"
+            GOPROXY: https://goproxy.io
+            TERM: xterm
         networks:
             default:
                 ipv4_address: 172.38.0.2
-        command:  bash -c "export GO111MODULE=on && export GOPROXY=https://goproxy.io && export TERM=xterm && mkdir -p /tmp/comic_api && cd /app && make cr"
-        # cgroups 部署资源限制
-        deploy:
+        command:  bash -c "mkdir -p /tmp/comic_api && cd /app && make cr"
+        deploy: # cgroups 部署资源限制
             resources:
                 limits: # cpu最大使用数
-                    cpus: '0.3' # 该服务cpu资源可用百分比，单个cpu打满就是 100%, 这里的 1.0 就是 100% 的 意思
+                    cpus: "0.3" # 该服务cpu资源可用百分比，单个cpu打满就是 100%, 这里的 1.0 就是 100% 的 意思
                     memory: 200M
-                    #reservations: # cpu最小使用数 --- 只能在 swarm 中用
+                #reservations: # cpu最小使用数 --- 只能在 swarm 中用
                     #cpus: '0.2'
                     #memory: 200M
 

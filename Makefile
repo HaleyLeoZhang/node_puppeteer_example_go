@@ -8,9 +8,10 @@ debug:
 build:
 	@clear
 	@echo "App API is creating. Please wait ..."
-	@rm -rf ./app_api
 	@echo "App API compiling ..."
-	@go build -o ./app_api -v ./api/build/main.go
+	@go build -o ./app_api_tmp -v ./api/build/main.go
+	@rm -rf ./app_api
+	@mv ./app_api_tmp ./app_api
 	@echo "App API is created"
 
 run:
@@ -28,7 +29,10 @@ docker:
 	@mkdir -p /tmp/comic_api
 	@make -is docker_network
 	@docker-compose -p puppeteer-go down # 删除老的镜像
-	@docker-compose -p puppeteer-go up -d # 启动 docker-compile 编排
+	@#  --compatibility 是限制系统资源
+	@# -p 设置项目名称以免使用相同镜像时提示异常
+	@# -d 以后台挂起的模式运行
+	@docker-compose --compatibility -p puppeteer-go up -d # 启动 docker-compile 编排
 
 docker_network:
 	@docker network create --subnet=172.38.0.0/24  network_puppeteer_go # 创建 docker 网卡
