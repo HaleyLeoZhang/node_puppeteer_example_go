@@ -1,0 +1,45 @@
+serviceName: node_puppeteer_example_go_api
+
+httpServer:
+  name: node_puppeteer_example_go_api
+  ip: 0.0.0.0
+  port: 8100
+  pprof: false
+  writeTimeout: 1s
+  maxHeaderBytes: 1048576
+
+gin:
+  name: node_puppeteer_example_go_api
+  debug: true
+  timeout: 3s
+
+db:
+  name: node_puppeteer_example_go_api
+  type: mysql
+  host: 127.0.0.1
+  port: 3306
+  database: curl_avatar
+  user: root
+  password:
+  maxIdleConns: 5
+  maxOpenConns: 50
+  maxLeftTime: 30s
+
+redis:
+  name: node_puppeteer_example_go_api
+  proto: tcp
+  addr: 127.0.0.1:6379
+  auth:
+  dialTimeout: 20ms
+  readTimeout: 20ms
+  writeTimeout: 20ms
+  expire: 10s
+  pool:
+    maxActive: 20
+    maxIdle: 10
+    idleTimeout: 80s
+
+log:
+  name: node_puppeteer_example_go_api
+  stdout: true
+  dir: ""

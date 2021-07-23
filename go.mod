@@ -1,9 +1,9 @@
 module node_puppeteer_example_go
 
-go 1.15
+go 1.16
 
 require (
-	github.com/HaleyLeoZhang/go-component v1.5.2 
+	github.com/HaleyLeoZhang/go-component v1.5.3
 	github.com/gin-gonic/gin v1.6.3
 	github.com/golang/groupcache v0.0.0-20200121045136-8c9f03a8e57e
 	github.com/gomodule/redigo v1.8.2
