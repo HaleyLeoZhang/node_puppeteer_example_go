@@ -38,9 +38,9 @@ func TestMain(m *testing.M) {
 	os.Exit(m.Run())
 }
 
-func TestService_sdasd(t *testing.T){
+func TestService_sdasd(t *testing.T) {
 	//
-	c := make(chan int , 2)
+	c := make(chan int, 2)
 	eg := errgroup.Group{}
 	eg.Go(func(ctx context.Context) error {
 		c <- 1

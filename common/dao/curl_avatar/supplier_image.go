@@ -2,6 +2,7 @@ package curl_avatar
 
 import (
 	"context"
+	dbTool "github.com/HaleyLeoZhang/go-component/driver/db"
 	"github.com/jinzhu/gorm"
 	"github.com/pkg/errors"
 	"node_puppeteer_example_go/common/model/po"
@@ -11,6 +12,10 @@ func (d *Dao) SupplierImageList(ctx context.Context, where map[string]interface{
 	res = make([]*po.SupplierImage, 0)
 	comicInfo := &po.SupplierImage{}
 
+	err = dbTool.Context(ctx, d.db)
+	if err != nil {
+		return
+	}
 	chain := d.db
 
 	if v, exist := attr["limit"]; exist {

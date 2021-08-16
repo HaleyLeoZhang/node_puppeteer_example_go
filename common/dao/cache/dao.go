@@ -24,7 +24,7 @@ func New(cfg *xredis.Config) *Dao {
 func (d *Dao) Close() {
 	err := d.Redis.Close()
 	if err != nil {
-		xlog.Errorf("cache.redis.Err(%+v)", err)
+		xlog.Errorf("cache redis Err(%+v)", err)
 	}
 }
 
