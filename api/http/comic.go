@@ -10,7 +10,6 @@ import (
 	"fmt"
 	"github.com/HaleyLeoZhang/go-component/driver/xgin"
 	"github.com/gin-gonic/gin"
-	"github.com/golang/groupcache/singleflight"
 	"node_puppeteer_example_go/api/model"
 )
 
@@ -73,9 +72,7 @@ func (Comic) GetList(c *gin.Context) {
 		return
 	}
 
-	// 幂等请求，防止击穿 说明文档 https://segmentfault.com/a/1190000018464029
-	g := &singleflight.Group{}
-	groupKey := fmt.Sprintf("comic_list_%v", param.Page)
+	groupKey := fmt.Sprintf("comic_list_%d", param.Page)
 	res, err := g.Do(groupKey, func() (data interface{}, errBusiness error) {
 		data, errBusiness = srv.ComicList(xGin.C, param)
 		return
@@ -126,9 +123,7 @@ func (Comic) GetChapterList(c *gin.Context) {
 		xGin.Response(err, nil)
 		return
 	}
-	// 幂等请求，防止击穿 说明文档 https://segmentfault.com/a/1190000018464029
-	g := &singleflight.Group{}
-	groupKey := fmt.Sprintf("chapter_list_%v", param.ComicId)
+	groupKey := fmt.Sprintf("chapter_list_%d", param.ComicId)
 	res, err := g.Do(groupKey, func() (data interface{}, errBusiness error) {
 		data, errBusiness = srv.ChapterList(xGin.C, param)
 		return
@@ -192,9 +187,7 @@ func (Comic) GetChapterDetail(c *gin.Context) {
 		return
 	}
 
-	// 幂等请求，防止击穿 说明文档 https://segmentfault.com/a/1190000018464029
-	g := &singleflight.Group{}
-	groupKey := fmt.Sprintf("chapter_detail_%v", param.Id)
+	groupKey := fmt.Sprintf("chapter_detail_%d", param.Id)
 	res, err := g.Do(groupKey, func() (data interface{}, errBusiness error) {
 		data, errBusiness = srv.ChapterDetail(xGin.C, param)
 		return
@@ -247,9 +240,7 @@ func (Comic) GetImageList(c *gin.Context) {
 		return
 	}
 
-	// 幂等请求，防止击穿 说明文档 https://segmentfault.com/a/1190000018464029
-	g := &singleflight.Group{}
-	groupKey := fmt.Sprintf("image_list_%v", param.ChapterId)
+	groupKey := fmt.Sprintf("image_list_%d", param.ChapterId)
 	res, err := g.Do(groupKey, func() (data interface{}, errBusiness error) {
 		data, errBusiness = srv.ImageList(xGin.C, param)
 		return

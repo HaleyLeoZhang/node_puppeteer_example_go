@@ -2,10 +2,12 @@ package http
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/golang/groupcache/singleflight"
 	"node_puppeteer_example_go/api/service"
 )
 
 var srv *service.Service
+var g = &singleflight.Group{} // 接口级缓存 幂等请求，防止击穿 说明文档 https://segmentfault.com/a/1190000018464029
 
 func Init(e *gin.Engine, srvInjection *service.Service) *gin.Engine {
 	srv = srvInjection
