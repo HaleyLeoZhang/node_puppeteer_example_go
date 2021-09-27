@@ -9,32 +9,38 @@
 ### 性能表现
 本次压测因条件限制，在业务宿主机(2c/2G)上直接进行的压测  
 
-最大支持 `QPS` 在 `650` 左右  
-最大支持 `120` 个并发连接数左右  
+最大支持 `QPS` 在 `3170` 左右  
+最大支持 `150` 个并发连接数左右  
 
-![](doc/readme_performance.png)  
-`图 01 - API性能表现`  
+其实本次压测的 `API` 基于本地缓存 `singlefight` 做的本地 `一级接口级缓存` 的  
+但是作者本人并没有那么多时间去做更多的性能优化，如 `Redis做二级缓存`  
 
-有兴趣的读者朋友可以通过 [http://www.hlzblog.top/article/74.html](http://www.hlzblog.top/article/74.html)  
-分析下本次压测的`API` 瓶颈是哪里  
+![](doc/readme_performance.jpg)  
+`图 01 - API性能表现`
 
 作者本次就直接展示下压测前后的业务机环境的资源运用情况了  
 
 压测前 如 `图 02`
-![](doc/before.png)  
+![](doc/before.jpg)  
 `图 02`  
 
-压测后 如 `图 03`
-![](doc/after.png)  
+压测时 如 `图 03`
+![](doc/doing.jpg)  
 `图 03`  
 
-其实本次压测的 `API` 是可以做 `接口级缓存` 的  
-但是作者本人并没有那么多时间去做更多的性能优化  
-感兴趣的小伙伴可以提个 `pull request` 帮作者优化一波  
+可以看到本次瓶颈不在 `CPU`、`DB` 资源消耗上  
+而是在 `网络I/O` 上  
 
-此外的API
+
+> 拓展思维
+
 `列表页` 可以考虑下数据的缓存预热，从外在每次有对表进行数据变更的时候，重新触发全部【目前量不大】预热即可  
 其他的API等待着其他小伙伴自行思考  
+
+> 相关文章
+
+有兴趣的读者朋友可以通过 [http://www.hlzblog.top/article/74.html](http://www.hlzblog.top/article/74.html)  
+分析下平时压测的`API` 瓶颈是哪里
 
 > 运行前要求
 
