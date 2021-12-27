@@ -3,7 +3,7 @@ module github.com/HaleyLeoZhang/node_puppeteer_example_go
 go 1.16
 
 require (
-	github.com/HaleyLeoZhang/go-component v2.1.0
+	github.com/HaleyLeoZhang/go-component v1.10.0
 	github.com/gin-gonic/gin v1.7.0
 	github.com/golang/groupcache v0.0.0-20200121045136-8c9f03a8e57e
 	github.com/gomodule/redigo v1.8.2
