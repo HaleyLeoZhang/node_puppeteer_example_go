@@ -2,9 +2,9 @@ package service
 
 import (
 	"context"
-	"node_puppeteer_example_go/api/model"
-	constant2 "node_puppeteer_example_go/common/constant"
-	"node_puppeteer_example_go/common/model/po"
+	"github.com/HaleyLeoZhang/node_puppeteer_example_go/api/model"
+	constant2 "github.com/HaleyLeoZhang/node_puppeteer_example_go/common/constant"
+	"github.com/HaleyLeoZhang/node_puppeteer_example_go/common/model/po"
 )
 
 func (s *Service) ComicList(ctx context.Context, param *model.ComicListParam) (res *model.ComicListResponse, err error) {

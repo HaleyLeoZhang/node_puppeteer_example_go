@@ -5,7 +5,7 @@ import (
 	"github.com/HaleyLeoZhang/go-component/driver/xgin"
 	"github.com/HaleyLeoZhang/go-component/driver/xlog"
 	"github.com/HaleyLeoZhang/go-component/errgroup"
-	"node_puppeteer_example_go/api/model"
+	"github.com/HaleyLeoZhang/node_puppeteer_example_go/api/model"
 )
 
 func (s *Service) ChapterDetail(ctx context.Context, param *model.ChapterDetailParam) (res *model.ChapterDetailResponse, err error) {

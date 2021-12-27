@@ -5,8 +5,8 @@ import (
 	dbTool "github.com/HaleyLeoZhang/go-component/driver/db"
 	"github.com/jinzhu/gorm"
 	"github.com/pkg/errors"
-	"node_puppeteer_example_go/common/constant"
-	"node_puppeteer_example_go/common/model/po"
+	"github.com/HaleyLeoZhang/node_puppeteer_example_go/common/constant"
+	"github.com/HaleyLeoZhang/node_puppeteer_example_go/common/model/po"
 )
 
 func (d *Dao) SupplierChapterList(ctx context.Context, where map[string]interface{}, attr map[string]interface{}) (res []*po.SupplierChapter, err error) {

@@ -6,9 +6,9 @@ import (
 	"github.com/HaleyLeoZhang/go-component/driver/httpserver"
 	"github.com/HaleyLeoZhang/go-component/driver/xgin"
 	"github.com/HaleyLeoZhang/go-component/driver/xlog"
-	"node_puppeteer_example_go/api/conf"
-	"node_puppeteer_example_go/api/http"
-	"node_puppeteer_example_go/api/service"
+	"github.com/HaleyLeoZhang/node_puppeteer_example_go/api/conf"
+	"github.com/HaleyLeoZhang/node_puppeteer_example_go/api/http"
+	"github.com/HaleyLeoZhang/node_puppeteer_example_go/api/service"
 )
 
 func main() {

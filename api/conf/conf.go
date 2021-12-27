@@ -2,6 +2,7 @@ package conf
 
 import (
 	"flag"
+	"github.com/HaleyLeoZhang/go-component/driver/xconsul"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"path/filepath"
@@ -20,6 +21,7 @@ var (
 
 // Config struct
 type Config struct {
+	Consul xconsul.Config `yaml:"consul" json:"consul"`
 	ServiceName string             `yaml:"serviceName" json:"serviceName"`
 	HttpServer  *httpserver.Config `yaml:"httpServer" json:"httpServer"`
 	Gin         *xgin.Config       `yaml:"gin" json:"gin"`

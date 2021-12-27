@@ -2,9 +2,9 @@ package service
 
 import (
 	"github.com/HaleyLeoZhang/go-component/driver/xlog"
-	"node_puppeteer_example_go/api/conf"
-	comonnconf "node_puppeteer_example_go/common/conf"
-	commonservice "node_puppeteer_example_go/common/service"
+	"github.com/HaleyLeoZhang/node_puppeteer_example_go/api/conf"
+	comonnconf "github.com/HaleyLeoZhang/node_puppeteer_example_go/common/conf"
+	commonservice "github.com/HaleyLeoZhang/node_puppeteer_example_go/common/service"
 )
 
 type Service struct {
@@ -17,6 +17,10 @@ func New(cfg *conf.Config) *Service {
 	cfgCommon := &comonnconf.Config{}
 	cfgCommon.DB = cfg.DB
 	cfgCommon.Redis = cfg.Redis
+	// 微服务
+	cfg.Consul.ServiceName = cfg.ServiceName
+	cfg.Consul.HttpPort = cfg.HttpServer.Port
+	cfgCommon.Consul = cfg.Consul
 	s.commonService = commonservice.New(cfgCommon)
 	return s
 }

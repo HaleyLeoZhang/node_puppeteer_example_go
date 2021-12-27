@@ -5,7 +5,7 @@ import (
 	dbTool "github.com/HaleyLeoZhang/go-component/driver/db"
 	"github.com/jinzhu/gorm"
 	"github.com/pkg/errors"
-	"node_puppeteer_example_go/common/model/po"
+	"github.com/HaleyLeoZhang/node_puppeteer_example_go/common/model/po"
 )
 
 func (d *Dao) SupplierList(ctx context.Context, where map[string]interface{}, attr map[string]interface{}) (res []*po.Supplier, err error) {

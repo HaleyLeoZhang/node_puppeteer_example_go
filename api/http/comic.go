@@ -10,8 +10,8 @@ import (
 	"fmt"
 	"github.com/HaleyLeoZhang/go-component/driver/xgin"
 	"github.com/gin-gonic/gin"
-	constantapi "node_puppeteer_example_go/api/constant"
-	"node_puppeteer_example_go/api/model"
+	constantapi "github.com/HaleyLeoZhang/node_puppeteer_example_go/api/constant"
+	"github.com/HaleyLeoZhang/node_puppeteer_example_go/api/model"
 )
 
 type Comic struct{}

@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 	"flag"
-	"node_puppeteer_example_go/api/conf"
+	"github.com/HaleyLeoZhang/node_puppeteer_example_go/api/conf"
 	"os"
 	"testing"
 )

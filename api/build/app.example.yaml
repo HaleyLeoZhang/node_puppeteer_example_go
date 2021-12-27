@@ -1,5 +1,9 @@
 serviceName: node_puppeteer_example_go_api
 
+consul:
+  addr: "http://127.0.0.1:8500" # consul 地址
+  health_check_router: "/health" # 健康检查的路由
+
 httpServer:
   name: node_puppeteer_example_go_api
   ip: 0.0.0.0

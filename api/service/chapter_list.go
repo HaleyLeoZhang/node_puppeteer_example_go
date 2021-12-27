@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 	"github.com/HaleyLeoZhang/go-component/driver/xlog"
-	"node_puppeteer_example_go/api/model"
-	constant2 "node_puppeteer_example_go/common/constant"
+	"github.com/HaleyLeoZhang/node_puppeteer_example_go/api/model"
+	constant2 "github.com/HaleyLeoZhang/node_puppeteer_example_go/common/constant"
 )
 
 func (s *Service) ChapterList(ctx context.Context, param *model.ChapterListParam) (res *model.ChapterListResponse, err error) {

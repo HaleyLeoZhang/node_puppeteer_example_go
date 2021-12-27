@@ -2,8 +2,8 @@ package service
 
 import (
 	"context"
-	"node_puppeteer_example_go/api/model"
-	constant2 "node_puppeteer_example_go/common/constant"
+	"github.com/HaleyLeoZhang/node_puppeteer_example_go/api/model"
+	constant2 "github.com/HaleyLeoZhang/node_puppeteer_example_go/common/constant"
 )
 
 func (s *Service) ImageList(ctx context.Context, param *model.ImageListParam) (res *model.ImageListResponse, err error) {

@@ -3,7 +3,8 @@ package http
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/golang/groupcache/singleflight"
-	"node_puppeteer_example_go/api/service"
+	"github.com/HaleyLeoZhang/node_puppeteer_example_go/api/conf"
+	"github.com/HaleyLeoZhang/node_puppeteer_example_go/api/service"
 )
 
 var srv *service.Service
@@ -24,6 +25,14 @@ func Init(e *gin.Engine, srvInjection *service.Service) *gin.Engine {
 		routComic.GET("chapter/list", comic.GetChapterList)
 		routComic.GET("chapter/detail", comic.GetChapterDetail)
 		routComic.GET("image/list", comic.GetImageList)
+	}
+	// 健康检查专用
+	{
+		e.GET(conf.Conf.Consul.HealthCheckRouter, func(c *gin.Context) {
+			// 健康检测啥都不用处理
+			return
+		})
+
 	}
 
 	return e
