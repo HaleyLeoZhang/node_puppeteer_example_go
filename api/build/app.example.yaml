@@ -1,16 +1,17 @@
 serviceName: node_puppeteer_example_go_api
 
-consul:
-  addr: "http://127.0.0.1:8500" # consul 地址
-  health_check_router: "/health" # 健康检查的路由
+#consul:
+#  addr: "http://127.0.0.1:8500" # consul 地址
+#  health_check_router: "/health" # 健康检查的路由
 
 httpServer:
-  name: node_puppeteer_example_go_api
+  name: node_puppeteer_example_go_api # 服务名，用于trace识别
   ip: 0.0.0.0
-  port: 8100
-  pprof: false
-  writeTimeout: 1s
-  maxHeaderBytes: 1048576
+  port: 8100 # 对外暴露的 http 端口名
+  pprof: false # true 开启  pprof 性能监控路由  注: 请勿开放到公网
+  metrics: true # true 开启  metrics 打点，支持 prometheus 主动来拉数据  注: 请勿开放到公网
+  writeTimeout: 1s # 写入时长限制
+  maxHeaderBytes: 1048576 # 请求头长度限制
 
 gin:
   name: node_puppeteer_example_go_api
