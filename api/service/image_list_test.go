@@ -1,21 +1,47 @@
 package service
 
 import (
+	"context"
 	"encoding/json"
 	"github.com/HaleyLeoZhang/node_puppeteer_example_go/api/model"
+	commonservice "github.com/HaleyLeoZhang/node_puppeteer_example_go/common/service"
 	"testing"
 )
 
 func TestService_ImageList(t *testing.T) {
-
-	param := &model.ImageListParam{
-		ChapterId: ctx.Value("chapter_id").(int),
+	type fields struct {
+		commonService *commonservice.Service
 	}
-	res, err := svr.ImageList(ctx, param)
-	if nil != err {
-		t.Fatalf("Err: %+v", err)
-		return
+	type args struct {
+		ctx   context.Context
+		param *model.ImageListParam
 	}
-	raw, _ := json.Marshal(res)
-	t.Logf("res %+v param %v", string(raw), param)
+	tests := []struct {
+		name    string
+		fields  fields
+		args    args
+		wantRes *model.ImageListResponse
+		wantErr bool
+	}{
+		// TODO: Add test cases.
+		{
+			args: args{
+				ctx: ctx,
+				param: &model.ImageListParam{
+					ChapterId: 1,
+				},
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			gotRes, err := svr.ImageList(tt.args.ctx, tt.args.param)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("ImageList() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			raw, _ := json.Marshal(gotRes)
+			t.Logf("%+v", string(raw))
+		})
+	}
 }

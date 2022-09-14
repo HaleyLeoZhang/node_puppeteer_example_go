@@ -2,22 +2,21 @@ package service
 
 import (
 	"context"
-	"github.com/HaleyLeoZhang/go-component/driver/xlog"
 	"github.com/HaleyLeoZhang/node_puppeteer_example_go/api/model"
-	constant2 "github.com/HaleyLeoZhang/node_puppeteer_example_go/common/constant"
+	"github.com/HaleyLeoZhang/node_puppeteer_example_go/common/constant"
 )
 
 func (s *Service) ChapterList(ctx context.Context, param *model.ChapterListParam) (res *model.ChapterListResponse, err error) {
 	comicId := param.ComicId
 
-	res = &model.ChapterListResponse{}
-	res.List = make([]*model.ChapterListResponseItem, 0)
-	err = nil
+	res = &model.ChapterListResponse{
+		List: make([]*model.ChapterListResponseItem, 0),
+	}
 
 	// 先找渠道
 	whereSupplierMap := make(map[string]interface{})
 	whereSupplierMap["related_id"] = comicId
-	whereSupplierMap["status"] = constant2.BASE_TABLE_ONLINE
+	whereSupplierMap["status"] = constant.BASE_TABLE_ONLINE
 
 	attrSupplierMap := make(map[string]interface{})
 	attrSupplierMap["limit"] = 1
@@ -26,7 +25,6 @@ func (s *Service) ChapterList(ctx context.Context, param *model.ChapterListParam
 
 	supplierList, err := s.commonService.CurlAvatarDao.SupplierList(ctx, whereSupplierMap, attrSupplierMap)
 	if nil != err {
-		xlog.Errorf("PageList.Error.%+v", err)
 		return
 	}
 	lenSupplierList := len(supplierList)
@@ -37,7 +35,7 @@ func (s *Service) ChapterList(ctx context.Context, param *model.ChapterListParam
 	// 再找渠道对应章节信息
 	whereSupplierChapterMap := make(map[string]interface{})
 	whereSupplierChapterMap["related_id"] = supplier.Id
-	whereSupplierChapterMap["status"] = constant2.BASE_TABLE_ONLINE
+	whereSupplierChapterMap["status"] = constant.BASE_TABLE_ONLINE
 
 	attrSupplierChapterMap := make(map[string]interface{})
 	attrSupplierChapterMap["order_by"] = "sequence ASC" // 权重高、先创建的在前面
@@ -51,11 +49,11 @@ func (s *Service) ChapterList(ctx context.Context, param *model.ChapterListParam
 		return
 	}
 	for _, supplierChapter := range supplierChapterList {
-		tmp := &model.ChapterListResponseItem{}
-		tmp.Id = supplierChapter.Id
-		tmp.Name = supplierChapter.Name
-		tmp.Sequence = supplierChapter.Sequence
-		res.List = append(res.List, tmp)
+		res.List = append(res.List, &model.ChapterListResponseItem{
+			Id:       supplierChapter.Id,
+			Name:     supplierChapter.Name,
+			Sequence: supplierChapter.Sequence,
+		})
 	}
 
 	return

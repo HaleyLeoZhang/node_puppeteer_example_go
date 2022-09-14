@@ -9,9 +9,9 @@ package http
 import (
 	"fmt"
 	"github.com/HaleyLeoZhang/go-component/driver/xgin"
-	"github.com/gin-gonic/gin"
 	constantapi "github.com/HaleyLeoZhang/node_puppeteer_example_go/api/constant"
 	"github.com/HaleyLeoZhang/node_puppeteer_example_go/api/model"
+	"github.com/gin-gonic/gin"
 )
 
 type Comic struct{}
@@ -125,9 +125,8 @@ func (Comic) GetChapterList(c *gin.Context) {
 		return
 	}
 	groupKey := fmt.Sprintf(constantapi.SINGLEFIGHT_COMIC_GET_CHAPTER_LIST, param.ComicId)
-	res, err := g.Do(groupKey, func() (data interface{}, errBusiness error) {
-		data, errBusiness = srv.ChapterList(xGin.C, param)
-		return
+	res, err := g.Do(groupKey, func() (interface{}, error) {
+		return srv.ChapterList(xGin.C, param)
 	})
 	xGin.Response(err, res)
 }
@@ -189,9 +188,8 @@ func (Comic) GetChapterDetail(c *gin.Context) {
 	}
 
 	groupKey := fmt.Sprintf(constantapi.SINGLEFIGHT_COMIC_GET_CHAPTER_DETAIL, param.Id)
-	res, err := g.Do(groupKey, func() (data interface{}, errBusiness error) {
-		data, errBusiness = srv.ChapterDetail(xGin.C, param)
-		return
+	res, err := g.Do(groupKey, func() (interface{}, error) {
+		return srv.ChapterDetail(xGin.C, param)
 	})
 
 	xGin.Response(err, res)
@@ -242,9 +240,8 @@ func (Comic) GetImageList(c *gin.Context) {
 	}
 
 	groupKey := fmt.Sprintf(constantapi.SINGLEFIGHT_COMIC_GET_IMAGE_LIST, param.ChapterId)
-	res, err := g.Do(groupKey, func() (data interface{}, errBusiness error) {
-		data, errBusiness = srv.ImageList(xGin.C, param)
-		return
+	res, err := g.Do(groupKey, func() (interface{}, error) {
+		return srv.ImageList(xGin.C, param)
 	})
 	xGin.Response(err, res)
 }

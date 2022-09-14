@@ -1,20 +1,42 @@
 package service
 
 import (
+	"context"
 	"encoding/json"
 	"github.com/HaleyLeoZhang/node_puppeteer_example_go/api/model"
 	"testing"
 )
 
 func TestService_ComicList(t *testing.T) {
-	param := &model.ComicListParam{
-		Page: ctx.Value("page").(int),
+	type args struct {
+		ctx   context.Context
+		param *model.ComicListParam
 	}
-	res, err := svr.ComicList(ctx, param)
-	if nil != err {
-		t.Fatalf("Err: %+v", err)
-		return
+	tests := []struct {
+		name    string
+		args    args
+		wantErr bool
+	}{
+		// TODO: Add test cases.
+		{
+			args: args{
+				ctx: ctx,
+				param: &model.ComicListParam{
+					Page: 1,
+				},
+			},
+		},
 	}
-	raw, _ := json.Marshal(res)
-	t.Logf("res %+v param %v", string(raw), param)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			gotRes, err := svr.ComicList(tt.args.ctx, tt.args.param)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("ComicList() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+
+			raw, _ := json.Marshal(gotRes)
+			t.Logf("%+v", string(raw))
+		})
+	}
 }

@@ -14,15 +14,12 @@ var (
 )
 
 func TestMain(m *testing.M) {
-	flag.Parse()
+	_ = flag.Set("conf", "../build/app.yaml")
 	err := conf.Init()
 	if err != nil {
 		panic(err)
 	}
 	svr = New(conf.Conf)
 	ctx = context.Background()
-	ctx = context.WithValue(ctx, "page", 1)
-	ctx = context.WithValue(ctx, "comic_id", 1)
-	ctx = context.WithValue(ctx, "chapter_id", 1)
 	os.Exit(m.Run())
 }

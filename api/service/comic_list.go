@@ -2,22 +2,35 @@ package service
 
 import (
 	"context"
+	"encoding/json"
 	"github.com/HaleyLeoZhang/node_puppeteer_example_go/api/model"
-	constant2 "github.com/HaleyLeoZhang/node_puppeteer_example_go/common/constant"
+	"github.com/HaleyLeoZhang/node_puppeteer_example_go/common/constant"
 	"github.com/HaleyLeoZhang/node_puppeteer_example_go/common/model/po"
 )
 
 func (s *Service) ComicList(ctx context.Context, param *model.ComicListParam) (res *model.ComicListResponse, err error) {
-	res = &model.ComicListResponse{}
-	res.List = make([]*model.ComicListResponseItem, 0)
-	err = nil
+	res, err = s.commonService.CacheDao.ComicListRequestWithCache(ctx, param.GetPage(), func() (by []byte, errRaw error) {
+		// 生成缓存前查询
+		resRaw, errRaw := s.comicList(ctx, param)
+		if errRaw != nil {
+			return
+		}
+		by, _ = json.Marshal(resRaw)
+		return
+	})
+	return
+}
 
-	page := param.Page
-	size := 20
-	// TODO 后续这块儿做下缓存
+func (s *Service) comicList(ctx context.Context, param *model.ComicListParam) (res *model.ComicListResponse, err error) {
+	res = &model.ComicListResponse{
+		List: make([]*model.ComicListResponseItem, 0),
+	}
+
+	page := param.GetPage()
+	size := param.GetPageSize()
 
 	whereComicMap := make(map[string]interface{})
-	whereComicMap["status"] = constant2.BASE_TABLE_ONLINE
+	whereComicMap["status"] = constant.BASE_TABLE_ONLINE
 
 	attrComicMap := make(map[string]interface{})
 	attrComicMap["limit"] = size
@@ -39,7 +52,7 @@ func (s *Service) ComicList(ctx context.Context, param *model.ComicListParam) (r
 		comicIdList = append(comicIdList, comic.RelatedId)
 	}
 	whereSupplierMap := make(map[string]interface{})
-	whereSupplierMap["status"] = constant2.BASE_TABLE_ONLINE
+	whereSupplierMap["status"] = constant.BASE_TABLE_ONLINE
 	supplierList, err := s.commonService.CurlAvatarDao.SupplierList(ctx, whereSupplierMap, nil)
 	if nil != err {
 		return
@@ -71,6 +84,5 @@ func (s *Service) ComicList(ctx context.Context, param *model.ComicListParam) (r
 			res.List = append(res.List, tmp)
 		}
 	}
-
 	return
 }
