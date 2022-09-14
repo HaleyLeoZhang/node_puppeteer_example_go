@@ -1,20 +1,43 @@
 package service
 
 import (
+	"context"
 	"encoding/json"
 	"github.com/HaleyLeoZhang/node_puppeteer_example_go/api/model"
 	"testing"
 )
 
 func TestService_ChapterDetail(t *testing.T) {
-	param := &model.ChapterDetailParam{
-		Id: ctx.Value("chapter_id").(int),
+
+	type args struct {
+		ctx   context.Context
+		param *model.ChapterDetailParam
 	}
-	res, err := svr.ChapterDetail(ctx, param)
-	if nil != err {
-		t.Fatalf("Err: %v", err)
-		return
+	tests := []struct {
+		name    string
+		args    args
+		wantRes *model.ChapterDetailResponse
+		wantErr bool
+	}{
+		// TODO: Add test cases.
+		{
+			args: args{
+				ctx: ctx,
+				param: &model.ChapterDetailParam{
+					Id: 1,
+				},
+			},
+		},
 	}
-	raw, _ := json.Marshal(res)
-	t.Logf("res %+v param %v", string(raw), param)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			gotRes, err := svr.ChapterDetail(tt.args.ctx, tt.args.param)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("ChapterDetail() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			raw, _ := json.Marshal(gotRes)
+			t.Logf("%+v", string(raw))
+		})
+	}
 }
