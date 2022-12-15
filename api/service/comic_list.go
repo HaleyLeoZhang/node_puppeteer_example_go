@@ -31,7 +31,7 @@ func (s *Service) comicList(ctx context.Context, param *model.ComicListParam) (r
 		limit       = size
 		offset      = (page - 1) * size
 		orderBy     = "weight DESC,id DESC" // 权重高、新创建的在前面
-		comicFields = "id,name,intro,pic,tag,weight"
+		comicFields = "id,name,intro,pic,tag,weight,related_id"
 	)
 	// 查询漫画列表
 	comicList, err := s.commonService.CurlAvatarDao.ComicListForIndexWithFields(ctx, limit, offset, orderBy, comicFields)
