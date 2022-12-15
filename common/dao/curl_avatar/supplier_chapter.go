@@ -52,7 +52,7 @@ func (d *Dao) SupplierChapterGetOne(ctx context.Context, id int) (res *po.Suppli
 	chain := d.db
 	err = chain.Table(res.TableName()).Where("id = ?", id).First(&res).Error
 	if gorm.IsRecordNotFoundError(err) {
-		res = nil
+		err = nil
 		return
 	}
 	if err != nil {
@@ -70,7 +70,7 @@ func (d *Dao) SupplierChapterGetNextOne(ctx context.Context, sequence int, suppl
 	err = chain.Table(res.TableName()).Where("sequence > ? AND related_id = ? AND status = ? ", sequence, supplierId, constant.BASE_TABLE_ONLINE).
 		Order("sequence asc").First(&res).Error
 	if gorm.IsRecordNotFoundError(err) {
-		res = nil
+		err = nil
 		return
 	}
 	if err != nil {

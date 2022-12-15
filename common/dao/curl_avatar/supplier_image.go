@@ -52,7 +52,7 @@ func (d *Dao) SupplierImageGetOne(ctx context.Context, id int) (res *po.Supplier
 	chain := d.db
 	err = chain.Table(res.TableName()).Where("id = ?", id).First(&res).Error
 	if gorm.IsRecordNotFoundError(err) {
-		res = nil
+		err = nil
 		return
 	}
 	if err != nil {
