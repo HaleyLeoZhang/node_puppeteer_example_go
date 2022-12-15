@@ -3,46 +3,45 @@ package curl_avatar
 import (
 	"context"
 	dbTool "github.com/HaleyLeoZhang/go-component/driver/db"
+	"github.com/HaleyLeoZhang/node_puppeteer_example_go/common/constant"
+	"github.com/HaleyLeoZhang/node_puppeteer_example_go/common/model/po"
 	"github.com/jinzhu/gorm"
 	"github.com/pkg/errors"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/common/model/po"
 )
 
-func (d *Dao) SupplierImageList(ctx context.Context, where map[string]interface{}, attr map[string]interface{}) (res []*po.SupplierImage, err error) {
-	res = make([]*po.SupplierImage, 0)
-	comicInfo := &po.SupplierImage{}
+func (d *Dao) SupplierImageListWithFields(ctx context.Context, chapterId int, fields string) (list []*po.SupplierImage, err error) {
+	cond := &dbTool.DBConditions{
+		Select: fields,
+		And: map[string]interface{}{
+			"status = ?":     constant.BASE_TABLE_ONLINE,
+			"related_id = ?": chapterId,
+		},
+		Order: "sequence ASC",
+	}
+	return d.SupplierImageListByCondition(ctx, cond)
+}
 
+func (d *Dao) SupplierImageListByCondition(ctx context.Context, conditions *dbTool.DBConditions) (list []*po.SupplierImage, err error) {
 	err = dbTool.Context(ctx, d.db)
 	if err != nil {
 		return
 	}
-	chain := d.db
 
-	if v, exist := attr["limit"]; exist {
-		chain = chain.Limit(v)
-	}
-	if v, exist := attr["offset"]; exist {
-		chain = chain.Offset(v)
-	}
-	if v, exist := attr["order_by"]; exist {
-		chain = chain.Order(v)
-	}
-	if v, exist := attr["select"]; exist {
-		chain = chain.Select(v)
-	}
-
-	err = chain.Table(comicInfo.TableName()).Where(where).Find(&res).Error
-
-	if err == gorm.ErrRecordNotFound {
+	var (
+		res   = &po.SupplierImage{}
+		chain = d.db
+	)
+	chain = chain.Table(res.TableName())
+	chain = conditions.Fill(chain)
+	err = chain.Find(&list).Error
+	if gorm.IsRecordNotFoundError(err) {
 		err = nil
 		return
 	}
-
 	if err != nil {
 		err = errors.WithStack(err)
 		return
 	}
-
 	return
 }
 

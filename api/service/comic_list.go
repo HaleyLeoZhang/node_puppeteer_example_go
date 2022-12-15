@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/HaleyLeoZhang/node_puppeteer_example_go/api/model"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/common/constant"
 	"github.com/HaleyLeoZhang/node_puppeteer_example_go/common/model/po"
 )
 
@@ -25,35 +24,32 @@ func (s *Service) comicList(ctx context.Context, param *model.ComicListParam) (r
 	res = &model.ComicListResponse{
 		List: make([]*model.ComicListResponseItem, 0),
 	}
-
-	page := param.GetPage()
-	size := param.GetPageSize()
-
-	whereComicMap := make(map[string]interface{})
-	whereComicMap["status"] = constant.BASE_TABLE_ONLINE
-
-	attrComicMap := make(map[string]interface{})
-	attrComicMap["limit"] = size
-	attrComicMap["offset"] = (page - 1) * size
-	attrComicMap["order_by"] = "weight DESC,id DESC" // 权重高、新创建的在前面
-
+	var (
+		page = param.GetPage()
+		size = param.GetPageSize()
+		// -
+		limit       = size
+		offset      = (page - 1) * size
+		orderBy     = "weight DESC,id DESC" // 权重高、新创建的在前面
+		comicFields = "id,name,intro,pic,tag,weight"
+	)
 	// 查询漫画列表
-	comicList, err := s.commonService.CurlAvatarDao.ComicList(ctx, whereComicMap, attrComicMap)
+	comicList, err := s.commonService.CurlAvatarDao.ComicListForIndexWithFields(ctx, limit, offset, orderBy, comicFields)
 	if nil != err {
 		return
 	}
 	// 查询渠道数据
-	lenComicList := len(comicList)
-	if lenComicList == 0 {
+	if len(comicList) == 0 {
 		return
 	}
-	comicIdList := make([]int, 0, lenComicList)
+	var (
+		supplierIds    = make([]int, 0, len(comicList))
+		supplierFields = "id,max_sequence"
+	)
 	for _, comic := range comicList {
-		comicIdList = append(comicIdList, comic.RelatedId)
+		supplierIds = append(supplierIds, comic.RelatedId)
 	}
-	whereSupplierMap := make(map[string]interface{})
-	whereSupplierMap["status"] = constant.BASE_TABLE_ONLINE
-	supplierList, err := s.commonService.CurlAvatarDao.SupplierList(ctx, whereSupplierMap, nil)
+	supplierList, err := s.commonService.CurlAvatarDao.SupplierListForIndexWithFields(ctx, supplierIds, supplierFields)
 	if nil != err {
 		return
 	}

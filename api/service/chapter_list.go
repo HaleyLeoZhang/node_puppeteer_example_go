@@ -2,45 +2,33 @@ package service
 
 import (
 	"context"
+	"github.com/HaleyLeoZhang/go-component/driver/xgin"
 	"github.com/HaleyLeoZhang/node_puppeteer_example_go/api/model"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/common/constant"
 )
 
 func (s *Service) ChapterList(ctx context.Context, param *model.ChapterListParam) (res *model.ChapterListResponse, err error) {
-	comicId := param.ComicId
-
 	res = &model.ChapterListResponse{
 		List: make([]*model.ChapterListResponseItem, 0),
 	}
-
 	// 先找渠道
-	whereSupplierMap := make(map[string]interface{})
-	whereSupplierMap["related_id"] = comicId
-	whereSupplierMap["status"] = constant.BASE_TABLE_ONLINE
-
-	attrSupplierMap := make(map[string]interface{})
-	attrSupplierMap["limit"] = 1
-	attrSupplierMap["offset"] = 0
-	attrSupplierMap["order_by"] = "weight DESC,id ASC" // 权重高、先创建的在前面
-
-	supplierList, err := s.commonService.CurlAvatarDao.SupplierList(ctx, whereSupplierMap, attrSupplierMap)
-	if nil != err {
+	var (
+		comicId = param.ComicId
+		// -
+		supplierFields = "id"
+	)
+	supplier, err := s.commonService.CurlAvatarDao.SupplierOneForChapterWithFields(ctx, comicId, supplierFields)
+	if err != nil {
 		return
 	}
-	lenSupplierList := len(supplierList)
-	if lenSupplierList == 0 {
+	if supplier == nil {
+		err = xgin.NewBusinessError("暂无可用渠道", xgin.HTTP_RESPONSE_CODE_SOURCE_NOT_FOUND)
 		return
 	}
-	supplier := supplierList[0]
+	var (
+		supplierChapterFields = "id,name,sequence"
+	)
 	// 再找渠道对应章节信息
-	whereSupplierChapterMap := make(map[string]interface{})
-	whereSupplierChapterMap["related_id"] = supplier.Id
-	whereSupplierChapterMap["status"] = constant.BASE_TABLE_ONLINE
-
-	attrSupplierChapterMap := make(map[string]interface{})
-	attrSupplierChapterMap["order_by"] = "sequence ASC" // 权重高、先创建的在前面
-
-	supplierChapterList, err := s.commonService.CurlAvatarDao.SupplierChapterList(ctx, whereSupplierChapterMap, attrSupplierChapterMap)
+	supplierChapterList, err := s.commonService.CurlAvatarDao.SupplierChapterListWithFields(ctx, supplier.Id, supplierChapterFields)
 	if nil != err {
 		return
 	}

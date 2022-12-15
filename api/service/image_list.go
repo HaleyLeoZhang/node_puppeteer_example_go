@@ -3,23 +3,19 @@ package service
 import (
 	"context"
 	"github.com/HaleyLeoZhang/node_puppeteer_example_go/api/model"
-	"github.com/HaleyLeoZhang/node_puppeteer_example_go/common/constant"
 )
 
 func (s *Service) ImageList(ctx context.Context, param *model.ImageListParam) (res *model.ImageListResponse, err error) {
-	chapterId := param.ChapterId
 	res = &model.ImageListResponse{
 		List: make([]*model.ImageListResponseItem, 0),
 	}
-
-	whereSupplierImageMap := make(map[string]interface{})
-	whereSupplierImageMap["related_id"] = chapterId
-	whereSupplierImageMap["status"] = constant.BASE_TABLE_ONLINE
-
-	attrSupplierImageMap := make(map[string]interface{})
-	attrSupplierImageMap["order_by"] = "sequence ASC" // 权重高、先创建的在前面
-
-	supplierImageList, err := s.commonService.CurlAvatarDao.SupplierImageList(ctx, whereSupplierImageMap, attrSupplierImageMap)
+	// 先找渠道
+	var (
+		chapterId = param.ChapterId
+		// -
+		supplierFields = "src_origin,src_own,sequence"
+	)
+	supplierImageList, err := s.commonService.CurlAvatarDao.SupplierImageListWithFields(ctx, chapterId, supplierFields)
 	if nil != err {
 		return
 	}
