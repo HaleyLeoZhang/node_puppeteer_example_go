@@ -57,19 +57,14 @@
 ![](doc/response_ms_in_1_minute.png)  
 `图 2-5`
 
-> 拓展思维
-
-`列表页` 可以考虑下数据的缓存预热，从外在每次有对表进行数据变更的时候，重新触发全部【目前量不大】预热即可  
-其他的API等待着其他小伙伴自行思考
-
 > 相关文章
 
 有兴趣的读者朋友可以通过 [http://www.hlzblog.top/article/74.html](http://www.hlzblog.top/article/74.html)  
-分析下平时压测的`API` 瓶颈是哪里
+分析下平时压测的 `API` 瓶颈是哪里
 
 > 运行前要求
 
-生成好 `app.ini`
+生成好 `app.yaml`  
 
 ~~~bash
 make ini
