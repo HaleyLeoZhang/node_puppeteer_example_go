@@ -4,7 +4,6 @@
 
 * `go mod` 管理包
 * `Makefile` 集成命令
-* [查看接口文档](http://api_puppeteer.doc.hlzblog.top/)
 
 ### 性能表现
 
