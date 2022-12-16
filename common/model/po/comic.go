@@ -9,13 +9,13 @@ package po
 
 type Comic struct {
 	Model
-	RelatedId int    `json:"related_id"`
-	Name      string `json:"name"`
-	Pic       string `json:"pic"`
-	Intro     string `json:"intro"`
-	Weight    int    `json:"weight"`
-	Tag       int    `json:"tag"`
-	Method    int    `json:"method"`
+	RelatedId int    `gorm:"column:related_id"`
+	Name      string `gorm:"column:name"`
+	Pic       string `gorm:"column:pic"`
+	Intro     string `gorm:"column:intro"`
+	Weight    int    `gorm:"column:weight"`
+	Tag       int    `gorm:"column:tag"`
+	Method    int    `gorm:"column:method"`
 }
 
 //数据表---必需

@@ -2,9 +2,9 @@ package po
 
 type SupplierChapter struct {
 	Model
-	RelatedId int    `json:"related_id"`
-	Sequence  int    `json:"sequence"`
-	Name      string `json:"name"`
+	RelatedId int    `gorm:"column:related_id"`
+	Sequence  int    `gorm:"column:sequence"`
+	Name      string `gorm:"column:name"`
 }
 
 //数据表---必需

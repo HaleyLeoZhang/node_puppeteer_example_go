@@ -10,8 +10,8 @@ import "time"
 // ----------------------------------------------------------------------
 
 type Model struct {
-	Id        int       `gorm:"primary_key" json:"id"`
-	Status    uint8     `json:"status"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
+	Id        int       `gorm:"primary_key" gorm:"column:id"`
+	Status    int       `gorm:"column:status"`
+	CreatedAt time.Time `gorm:"column:created_at"`
+	UpdatedAt time.Time `gorm:"column:updated_at"`
 }

@@ -2,17 +2,17 @@ package po
 
 type Supplier struct {
 	Model
-	RelatedId   int    `json:"related_id"`
-	Channel     uint8  `json:"channel"`
-	SourceId    string `json:"source_id"`
-	Name        string `json:"name"`
-	Pic         string `json:"pic"`
-	Intro       string `json:"intro"`
-	MaxSequence int    `json:"max_sequence"`
-	Ext1        string `json:"ext1"`
-	Ext2        string `json:"ext2"`
-	Ext3        string `json:"ext3"`
-	Weight      int    `json:"weight"`
+	RelatedId   int    `gorm:"column:related_id"`
+	Channel     int    `gorm:"column:channel"`
+	SourceId    string `gorm:"column:source_id"`
+	Name        string `gorm:"column:name"`
+	Pic         string `gorm:"column:pic"`
+	Intro       string `gorm:"column:intro"`
+	MaxSequence int    `gorm:"column:max_sequence"`
+	Ext1        string `gorm:"column:ext1"`
+	Ext2        string `gorm:"column:ext2"`
+	Ext3        string `gorm:"column:ext3"`
+	Weight      int    `gorm:"column:weight"`
 }
 
 //数据表---必需
