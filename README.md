@@ -13,7 +13,6 @@
 最大支持 `150` 个并发连接数左右  
 
 其实本次压测的 `API` 基于本地缓存 `singlefight` 做的本地 `一级接口级缓存` 的  
-但是作者本人并没有那么多时间去做更多的性能优化，如 `Redis做二级缓存`  
 
 ![](doc/readme_performance.jpg)  
 `图 01 - API性能表现`
@@ -30,6 +29,30 @@
 
 可以看到本次瓶颈不在 `CPU`、`DB` 资源消耗上  
 而是在 `网络I/O` 上  
+
+#### 二级缓存
+
+`2022-12月` 作者对于漫画首页接口，基于 `Redis` 缓存中间件 做了 `二级缓存`  
+使用与前文相同的压测条件  
+
+![](doc/wrk_with_cache.jpeg)  
+`图 2-1`
+
+各指标表现结果  
+
+![](doc/qps_with_cache.png)  
+`图 2-2`
+
+![](doc/cache_hit_rate_in_1_minute.png)  
+`图 2-3`
+
+![](doc/request_counter_in_1_minute.png)  
+`图 2-4`
+
+![](doc/response_ms_in_1_minute.png)  
+`图 2-5`
+
+
 
 
 > 拓展思维
