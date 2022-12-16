@@ -4,6 +4,7 @@
 
 * `go mod` 管理包
 * `Makefile` 集成命令
+* `api/build/main.go` 入口文件
 
 ### 性能表现
 
