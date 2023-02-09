@@ -4,7 +4,7 @@ go 1.16
 
 require (
 	github.com/HaleyLeoZhang/go-component v1.13.5
-	github.com/gin-gonic/gin v1.7.0
+	github.com/gin-gonic/gin v1.7.7
 	github.com/golang/groupcache v0.0.0-20200121045136-8c9f03a8e57e
 	github.com/gomodule/redigo v1.8.2
 	github.com/jinzhu/gorm v1.9.16
